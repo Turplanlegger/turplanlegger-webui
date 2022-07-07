@@ -1,12 +1,8 @@
-import { Box, styled } from "@mui/material";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Box, styled } from '@mui/material';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { Home } from "./pages/Home";
-import { Opprett } from "./pages/Opprett";
+import { Home } from './pages/Home';
+import { Opprett } from './pages/Opprett';
 
 const FullScreen = styled(Box)({
   height: '100vh',
@@ -15,7 +11,7 @@ const FullScreen = styled(Box)({
   flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center'
-})
+});
 
 export const App = () => {
   return (
@@ -25,9 +21,9 @@ export const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/opprett" element={<Opprett />} />
         </Routes>
-    </BrowserRouter>
-  </FullScreen>
+      </BrowserRouter>
+    </FullScreen>
   );
-}
+};
 
 export default App;
