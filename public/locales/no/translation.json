@@ -1,0 +1,15 @@
+{
+    "app": {
+        "routes": {
+            "create": "opprett"
+        }
+    },
+    "home": {
+        "welcome": "Velkommen!",
+        "create_trip" : "Opprett tur"
+    },
+    "create": {
+        "description": "Her kan du lage en tur!",
+        "exit" : "Tilbake"
+    }
+}
