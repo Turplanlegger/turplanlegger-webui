@@ -4,8 +4,6 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 
 const useDebug = process.env.REACT_APP_i18n_DEBUG === 'true';
-console.log("useDebug")
-console.log(useDebug)
 i18n
   // i18next-http-backend
   // loads translations from your server
