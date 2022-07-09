@@ -1,15 +1,46 @@
 {
     "app": {
-        "routes": {
-            "create": "create"
-        }
+        "menu": "Menu",
+        "turplanlegger": "Tripplanner"
     },
-    "home": {
-        "welcome": "Welcome!",
-        "create_trip" : "Create trip"
+    "common": {
+        "add_new": "Add new",
+        "add": "Add",
+        "create": "Create"
     },
     "create": {
-        "description": "This is where you create a trip!",
-        "exit" : "Exit"
+        "description": "You can create a trip here!",
+        "exit" : "Back"
+    },
+    "home": {
+        "welcome": "Welcome!"
+    },
+    "list": {
+        "list": "List",
+        "lists": "Lists",
+        "my_lists": "My lists",
+        "my_packlists": "My packing lists",
+        "item": "Item",
+        "items": "Items"
+    },
+    "profile": {
+        "my_page": "My Profile",
+        "profile": "Profile",
+        "login": "Login"
+    },
+    "note": {
+        "note": "Note",
+        "notes": "Notes",
+        "my_notes": "My notes"
+    },
+    "route": {
+        "route": "Route",
+        "routes": "Routes",
+        "my_routes": "My Routes"
+    },
+    "trip": {
+        "trip": "Trip",
+        "trips": "Trips",
+        "my_trips": "My Trips"
     }
 }

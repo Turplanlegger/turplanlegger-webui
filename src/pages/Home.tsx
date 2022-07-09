@@ -9,7 +9,7 @@ export const Home = () => {
     return (
         <>
             <Typography>{t('home.welcome')}</Typography>
-            <Button onClick={() => navigate(`/${t('app.routes.create')}`)}>{t('home.create_trip')}</Button>
+            <Button onClick={() => navigate(`/${t('app.routes.create')}`)}>{t('common.create')} {t('trip.trip')}</Button>
         </>
     )
 }
