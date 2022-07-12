@@ -1,9 +1,8 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders welcome', () => {
+test('renders welcome text', () => {
   render(<App />);
-  const velkommenElement = screen.getByText(/Velkommen til turplanleggeren!/i);
-  expect(velkommenElement).toBeInTheDocument();
+  const welcomeElement = screen.getByText(/welcome/);
+  expect(welcomeElement).toBeInTheDocument();
 });
