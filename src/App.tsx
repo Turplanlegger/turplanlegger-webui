@@ -1,4 +1,5 @@
 import { Box, styled } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import {
   BrowserRouter,
   Routes,
@@ -6,7 +7,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import { Home } from "./pages/Home";
-import { Opprett } from "./pages/Opprett";
+import { Create } from "./pages/Create";
 
 const FullScreen = styled(Box)({
   height: '100vh',
@@ -18,12 +19,14 @@ const FullScreen = styled(Box)({
 })
 
 export const App = () => {
+  const { t } = useTranslation();
+  
   return (
     <FullScreen>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/opprett" element={<Opprett />} />
+          <Route path={`/${t('app.routes.create')}`} element={<Create />} />
         </Routes>
     </BrowserRouter>
   </FullScreen>
