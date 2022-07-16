@@ -18,7 +18,7 @@ export const Home = () => {
       <p></p>
       <p></p>
       <TextField placeholder="Epost" />
-      <TextField placeholder="Passord" />
+      <TextField placeholder="Passord" type="password" />
       <Button onClick={() => UserLogin()} style={{ background: 'light-blue', width: '220px' }}>
         Logg inn
       </Button>

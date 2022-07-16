@@ -23,7 +23,7 @@ export const Signup = () => {
       <p></p>
       <p></p>
       <TextField placeholder="Epost" />
-      <TextField placeholder="Passord" />
+      <TextField placeholder="Passord" type="password" />
       <Button onClick={() => UserSignup()}>Lag bruker</Button>
     </>
   );
