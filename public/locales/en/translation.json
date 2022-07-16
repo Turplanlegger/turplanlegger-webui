@@ -1,15 +1,15 @@
 {
-    "app": {
-        "routes": {
-            "create": "create"
-        }
-    },
-    "home": {
-        "welcome": "Welcome!",
-        "create_trip" : "Create trip"
-    },
-    "create": {
-        "description": "This is where you create a trip!",
-        "exit" : "Exit"
+  "app": {
+    "routes": {
+      "create": "create"
     }
+  },
+  "home": {
+    "welcome": "Welcome!",
+    "create_trip": "Create trip"
+  },
+  "create": {
+    "description": "This is where you create a trip!",
+    "exit": "Exit"
+  }
 }

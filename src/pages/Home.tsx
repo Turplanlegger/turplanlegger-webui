@@ -1,17 +1,39 @@
-import { Button, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Home = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
+  const UserLogin = () => {
+    console.log('Lag bruker');
+  };
+
   return (
     <>
-      <Typography>{t('home.welcome')}</Typography>
-      <Button onClick={() => navigate(`/${t('app.routes.create')}`)}>
-        {t('home.create_trip')}
+      <Typography variant="h1" fontSize={50}>
+        Turplanleggeren
+      </Typography>
+      <p></p>
+      <p></p>
+      <TextField placeholder="Epost" />
+      <TextField placeholder="Passord" />
+      <Button onClick={() => UserLogin()} style={{ background: 'light-blue', width: '220px' }}>
+        Logg inn
       </Button>
+      <Box
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+        <Typography style={{ padding: '5px' }}> Ingen bruker?</Typography>
+        <Link to={'/signup'} style={{ textDecoration: 'none' }}>
+          Lag bruker
+        </Link>
+      </Box>
     </>
   );
 };
