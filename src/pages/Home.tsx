@@ -19,11 +19,9 @@ export const Home = () => {
   };
 
   const UserLogin = () => {
-    console.log('Lag bruker');
-    const loginRequest = { email: email, password: password };
-    console.log('Request: ', loginRequest);
-    const res = Login(loginRequest).then((res) => console.log('Res1: ', res));
-    console.log('Result: ', res);
+    Login({ email: email, password: password }).then(res => {
+      console.log(res)
+    })
   };
 
   return (
