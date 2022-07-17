@@ -1,14 +1,7 @@
-export async function SignUp(data: SignupBody) {
-  const response = await fetch(`/api/user`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-  return await response.json();
-}
+import config from '../config/config.json';
 
 export async function Login(data: LoginBody) {
-  const response = await fetch(`http://localhost/login`, {
+  const response = await fetch(`${config.api_base_url}/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
@@ -17,11 +10,6 @@ export async function Login(data: LoginBody) {
 }
 
 type LoginBody = {
-  email: string;
-  password: string;
-};
-
-type SignupBody = {
   email: string;
   password: string;
 };

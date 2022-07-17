@@ -1,5 +1,6 @@
 {
   "i18n": {
     "debug": true
-  }
+  },
+  "api_base_url": "http://localhost"
 }
