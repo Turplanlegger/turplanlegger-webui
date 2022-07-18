@@ -19,9 +19,9 @@ export const Home = () => {
   };
 
   const UserLogin = () => {
-    Login({ email: email, password: password }).then(res => {
-      console.log(res)
-    })
+    Login({ email: email, password: password }).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
