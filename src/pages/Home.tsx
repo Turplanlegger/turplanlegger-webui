@@ -2,6 +2,7 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import { SetStateAction, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+import { PasswordField } from '../components/PasswordField';
 import { Login } from '../services/AuthService';
 
 export const Home = () => {
@@ -12,10 +13,6 @@ export const Home = () => {
 
   const handleEmail = (e: { target: { value: SetStateAction<string> } }) => {
     setEmail(e.target.value);
-  };
-
-  const handlePassword = (e: { target: { value: SetStateAction<string> } }) => {
-    setPassword(e.target.value);
   };
 
   const UserLogin = () => {
@@ -31,8 +28,28 @@ export const Home = () => {
       </Typography>
       <p></p>
       <p></p>
-      <TextField placeholder="Epost" value={email} onChange={handleEmail} />
-      <TextField placeholder="Passord" type="password" value={password} onChange={handlePassword} />
+      <Box
+        component="form"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+        <TextField
+          placeholder="Epost"
+          style={{ width: '60vw' }}
+          value={email}
+          onChange={handleEmail}
+          autoComplete="email"
+        />
+        <PasswordField
+          placeHolder="Passord"
+          value={password}
+          setValue={setPassword}
+          autoComplete="current-password"
+        />
+      </Box>
       <Button onClick={() => UserLogin()} style={{ background: 'light-blue', width: '220px' }}>
         Logg inn
       </Button>
