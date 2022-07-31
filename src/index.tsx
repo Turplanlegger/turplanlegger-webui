@@ -1,15 +1,15 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import './i18n';
 import reportWebVitals from './reportWebVitals';
+import AuthRoot from './AuthRoot';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <Suspense fallback="Spinner..">
-      <App />
+      <AuthRoot />
     </Suspense>
   </React.StrictMode>
 );

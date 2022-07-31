@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { Create } from './pages/Create';
-import { Signup } from './pages/Signup';
+import { Login } from './pages/Login';
+import { useIsAuthenticated } from '@azure/msal-react';
+import { Configuration } from '@azure/msal-browser';
 
 const FullScreen = styled(Box)({
   height: '100vh',
@@ -16,22 +18,25 @@ const FullScreen = styled(Box)({
   alignItems: 'center'
 });
 
-export const App = () => {
+type Props = {
+  setInstanceAndLogin: (config: Configuration) => void;
+};
+
+export const App = ({ setInstanceAndLogin }: Props) => {
   const { t } = useTranslation();
-  const isLoggedIn = false;
+  const isAuthenticated = useIsAuthenticated();
 
   return (
     <FullScreen>
       <BrowserRouter>
-        {isLoggedIn ? (
+        {isAuthenticated ? (
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path={`/${t('app.routes.create')}`} element={<Create />} />
           </Routes>
         ) : (
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<Login setInstanceAndLogin={setInstanceAndLogin} />} />
           </Routes>
         )}
       </BrowserRouter>
