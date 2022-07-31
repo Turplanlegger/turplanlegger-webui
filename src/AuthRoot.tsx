@@ -11,7 +11,7 @@ export const AuthRoot = () => {
   const setInstanceAndLogin = (config: Configuration) => {
     const instance = new PublicClientApplication(config);
     setMsalInstance(instance);
-    instance.loginPopup(loginRequest);
+    instance.loginRedirect(loginRequest);
   };
 
   return (
