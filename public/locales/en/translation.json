@@ -1,4 +1,5 @@
 {
+    "app": {
         "menu": "Menu",
         "turplanlegger": "Tripplanner"
     },
@@ -12,7 +13,8 @@
         "exit" : "Back"
     },
     "home": {
-        "welcome": "Welcome!"
+        "welcome": "Welcome!",
+        "title": "Front page"
     },
     "list": {
         "list": "List",

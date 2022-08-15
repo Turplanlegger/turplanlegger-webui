@@ -5,16 +5,19 @@ import {
   CssBaseline,
   Divider,
   Drawer,
+  Link,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Stack,
   styled,
   Toolbar,
   Typography
 } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import LandscapeIcon from '@mui/icons-material/Landscape';
 import HikingIcon from '@mui/icons-material/Hiking';
@@ -28,14 +31,7 @@ import { Create } from './pages/Create';
 import { Login } from './pages/Login';
 import { useIsAuthenticated } from '@azure/msal-react';
 import { Configuration } from '@azure/msal-browser';
-
-const FullScreen = styled(Box)({
-  height: '100vh',
-  width: '100vw',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center'
-});
+import Grid2 from '@mui/material/Unstable_Grid2';
 
 type Props = {
   setInstanceAndLogin: (config: Configuration) => void;
@@ -44,11 +40,8 @@ type Props = {
 export const App = ({ setInstanceAndLogin }: Props) => {
   const isAuthenticated = useIsAuthenticated();
   const { t } = useTranslation();
-  const drawerWidth = 240;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+  document.title = t('app.turplanlegger');
+
   const menu_items = [
     {
       route: '/login',
@@ -71,83 +64,71 @@ export const App = ({ setInstanceAndLogin }: Props) => {
       icon: <StickyNote2Icon />
     }
   ];
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {menu_items.map((item, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton onClick={() => console.debug(item.route)}>
-              <ListItemText primary={item.display_name} />
-              <ListItemIcon>{item.icon}</ListItemIcon>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
+  const menu_elements = (
+    <List>
+      {menu_items.map((item, index) => (
+        <ListItem key={index} disablePadding>
+          <ListItemButton onClick={() => console.debug(item.route)}>
+            <ListItemText primary={item.display_name} />
+            <ListItemIcon>{item.icon}</ListItemIcon>
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </List>
   );
 
   return (
-    <FullScreen>
-      <Box sx={{ display: 'flex', height: 56 }}>
-        <CssBaseline />
-        <AppBar
-          position="fixed"
-          sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-            ml: { sm: `${drawerWidth}px` }
-          }}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: 'none' } }}>
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              {t('app.turplanlegger')}
+    <Box>
+      <AppBar id="main-header">
+        <Toolbar disableGutters sx={{ alignItems: 'stretch' }}>
+          <Box sx={{ display: 'flex', width: '240px', backgroundColor: 'white' }}>
+            <Typography variant="h6" sx={{ display: 'flex', flex: '1 0 auto' }}>
+              <Link
+                href="#"
+                underline="none"
+                color="black"
+                sx={{
+                  display: 'inline-block',
+                  width: '100%',
+                  textAlign: 'center',
+                  lineHeight: '64px'
+                }}>
+                {t('app.turplanlegger')}
+              </Link>
             </Typography>
-          </Toolbar>
-        </AppBar>
-        <Box
-          component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-          aria-label="main navigation menu">
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-          <Drawer
-            variant="temporary"
-            open={mobileOpen}
-            onClose={handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: 'block', sm: 'none' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
-            }}>
-            {drawer}
-          </Drawer>
+          </Box>
+          <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
+            <MenuIcon />
+          </IconButton>
+          <Button style={{ marginLeft: 'auto' }} color="inherit">
+            {t('profile.login')}
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Box id="container">
+        <nav id="drawer-nav">
           <Drawer
             variant="permanent"
             sx={{
               display: { xs: 'none', sm: 'block' },
-              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+              width: '240px',
+              '& .MuiDrawer-paper': { boxSizing: 'border-box' }
             }}
             open>
-            {drawer}
+            <Divider />
+            {menu_elements}
           </Drawer>
-        </Box>
+        </nav>
+        <main id="main-content">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path={`/${t('app.routes.create')}`} element={<Create />} />
+            </Routes>
+          </BrowserRouter>
+        </main>
       </Box>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path={`/${t('app.routes.create')}`} element={<Create />} />
-        </Routes>
-      </BrowserRouter>
-    </FullScreen>
+    </Box>
   );
 };
 

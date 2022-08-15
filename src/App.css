@@ -1,3 +1,26 @@
+#main-header {
+  display: flex;
+  height: 64px;
+}
+
+#container {
+  display: flex;
+  margin-top: 64px;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+#drawer-nav {
+  width: 240px;
+}
+
+#drawer-nav > .MuiDrawer-root > .MuiPaper-root {
+  width: 240px;
+  top: 64px;
+}
+
 .App {
   text-align: center;
 }

@@ -14,13 +14,24 @@ import { useNavigate } from 'react-router-dom';
 export const Home = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  document.title = t('home.title');
 
   return (
     <>
-      <Typography>{t('home.welcome')}</Typography>
-      <Button onClick={() => navigate(`/${t('app.routes.create')}`)}>
-        {t('common.create')} {t('trip.trip')}
-      </Button>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Box>
+            <Typography>{t('home.welcome')}</Typography>
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box>
+            <Button onClick={() => navigate(`/${t('app.routes.create')}`)}>
+              {t('common.create')} {t('trip.trip')}
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
     </>
   );
 };

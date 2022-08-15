@@ -13,7 +13,8 @@
         "exit" : "Tilbake"
     },
     "home": {
-        "welcome": "Velkommen!"
+        "welcome": "Velkommen!",
+        "title": "Forside"
     },
     "list": {
         "list": "Liste",
