@@ -1,10 +1,6 @@
 import {
   Box,
   Button,
-  Card,
-  CardActions,
-  CardContent,
-  Container,
   Grid,
   Typography
 } from '@mui/material';
@@ -26,7 +22,7 @@ export const Home = () => {
         </Grid>
         <Grid item xs={12}>
           <Box>
-            <Button onClick={() => navigate(`/${t('app.routes.create')}`)}>
+            <Button onClick={() => navigate('/route/create')}>
               {t('common.create')} {t('trip.trip')}
             </Button>
           </Box>

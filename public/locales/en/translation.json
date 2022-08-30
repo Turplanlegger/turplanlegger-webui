@@ -37,7 +37,7 @@
     "route": {
         "route": "Route",
         "routes": "Routes",
-        "my_routes": "My Routes"
+        "my_routes": "My Routes",
     },
     "trip": {
         "trip": "Trip",
