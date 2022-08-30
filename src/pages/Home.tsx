@@ -1,9 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Typography
-} from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,12 +12,12 @@ export const Home = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Box>
-            <Typography>{t('home.welcome')}</Typography>
+            <Typography variant="h2">{t('home.welcome')}</Typography>
           </Box>
         </Grid>
         <Grid item xs={12}>
           <Box>
-            <Button onClick={() => navigate('/route/create')}>
+            <Button color="primary" variant="contained" onClick={() => navigate('/route/create')}>
               {t('common.create')} {t('trip.trip')}
             </Button>
           </Box>
