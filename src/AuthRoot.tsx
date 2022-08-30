@@ -11,6 +11,7 @@ export const AuthRoot = () => {
   const setInstanceAndLogin = (config: Configuration) => {
     const instance = new PublicClientApplication(config);
     setMsalInstance(instance);
+    instance.handleRedirectPromise().then().catch(); // Makes sure redirect works
     instance.loginRedirect(loginRequest);
   };
 
