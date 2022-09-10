@@ -3,6 +3,6 @@ import App from './App';
 
 test('renders welcome text', () => {
   render(<App setInstanceAndLogin={() => null} />);
-  const welcomeElement = screen.getByText(/welcome/);
+  const welcomeElement = screen.getByText(/Turplanleggeren/);
   expect(welcomeElement).toBeInTheDocument();
 });
