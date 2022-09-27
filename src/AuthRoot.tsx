@@ -9,8 +9,10 @@ export const AuthRoot = () => {
   const [msalInstance, setMsalInstance] = useState(new PublicClientApplication(signinMsalConfig));
 
   const setInstanceAndLogin = (config: Configuration) => {
+    console.log('LoginReq: ', loginRequest);
     const instance = new PublicClientApplication(config);
     setMsalInstance(instance);
+    instance.handleRedirectPromise().then().catch(); // Makes sure redirect works
     instance.loginRedirect(loginRequest);
   };
 
