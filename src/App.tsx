@@ -26,6 +26,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { Home } from './pages/Home';
 import { Create } from './pages/Create';
+import { Login } from './pages/Login';
+import { useIsAuthenticated } from '@azure/msal-react';
 import { Configuration } from '@azure/msal-browser';
 
 type Props = {
@@ -36,6 +38,7 @@ const drawerWidth = 240;
 
 export const App = ({ setInstanceAndLogin }: Props) => {
   const { t } = useTranslation();
+  const isAuthenticated = useIsAuthenticated();
   document.title = t('app.turplanlegger');
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -171,10 +174,16 @@ export const App = ({ setInstanceAndLogin }: Props) => {
         <Toolbar />
         <main id="main-content">
           <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path={`/${t('app.routes.create')}`} element={<Create />} />
-            </Routes>
+            {isAuthenticated ? (
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path={`/${t('app.routes.create')}`} element={<Create />} />
+              </Routes>
+            ) : (
+              <Routes>
+                <Route path="/" element={<Login setInstanceAndLogin={setInstanceAndLogin} />} />
+              </Routes>
+            )}
           </BrowserRouter>
         </main>
       </Box>
