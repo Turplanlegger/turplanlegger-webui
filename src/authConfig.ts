@@ -1,22 +1,24 @@
-export const b2cPolicies = {
+import config from './config/config.json';
+
+const b2cPolicies = {
   names: {
-    SignIn: 'B2C_1_SignIn',
-    SignUp: 'B2C_1_SignUp'
+    SignIn: config.auth.sign_in.name,
+    SignUp: config.auth.sign_up.name
   },
   authorities: {
     SignIn: {
-      authority: 'https://turplanlegger.b2clogin.com/turplanlegger.onmicrosoft.com/B2C_1_SignIn'
+      authority: config.auth.sign_in.authority
     },
     SignUp: {
-      authority: 'https://turplanlegger.b2clogin.com/turplanlegger.onmicrosoft.com/B2C_1_SignUp'
+      authority: config.auth.sign_up.authority
     }
   },
-  authorityDomain: 'turplanlegger.b2clogin.com'
+  authorityDomain: config.auth.authority_domain
 };
 
 export const signinMsalConfig = {
   auth: {
-    clientId: 'a501e8ed-b1e6-4814-ae5d-2f808e7ea3c6',
+    clientId: config.auth.app_client_id,
     authority: b2cPolicies.authorities.SignIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain],
     redirectUri: '/'
@@ -25,7 +27,7 @@ export const signinMsalConfig = {
 
 export const signupMsalConfig = {
   auth: {
-    clientId: 'a501e8ed-b1e6-4814-ae5d-2f808e7ea3c6',
+    clientId: config.auth.app_client_id,
     authority: b2cPolicies.authorities.SignUp.authority,
     knownAuthorities: [b2cPolicies.authorityDomain],
     redirectUri: '/'
@@ -33,7 +35,7 @@ export const signupMsalConfig = {
 };
 
 export const loginRequest = {
-  scopes: ['https://turplanlegger.onmicrosoft.com/0149fc65-259e-4895-9034-e144c242f733/Default']
+  scopes: [config.auth.login_scope]
 };
 
 export const silentRequest = {

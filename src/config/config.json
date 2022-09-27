@@ -2,5 +2,18 @@
   "i18n": {
     "debug": true
   },
-  "api_base_url": "http://localhost"
+  "api_base_url": "http://localhost",
+  "auth": {
+    "app_client_id": "a501e8ed-b1e6-4814-ae5d-2f808e7ea3c6",
+    "authority_domain": "turplanlegger.b2clogin.com",
+    "login_scope": "https://turplanlegger.onmicrosoft.com/0149fc65-259e-4895-9034-e144c242f733/Default",
+    "sign_in": {
+      "name": "B2C_1_SignIn",
+      "authority": "https://turplanlegger.b2clogin.com/turplanlegger.onmicrosoft.com/B2C_1_SignIn"
+    },
+    "sign_up": {
+      "name": "B2C_1_SignUp",
+      "authority": "https://turplanlegger.b2clogin.com/turplanlegger.onmicrosoft.com/B2C_1_SignUp"
+    }
+  }
 }
