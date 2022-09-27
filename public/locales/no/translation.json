@@ -1,47 +1,47 @@
 {
-    "app": {
-        "menu": "Meny",
-        "turplanlegger": "Turplanlegger"
-    },
-    "common": {
-        "add_new": "Legg til ny",
-        "add": "Legg til",
-        "create": "Opprett"
-    },
-    "create": {
-        "description": "Her kan du lage en tur!",
-        "exit" : "Tilbake"
-    },
-    "home": {
-        "welcome": "Velkommen!",
-        "title": "Forside"
-    },
-    "list": {
-        "list": "Liste",
-        "lists": "Lists",
-        "my_lists": "Mine lister",
-        "my_packlists": "Mine pakkelister",
-        "item": "Punkt",
-        "items": "Punkter"
-    },
-    "profile": {
-        "my_page": "Min side",
-        "profile": "Profil",
-        "login": "Login"
-    },
-    "note": {
-        "note": "Notat",
-        "notes": "Notater",
-        "my_notes": "Mine notater"
-    },
-    "route": {
-        "route": "Rute",
-        "routes": "Ruter",
-        "my_routes": "Mine ruter"
-    },
-    "trip": {
-        "trip": "Tur",
-        "trips": "Turer",
-        "my_trips": "Mine turer"
-    }
+  "app": {
+    "menu": "Meny",
+    "turplanlegger": "Turplanlegger"
+  },
+  "common": {
+    "add_new": "Legg til ny",
+    "add": "Legg til",
+    "create": "Opprett"
+  },
+  "create": {
+    "description": "Her kan du lage en tur!",
+    "exit": "Tilbake"
+  },
+  "home": {
+    "welcome": "Velkommen!",
+    "title": "Forside"
+  },
+  "list": {
+    "list": "Liste",
+    "lists": "Lists",
+    "my_lists": "Mine lister",
+    "my_packlists": "Mine pakkelister",
+    "item": "Punkt",
+    "items": "Punkter"
+  },
+  "profile": {
+    "my_page": "Min side",
+    "profile": "Profil",
+    "login": "Login"
+  },
+  "note": {
+    "note": "Notat",
+    "notes": "Notater",
+    "my_notes": "Mine notater"
+  },
+  "route": {
+    "route": "Rute",
+    "routes": "Ruter",
+    "my_routes": "Mine ruter"
+  },
+  "trip": {
+    "trip": "Tur",
+    "trips": "Turer",
+    "my_trips": "Mine turer"
+  }
 }

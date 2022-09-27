@@ -1,47 +1,47 @@
 {
-    "app": {
-        "menu": "Menu",
-        "turplanlegger": "Tripplanner"
-    },
-    "common": {
-        "add_new": "Add new",
-        "add": "Add",
-        "create": "Create"
-    },
-    "create": {
-        "description": "You can create a trip here!",
-        "exit" : "Back"
-    },
-    "home": {
-        "welcome": "Welcome!",
-        "title": "Front page"
-    },
-    "list": {
-        "list": "List",
-        "lists": "Lists",
-        "my_lists": "My lists",
-        "my_packlists": "My packing lists",
-        "item": "Item",
-        "items": "Items"
-    },
-    "profile": {
-        "my_page": "My Profile",
-        "profile": "Profile",
-        "login": "Login"
-    },
-    "note": {
-        "note": "Note",
-        "notes": "Notes",
-        "my_notes": "My notes"
-    },
-    "route": {
-        "route": "Route",
-        "routes": "Routes",
-        "my_routes": "My Routes",
-    },
-    "trip": {
-        "trip": "Trip",
-        "trips": "Trips",
-        "my_trips": "My Trips"
-    }
+  "app": {
+    "menu": "Menu",
+    "turplanlegger": "Tripplanner"
+  },
+  "common": {
+    "add_new": "Add new",
+    "add": "Add",
+    "create": "Create"
+  },
+  "create": {
+    "description": "You can create a trip here!",
+    "exit": "Back"
+  },
+  "home": {
+    "welcome": "Welcome!",
+    "title": "Front page"
+  },
+  "list": {
+    "list": "List",
+    "lists": "Lists",
+    "my_lists": "My lists",
+    "my_packlists": "My packing lists",
+    "item": "Item",
+    "items": "Items"
+  },
+  "profile": {
+    "my_page": "My Profile",
+    "profile": "Profile",
+    "login": "Login"
+  },
+  "note": {
+    "note": "Note",
+    "notes": "Notes",
+    "my_notes": "My notes"
+  },
+  "route": {
+    "route": "Route",
+    "routes": "Routes",
+    "my_routes": "My Routes"
+  },
+  "trip": {
+    "trip": "Trip",
+    "trips": "Trips",
+    "my_trips": "My Trips"
+  }
 }

@@ -11,8 +11,6 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Stack,
-  styled,
   Toolbar,
   Typography
 } from '@mui/material';
@@ -28,27 +26,22 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { Home } from './pages/Home';
 import { Create } from './pages/Create';
-import { Login } from './pages/Login';
-import { useIsAuthenticated } from '@azure/msal-react';
 import { Configuration } from '@azure/msal-browser';
-import Grid2 from '@mui/material/Unstable_Grid2';
-import { relative } from 'path';
 
 type Props = {
   setInstanceAndLogin: (config: Configuration) => void;
 };
 
+const drawerWidth = 240;
+
 export const App = ({ setInstanceAndLogin }: Props) => {
-  const isAuthenticated = useIsAuthenticated();
   const { t } = useTranslation();
   document.title = t('app.turplanlegger');
 
-  const drawerWidth = 240;
-
-  const [open, setOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
-    console.debug('Toggle it');
+    setMobileOpen(!mobileOpen);
   };
 
   const menu_items = [
@@ -78,8 +71,14 @@ export const App = ({ setInstanceAndLogin }: Props) => {
       {menu_items.map((item, index) => (
         <ListItem key={index} disablePadding>
           <ListItemButton onClick={() => console.debug(item.route)}>
-            <ListItemText primary={item.display_name} />
-            <ListItemIcon>{item.icon}</ListItemIcon>
+            <Link
+              href={item.route}
+              underline="none"
+              color="inherit"
+              sx={{ display: 'flex', flex: '1 0 auto' }}>
+              <ListItemText primary={item.display_name} />
+              <ListItemIcon>{item.icon}</ListItemIcon>
+            </Link>
           </ListItemButton>
         </ListItem>
       ))}
@@ -87,39 +86,37 @@ export const App = ({ setInstanceAndLogin }: Props) => {
   );
 
   return (
-    <Box>
-      <AppBar id="main-header">
-        <Toolbar disableGutters sx={{ alignItems: 'stretch' }}>
-          <Box
-            sx={{
-              width: drawerWidth,
-              backgroundColor: 'white',
-              display: { xs: 'none', sm: 'flex' }
-            }}>
-            <Typography variant="h6" sx={{ display: 'flex', flex: '1 0 auto' }}>
-              <Link
-                href="#"
-                underline="none"
-                color="black"
-                sx={{
-                  display: 'inline-block',
-                  width: '100%',
-                  textAlign: 'center',
-                  lineHeight: '64px'
-                }}>
-                {t('app.turplanlegger')}
-              </Link>
-            </Typography>
-          </Box>
+    <Box id="main-container" sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        sx={{
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px` }
+        }}>
+        <Toolbar>
           <IconButton
-            size="large"
-            edge="start"
             color="inherit"
-            aria-label="menu"
+            aria-label="open drawer"
+            edge="start"
             onClick={handleDrawerToggle}
-            sx={{ ml: 2, display: { xs: 'flex', sm: 'none' } }}>
+            sx={{ mr: 2, display: { sm: 'none' } }}>
             <MenuIcon />
           </IconButton>
+          <Typography variant="h6" sx={{ display: { xs: 'none', sm: 'flex' }, flex: '1 0 auto' }}>
+            <Link
+              href="/"
+              underline="none"
+              color="inherit"
+              sx={{
+                display: 'inline-block',
+                width: '100%',
+                textAlign: 'center',
+                lineHeight: '64px'
+              }}>
+              {t('app.turplanlegger')}
+            </Link>
+          </Typography>
           <IconButton
             size="large"
             color="inherit"
@@ -132,20 +129,46 @@ export const App = ({ setInstanceAndLogin }: Props) => {
           </Button>
         </Toolbar>
       </AppBar>
-      <Box id="container">
-        <nav id="drawer-nav">
-          <Drawer
-            variant="permanent"
-            sx={{
-              display: { xs: 'none', sm: 'flex' },
-              width: drawerWidth,
-              '& .MuiDrawer-paper': { boxSizing: 'border-box' }
-            }}
-            open>
+      <Box
+        component="nav"
+        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        aria-label="mailbox folders">
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Drawer
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+          }}>
+          <div>
+            <Toolbar className="menu-header" />
             <Divider />
             {menu_elements}
-          </Drawer>
-        </nav>
+          </div>
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
+          }}
+          open>
+          <div>
+            <Toolbar className="menu-header" />
+            <Divider />
+            {menu_elements}
+          </div>
+        </Drawer>
+      </Box>
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}>
+        <Toolbar />
         <main id="main-content">
           <BrowserRouter>
             <Routes>
