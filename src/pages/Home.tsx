@@ -1,11 +1,15 @@
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { Api } from '../services/Api';
 
 export const Home = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   document.title = t('home.title');
+
+  const api = new Api();
+  api.get_list(1);
 
   return (
     <>
