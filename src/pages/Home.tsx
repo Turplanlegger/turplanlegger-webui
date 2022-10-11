@@ -1,3 +1,4 @@
+import { useMsal } from '@azure/msal-react';
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -8,8 +9,18 @@ export const Home = () => {
   const { t } = useTranslation();
   document.title = t('home.title');
 
-  const api = new Api();
-  api.get_list(1);
+  const context = useMsal();
+  const account = context.accounts[0];
+  const accessTokenRequest = {
+    scopes: ['https://turplanlegger.onmicrosoft.com/0149fc65-259e-4895-9034-e144c242f733/Default'],
+    account: account
+  };
+  context.instance.acquireTokenSilent(accessTokenRequest).then((r) => {
+    const token = r.accessToken;
+    const api = new Api(token);
+    api.create_list('test');
+    api.get_list(1);
+  });
 
   return (
     <>
