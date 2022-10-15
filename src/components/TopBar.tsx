@@ -1,8 +1,9 @@
-import { AppBar, Link, Typography, Toolbar } from '@mui/material';
+import { AppBar, Typography, Toolbar } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import HikingIcon from '@mui/icons-material/Hiking';
+import { Link } from 'react-router-dom';
 
 interface Props {
   handleDrawerToggle: () => void;
@@ -14,7 +15,6 @@ export const TopBar = ({ handleDrawerToggle }: Props) => {
 
   return (
     <AppBar
-      position="fixed"
       sx={{
         width: { sm: `calc(100% - ${drawerWidth}px)` },
         ml: { sm: `${drawerWidth}px` }
@@ -30,11 +30,11 @@ export const TopBar = ({ handleDrawerToggle }: Props) => {
         </IconButton>
         <Typography variant="h6" sx={{ display: { xs: 'none', sm: 'flex' }, flex: '1 0 auto' }}>
           <Link
-            href="/"
-            underline="none"
+            to="/"
             color="inherit"
-            sx={{
+            style={{
               display: 'inline-block',
+              color: 'inherit',
               width: '100%',
               textAlign: 'center',
               lineHeight: '64px'

@@ -1,19 +1,14 @@
 import * as React from 'react';
 import {
-  AppBar,
   Box,
-  CssBaseline,
   Divider,
   Drawer,
-  IconButton,
-  Link,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Toolbar,
-  Typography
+  Toolbar
 } from '@mui/material';
 import LandscapeIcon from '@mui/icons-material/Landscape';
 import HikingIcon from '@mui/icons-material/Hiking';
@@ -23,10 +18,42 @@ import { useTranslation } from 'react-i18next';
 import { TopBar } from '../components/TopBar';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useMsal } from '@azure/msal-react';
+import { Link, Route, Routes } from 'react-router-dom';
+import { Profile } from './Profile';
+import { Trips } from './Trips';
+import { MyRoutes } from './MyRoutes';
+import { Notes } from './Notes';
 
 const handleLogout = (instance: any) => {
   instance.logoutRedirect().catch();
 };
+
+export const menu_items = [
+  {
+    route: '/profile',
+    display_name_key: 'profile.my_page',
+    icon: <PersonOutlineIcon />,
+    element: <Profile />
+  },
+  {
+    route: '/trips',
+    display_name_key: 'trip.my_trips',
+    icon: <HikingIcon />,
+    element: <Trips />
+  },
+  {
+    route: '/routes',
+    display_name_key: 'route.my_routes',
+    icon: <LandscapeIcon />,
+    element: <MyRoutes />
+  },
+  {
+    route: '/notes',
+    display_name_key: 'note.my_notes',
+    icon: <StickyNote2Icon />,
+    element: <Notes />
+  }
+];
 
 export const Home = () => {
   const drawerWidth = 240;
@@ -39,39 +66,16 @@ export const Home = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const menu_items = [
-    {
-      route: '/profile',
-      display_name: t('profile.my_page'),
-      icon: <PersonOutlineIcon />
-    },
-    {
-      route: '/trips',
-      display_name: t('trip.my_trips'),
-      icon: <HikingIcon />
-    },
-    {
-      route: '/routes',
-      display_name: t('route.my_routes'),
-      icon: <LandscapeIcon />
-    },
-    {
-      route: '/notes',
-      display_name: t('note.my_notes'),
-      icon: <StickyNote2Icon />
-    }
-  ];
   const menu_elements = (
     <List>
       {menu_items.map((item, index) => (
         <ListItem key={index} disablePadding>
           <ListItemButton onClick={() => console.debug(item.route)}>
             <Link
-              href={item.route}
-              underline="none"
+              to={item.route}
               color="inherit"
-              sx={{ display: 'flex', flex: '1 0 auto' }}>
-              <ListItemText primary={item.display_name} />
+              style={{ display: 'flex', flex: '1 0 auto', color: 'inherit' }}>
+              <ListItemText primary={t(item.display_name_key)} />
               <ListItemIcon>{item.icon}</ListItemIcon>
             </Link>
           </ListItemButton>
@@ -127,8 +131,17 @@ export const Home = () => {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}>
-        <Toolbar />
+        sx={{
+          flexGrow: 1,
+          paddingTop: 10,
+          paddingLeft: 5,
+          width: { sm: `calc(100% - ${drawerWidth}px)` }
+        }}>
+        <Routes>
+          {menu_items.map((item) => (
+            <Route key={item.route} path={item.route} element={item.element} />
+          ))}
+        </Routes>
       </Box>
     </Box>
   );
