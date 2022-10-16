@@ -1,5 +1,5 @@
 import { Configuration } from '@azure/msal-browser';
-import { Button, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { signupMsalConfig, signinMsalConfig } from '..//authConfig';
 
 type Props = {
@@ -16,20 +16,24 @@ export const Login = ({ setInstanceAndLogin }: Props) => {
   };
 
   return (
-    <>
-      <Typography variant="h1" fontSize={50}>
+    <Box
+      width="100vw"
+      height="100vh"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center">
+      <Typography variant="h1" fontSize={40} m={2}>
         Turplanleggeren
       </Typography>
-      <Typography variant="h2" fontSize={20}>
+      <Typography variant="h2" fontSize={20} mb={5}>
         Neste eventyr venter
       </Typography>
-      <p></p>
-      <p></p>
       <Button onClick={handleSignin}>Logg inn</Button>
       <Typography variant="h2" fontSize={20}>
         eller
       </Typography>
       <Button onClick={handleSignup}>Lag bruker</Button>
-    </>
+    </Box>
   );
 };
