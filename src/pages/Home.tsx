@@ -23,8 +23,9 @@ import { Profile } from './Profile';
 import { Trips } from './Trips';
 import { MyRoutes } from './MyRoutes';
 import { Notes } from './Notes';
+import { IPublicClientApplication } from '@azure/msal-browser';
 
-const handleLogout = (instance: any) => {
+const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
 };
 
