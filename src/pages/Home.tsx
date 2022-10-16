@@ -71,7 +71,7 @@ export const Home = () => {
     <List>
       {menu_items.map((item, index) => (
         <ListItem key={index} disablePadding>
-          <ListItemButton onClick={() => console.debug(item.route)}>
+          <ListItemButton onClick={handleDrawerToggle}>
             <Link
               to={item.route}
               color="inherit"
