@@ -1,5 +1,6 @@
 import { useMsal } from '@azure/msal-react';
 import { Box, Button, Grid, Typography } from '@mui/material';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Api } from '../services/Api';
@@ -15,12 +16,14 @@ export const Home = () => {
     scopes: ['https://turplanlegger.onmicrosoft.com/0149fc65-259e-4895-9034-e144c242f733/Default'],
     account: account
   };
-  context.instance.acquireTokenSilent(accessTokenRequest).then((r) => {
-    const token = r.accessToken;
-    const api = new Api(token);
-    api.create_list('test');
-    api.get_list(1);
-  });
+  useEffect(() => {
+    context.instance.acquireTokenSilent(accessTokenRequest).then((r) => {
+      const token = r.accessToken;
+      const api = new Api(token);
+      api.create_list('test');
+      api.get_list(1);
+    });
+  }, []);
 
   return (
     <>
