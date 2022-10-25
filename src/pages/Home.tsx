@@ -102,8 +102,7 @@ export const Home = () => {
     context.instance.acquireTokenSilent(accessTokenRequest).then((r) => {
       const token = r.accessToken;
       const api = new Api(token);
-      api.create_list('test');
-      api.get_list(1);
+      api.get('/test');
     });
   }, []);
 
