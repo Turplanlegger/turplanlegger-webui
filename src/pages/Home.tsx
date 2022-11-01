@@ -95,9 +95,7 @@ export const Home = () => {
 
   const api = useRecoilValue(apiState);
   React.useEffect(() => {
-    if (api) {
-      api.get('/test');
-    }
+    api && api.get('/test');
   }, [api]);
 
   return (

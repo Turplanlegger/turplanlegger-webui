@@ -12,9 +12,7 @@ export const myTrips = selector({
   get: async ({ get }) => {
     const api = get(apiState);
     if (api) {
-      const res = await api.get('/trip/mine');
-      console.log('res: ', res);
-      return res;
+      return await api.get('/trip/mine');
     }
     return [];
   }
