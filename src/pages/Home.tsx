@@ -93,11 +93,6 @@ export const Home = () => {
     </List>
   );
 
-  const api = useRecoilValue(apiState);
-  React.useEffect(() => {
-    api && api.get('/test');
-  }, [api]);
-
   return (
     <Box id="main-container" sx={{ display: 'flex' }}>
       <TopBar handleDrawerToggle={handleDrawerToggle} />
