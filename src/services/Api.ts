@@ -44,11 +44,13 @@ export class Api {
   }
 
   async getToken() {
-    return await this.instance.acquireTokenSilent({
+    const token = await this.instance.acquireTokenSilent({
       scopes: [
         'https://turplanlegger.onmicrosoft.com/0149fc65-259e-4895-9034-e144c242f733/Default'
       ],
       account: this.instance.getAllAccounts()[0]
     });
+
+    return token.accessToken;
   }
 }
