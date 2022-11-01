@@ -1,18 +1,19 @@
+import { IPublicClientApplication } from '@azure/msal-browser';
 import config from '../config/config.json';
 
 export class Api {
   url: string;
-  token: string;
+  instance: IPublicClientApplication;
 
-  constructor(token: string) {
+  constructor(instance: IPublicClientApplication) {
     this.url = config.api_base_url;
-    this.token = token; // add getToken() here!
+    this.instance = instance;
   }
 
   async get(path: string) {
     const response = await fetch(this.url + path, {
       method: 'GET',
-      headers: { Authorization: `Bearer ${this.token}` }
+      headers: { Authorization: `Bearer ${await this.getToken()}` }
     });
     return await response.json();
   }
@@ -22,7 +23,7 @@ export class Api {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/json',
-        Authorization: `Bearer ${this.token}`
+        Authorization: `Bearer ${await this.getToken()}`
       },
       body: JSON.stringify(data)
     });
@@ -40,5 +41,16 @@ export class Api {
       items: items,
       items_checked: itemsChecked
     });
+  }
+
+  async getToken() {
+    const token = await this.instance.acquireTokenSilent({
+      scopes: [
+        'https://turplanlegger.onmicrosoft.com/0149fc65-259e-4895-9034-e144c242f733/Default'
+      ],
+      account: this.instance.getAllAccounts()[0]
+    });
+
+    return token.accessToken;
   }
 }
