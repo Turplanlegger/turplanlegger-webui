@@ -24,8 +24,6 @@ import { Trips } from './Trips';
 import { MyRoutes } from './MyRoutes';
 import { Notes } from './Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
-import { useRecoilValue } from 'recoil';
-import { apiState } from '../state/apiState';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
