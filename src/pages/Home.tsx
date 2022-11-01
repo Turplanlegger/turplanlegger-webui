@@ -24,6 +24,7 @@ import { Trips } from './Trips';
 import { MyRoutes } from './MyRoutes';
 import { Notes } from './Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
+import { Api } from '../services/Api';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
@@ -90,6 +91,20 @@ export const Home = () => {
       </ListItem>
     </List>
   );
+
+  const context = useMsal();
+  const account = context.accounts[0];
+  const accessTokenRequest = {
+    scopes: ['https://turplanlegger.onmicrosoft.com/0149fc65-259e-4895-9034-e144c242f733/Default'],
+    account: account
+  };
+  React.useEffect(() => {
+    context.instance.acquireTokenSilent(accessTokenRequest).then((r) => {
+      const token = r.accessToken;
+      const api = new Api(token);
+      api.get('/test');
+    });
+  }, []);
 
   return (
     <Box id="main-container" sx={{ display: 'flex' }}>
