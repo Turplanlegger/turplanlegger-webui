@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { useRecoilValueLoadable } from 'recoil';
-import { myTrips } from '../state/apiState';
+import { myTrips } from '../state/tripState';
 
 export const Trips = () => {
   const tripsLoadable = useRecoilValueLoadable(myTrips);
