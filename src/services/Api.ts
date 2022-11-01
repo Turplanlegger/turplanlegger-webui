@@ -7,7 +7,7 @@ export class Api {
 
   constructor(instance: IPublicClientApplication) {
     this.url = config.api_base_url;
-    this.instance = instance; // add getToken() here!
+    this.instance = instance;
   }
 
   async get(path: string) {
