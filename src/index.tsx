@@ -5,12 +5,17 @@ import './i18n';
 import reportWebVitals from './reportWebVitals';
 import AuthRoot from './AuthRoot';
 import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthRoot />
+      <React.Suspense fallback={<div>loading...</div>}>
+        <RecoilRoot>
+          <AuthRoot />
+        </RecoilRoot>
+      </React.Suspense>
     </BrowserRouter>
   </React.StrictMode>
 );
