@@ -26,6 +26,7 @@ import { Notes } from './Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
 import { useRecoilValue } from 'recoil';
 import { apiState } from '../state/apiState';
+import { Lists } from './Lists/Lists';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
@@ -55,6 +56,12 @@ export const menu_items = [
     display_name_key: 'note.my_notes',
     icon: <StickyNote2Icon />,
     element: <Notes />
+  },
+  {
+    route: '/lists',
+    display_name_key: 'list.my_lists',
+    icon: <StickyNote2Icon />,
+    element: <Lists />
   }
 ];
 
