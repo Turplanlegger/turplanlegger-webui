@@ -1,11 +1,20 @@
 import { useRecoilValueLoadable } from 'recoil';
+import { SomethingWentWrong } from '../../components/SomethingWentWrong';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { myLists } from '../../state/listState';
-import { ErrorContent } from './ErrorContent';
+import { NothingFoundContent } from './NothingFoundContent';
 import { ListOverview } from './ListOverview';
 
 export const Lists = () => {
   const listsLoadable = useRecoilValueLoadable(myLists);
-  const lists = listsLoadable.state === 'hasValue' ? listsLoadable.contents : [];
-  return isErrorResponse(lists) ? <ErrorContent /> : <ListOverview lists={lists} />;
+  const response = listsLoadable.state === 'hasValue' ? listsLoadable.contents : [];
+
+  return isErrorResponse(response) ? (
+    <>
+      {response.status === 404 && <NothingFoundContent />}
+      {response.status !== 404 && <SomethingWentWrong />}
+    </>
+  ) : (
+    <ListOverview lists={response} />
+  );
 };
