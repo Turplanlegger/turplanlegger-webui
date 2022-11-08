@@ -3,21 +3,12 @@ import Box from '@mui/material/Box';
 import AddIcon from '@mui/icons-material/Add';
 
 import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import { Fab } from '@mui/material';
-
-const style = {
-  position: 'absolute',
-  width: '70%',
-  top: '30%',
-  left: '15%',
-  bgcolor: 'background.paper'
-};
+import { CustomModal } from '../../components/CustomModal';
 
 export const NothingFoundContent = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <Box
@@ -34,22 +25,13 @@ export const NothingFoundContent = () => {
       <Fab color="primary" aria-label="add" onClick={handleOpen}>
         <AddIcon />
       </Fab>
-      <Modal
-        disablePortal
-        open={open}
-        onClose={handleClose}
-        style={{ position: 'absolute' }}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </Box>
-      </Modal>
+      <CustomModal open={open} setOpen={setOpen}>
+        <CreateList />
+      </CustomModal>
     </Box>
   );
+};
+
+const CreateList = () => {
+  return <Typography style={{ padding: 10 }}>Ny liste</Typography>;
 };
