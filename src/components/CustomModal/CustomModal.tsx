@@ -1,4 +1,6 @@
 import { Modal, Box } from '@mui/material';
+import { useRecoilState } from 'recoil';
+import { modalOpen } from './modalState';
 
 const style = {
   position: 'absolute',
@@ -13,12 +15,12 @@ const style = {
 };
 
 interface Props {
-  open: boolean;
-  setOpen: (value: boolean) => void;
   children: React.ReactNode;
 }
 
-export const CustomModal = ({ open, setOpen, children }: Props) => {
+export const CustomModal = ({ children }: Props) => {
+  const [open, setOpen] = useRecoilState(modalOpen);
+
   return (
     <Modal
       disablePortal

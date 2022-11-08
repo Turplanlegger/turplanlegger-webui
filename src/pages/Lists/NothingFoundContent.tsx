@@ -4,11 +4,12 @@ import AddIcon from '@mui/icons-material/Add';
 
 import Typography from '@mui/material/Typography';
 import { Fab } from '@mui/material';
-import { CustomModal } from '../../components/CustomModal';
+import { CustomModal } from '../../components/CustomModal/CustomModal';
+import { useSetRecoilState } from 'recoil';
+import { modalOpen } from '../../components/CustomModal/modalState';
 
 export const NothingFoundContent = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  const setOpen = useSetRecoilState(modalOpen);
 
   return (
     <Box
@@ -22,10 +23,10 @@ export const NothingFoundContent = () => {
         justifyContent: 'space-around'
       }}>
       <Typography>Ingen lister funnet. Klikk på knappen nedenfor for å lage en liste</Typography>
-      <Fab color="primary" aria-label="add" onClick={handleOpen}>
+      <Fab color="primary" aria-label="add" onClick={() => setOpen(true)}>
         <AddIcon />
       </Fab>
-      <CustomModal open={open} setOpen={setOpen}>
+      <CustomModal>
         <CreateList />
       </CustomModal>
     </Box>
