@@ -7,9 +7,11 @@ import { Fab } from '@mui/material';
 import { CustomModal } from '../../components/CustomModal/CustomModal';
 import { useSetRecoilState } from 'recoil';
 import { modalOpen } from '../../components/CustomModal/modalState';
+import { useTranslation } from 'react-i18next';
 
 export const NothingFoundContent = () => {
   const setOpen = useSetRecoilState(modalOpen);
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -22,7 +24,7 @@ export const NothingFoundContent = () => {
         alignItems: 'center',
         justifyContent: 'space-around'
       }}>
-      <Typography>Ingen lister funnet. Klikk på knappen nedenfor for å lage en liste</Typography>
+      <Typography>{t('list.no_lists_found')}</Typography>
       <Fab color="primary" aria-label="add" onClick={() => setOpen(true)}>
         <AddIcon />
       </Fab>
@@ -34,5 +36,6 @@ export const NothingFoundContent = () => {
 };
 
 const CreateList = () => {
-  return <Typography style={{ padding: 10 }}>Ny liste</Typography>;
+  const { t } = useTranslation();
+  return <Typography style={{ padding: 10 }}>{t('list.new_list')}</Typography>;
 };
