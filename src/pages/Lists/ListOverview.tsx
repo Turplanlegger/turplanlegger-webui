@@ -1,9 +1,5 @@
 import { Typography } from '@mui/material';
 
-interface Props {
-  lists: any;
-}
-
-export const ListOverview = (props: Props) => {
+export const ListOverview = () => {
   return <Typography>Lists</Typography>;
 };

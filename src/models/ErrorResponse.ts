@@ -6,11 +6,12 @@ export type ErrorResponse = {
   type: string;
 };
 
-export const isErrorResponse = (res: any): res is ErrorResponse => {
+export const isErrorResponse = (res: unknown): res is ErrorResponse => {
+  const parsed = res as ErrorResponse;
   return (
-    res.detail !== undefined &&
-    res.instance !== undefined &&
-    res.status !== undefined &&
-    res.title !== undefined
+    parsed.detail !== undefined &&
+    parsed.instance !== undefined &&
+    parsed.status !== undefined &&
+    parsed.title !== undefined
   );
 };

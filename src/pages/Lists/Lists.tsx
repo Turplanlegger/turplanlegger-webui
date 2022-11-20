@@ -15,6 +15,6 @@ export const Lists = () => {
       {response.status !== 404 && <SomethingWentWrong />}
     </>
   ) : (
-    <ListOverview lists={response} />
+    <ListOverview />
   );
 };
