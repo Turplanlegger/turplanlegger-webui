@@ -24,8 +24,7 @@ import { Trips } from './Trips';
 import { MyRoutes } from './MyRoutes';
 import { Notes } from './Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
-import { useRecoilValue } from 'recoil';
-import { apiState } from '../state/apiState';
+import { Lists } from './Lists/Lists';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
@@ -55,6 +54,12 @@ export const menu_items = [
     display_name_key: 'note.my_notes',
     icon: <StickyNote2Icon />,
     element: <Notes />
+  },
+  {
+    route: '/lists',
+    display_name_key: 'list.my_lists',
+    icon: <StickyNote2Icon />,
+    element: <Lists />
   }
 ];
 
@@ -135,9 +140,6 @@ export const Home = () => {
       <Box
         component="main"
         sx={{
-          flexGrow: 1,
-          paddingTop: 10,
-          paddingLeft: 5,
           width: { sm: `calc(100% - ${drawerWidth}px)` }
         }}>
         <Routes>
