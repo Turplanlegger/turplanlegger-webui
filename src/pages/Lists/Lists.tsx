@@ -1,5 +1,5 @@
 import { useRecoilValueLoadable } from 'recoil';
-import { SomethingWentWrong } from '../../components/SomethingWentWrong';
+import { DisplayError } from '../../components/DisplayError';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { myLists } from '../../state/listState';
 import { NothingFoundContent } from './NothingFoundContent';
@@ -12,7 +12,7 @@ export const Lists = () => {
   return isErrorResponse(response) ? (
     <>
       {response.status === 404 && <NothingFoundContent />}
-      {response.status !== 404 && <SomethingWentWrong />}
+      {response.status !== 404 && <DisplayError error={response} />}
     </>
   ) : (
     <ListOverview />
