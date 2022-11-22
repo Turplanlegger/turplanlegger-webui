@@ -7,7 +7,6 @@ import { Fab } from '@mui/material';
 import { CustomModal } from '../components/CustomModal/CustomModal';
 import { useSetRecoilState } from 'recoil';
 import { modalOpen } from '../components/CustomModal/modalState';
-import { useTranslation } from 'react-i18next';
 
 interface Props {
   children: React.ReactNode;
