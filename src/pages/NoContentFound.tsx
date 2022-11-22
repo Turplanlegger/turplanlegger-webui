@@ -4,14 +4,18 @@ import AddIcon from '@mui/icons-material/Add';
 
 import Typography from '@mui/material/Typography';
 import { Fab } from '@mui/material';
-import { CustomModal } from '../../components/CustomModal/CustomModal';
+import { CustomModal } from '../components/CustomModal/CustomModal';
 import { useSetRecoilState } from 'recoil';
-import { modalOpen } from '../../components/CustomModal/modalState';
+import { modalOpen } from '../components/CustomModal/modalState';
 import { useTranslation } from 'react-i18next';
 
-export const NothingFoundContent = () => {
+interface Props {
+  children: React.ReactNode;
+  message: string;
+}
+
+export const NoContentFound = ({ children, message }: Props) => {
   const setOpen = useSetRecoilState(modalOpen);
-  const { t } = useTranslation();
 
   return (
     <Box
@@ -24,18 +28,11 @@ export const NothingFoundContent = () => {
         alignItems: 'center',
         justifyContent: 'space-around'
       }}>
-      <Typography>{t('list.no_lists_found')}</Typography>
+      <Typography>{message}</Typography>
       <Fab color="primary" aria-label="add" onClick={() => setOpen(true)}>
         <AddIcon />
       </Fab>
-      <CustomModal>
-        <CreateList />
-      </CustomModal>
+      <CustomModal>{children}</CustomModal>
     </Box>
   );
-};
-
-const CreateList = () => {
-  const { t } = useTranslation();
-  return <Typography style={{ padding: 10 }}>{t('list.new_list')}</Typography>;
 };

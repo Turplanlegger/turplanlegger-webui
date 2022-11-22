@@ -45,6 +45,8 @@
   "trip": {
     "trip": "Trip",
     "trips": "Trips",
-    "my_trips": "My Trips"
+    "my_trips": "My Trips",
+    "new_trip": "New Trip",
+    "no_trips_found": "No trips found. Press the button below to create a trip"
   }
 }

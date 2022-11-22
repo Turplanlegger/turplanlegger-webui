@@ -20,7 +20,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useMsal } from '@azure/msal-react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { Profile } from './Profile';
-import { Trips } from './Trips';
+import { Trips } from './Trips/Trips';
 import { MyRoutes } from './MyRoutes';
 import { Notes } from './Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
