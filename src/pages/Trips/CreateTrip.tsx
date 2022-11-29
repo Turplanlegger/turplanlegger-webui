@@ -11,9 +11,9 @@ export const CreateTrip = () => {
   const [endTime, setEndTime] = useState<Date | null>();
   const [publicTrip, setPublicTrip] = useState(true);
   return (
-    <Box height={'100%'} margin={5}>
+    <Box height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'space-around'}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
-        <Grid container direction="column" justifyContent="center" spacing={2}>
+        <Grid container direction="column" spacing={2}>
           <Grid item>
             <Typography style={{ marginTop: 20 }}>{t('trip.new_trip')}</Typography>
           </Grid>
@@ -48,7 +48,7 @@ export const CreateTrip = () => {
           </Grid>
         </Grid>
       </LocalizationProvider>
-      <Box display={'flex'} marginBottom={10} marginTop={10}>
+      <Box display={'flex'}>
         <Button fullWidth={true}>Cancel</Button>
         <Button fullWidth={true}>Create</Button>
       </Box>
