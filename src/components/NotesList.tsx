@@ -14,7 +14,7 @@ export const NoteList = ({ notes }: Props) => {
   // };
 
   const noteList = (
-    <Grid container spacing={2} columns={16}>
+    <Grid container spacing={4}>
       {notes.map((item, index) => (
         <>
           {notes && (

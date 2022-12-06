@@ -16,10 +16,6 @@ export interface Note {
 }
 
 export const NoteCard = ({ index, id, name, content }: Note) => {
-  console.debug(index);
-  console.debug(id);
-  console.debug(name);
-  console.debug(content);
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {

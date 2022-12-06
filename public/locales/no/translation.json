@@ -6,7 +6,8 @@
   "common": {
     "add_new": "Legg til ny",
     "add": "Legg til",
-    "create": "Opprett"
+    "create": "Opprett",
+    "something_went_wrong": "Something went wrong"
   },
   "create": {
     "description": "Her kan du lage en tur!",
@@ -21,8 +22,10 @@
     "lists": "Lists",
     "my_lists": "Mine lister",
     "my_packlists": "Mine pakkelister",
+    "new_list": "Ny liste",
     "item": "Punkt",
-    "items": "Punkter"
+    "items": "Punkter",
+    "no_lists_found": "Ingen lister funnet. Klikk på knappen nedenfor for å lage en liste"
   },
   "profile": {
     "my_page": "Min side",
