@@ -1,26 +1,25 @@
-import {
-  Card,
-  CardActions,
-  CardContent,
-  Collapse,
-  Grid,
-  TextField,
-  Typography
-} from '@mui/material';
+import { Card, CardActions, CardContent, Collapse, TextField, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 // import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import SaveIcon from '@mui/icons-material/Save';
 import Fab from '@mui/material/Fab';
 
+import Grid from '@mui/material/Unstable_Grid2';
+
 import React from 'react';
 
 export interface Note {
+  index: number;
   id: number;
   name: string;
   content: string;
 }
 
-export const NoteCard = ({ id, name, content }: Note) => {
+export const NoteCard = ({ index, id, name, content }: Note) => {
+  console.debug(index);
+  console.debug(id);
+  console.debug(name);
+  console.debug(content);
   const [checked, setChecked] = React.useState(false);
 
   const handleChange = () => {
@@ -28,7 +27,7 @@ export const NoteCard = ({ id, name, content }: Note) => {
   };
 
   const noteCard = (
-    <Grid item key={id} xs={12} sm={6} md={4}>
+    <Grid key={index} xs={8} md={4}>
       <Card>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h3">

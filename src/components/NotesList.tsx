@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 
 import { NoteCard, Note } from './NoteCard';
 
@@ -14,11 +14,12 @@ export const NoteList = ({ notes }: Props) => {
   // };
 
   const noteList = (
-    <Grid container spacing={4}>
+    <Grid container spacing={2} columns={16}>
       {notes.map((item, index) => (
         <>
-          {console.debug(`Note: ${index}`)}
-          {notes && <NoteCard id={item.id} name={item.name} content={item.content}></NoteCard>}
+          {notes && (
+            <NoteCard index={index} id={item.id} name={item.name} content={item.content}></NoteCard>
+          )}
         </>
       ))}
     </Grid>
