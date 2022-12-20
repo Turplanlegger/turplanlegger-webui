@@ -5,7 +5,7 @@ import { isErrorResponse } from '../../models/ErrorResponse';
 import { myTrips } from '../../state/tripState';
 import { NoContentFound } from '../NoContentFound';
 import { CreateTrip } from './CreateTrip';
-import { TripsOverview } from './ListOverview';
+import { TripsOverview } from './TripsOverview';
 
 export const Trips = () => {
   const tripsLoadable = useRecoilValueLoadable(myTrips);
@@ -22,6 +22,6 @@ export const Trips = () => {
       {trips.status !== 404 && <DisplayError error={trips} />}
     </>
   ) : (
-    <TripsOverview />
+    <TripsOverview trips={trips.trip} />
   );
 };
