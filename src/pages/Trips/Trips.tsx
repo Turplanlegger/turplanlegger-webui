@@ -3,7 +3,7 @@ import { useRecoilValueLoadable } from 'recoil';
 import { DisplayError } from '../../components/DisplayError';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { myTrips } from '../../state/tripState';
-import { NoContentFound } from '../NoContentFound';
+import { CreateContent } from '../CreateContent';
 import { CreateTrip } from './CreateTrip';
 import { TripsOverview } from './TripsOverview';
 
@@ -15,13 +15,18 @@ export const Trips = () => {
   return isErrorResponse(trips) ? (
     <>
       {trips.status === 404 && (
-        <NoContentFound message={t('trip.no_trips_found')}>
+        <CreateContent message={t('trip.no_trips_found')}>
           <CreateTrip />
-        </NoContentFound>
+        </CreateContent>
       )}
       {trips.status !== 404 && <DisplayError error={trips} />}
     </>
   ) : (
-    <TripsOverview trips={trips.trip} />
+    <>
+      <TripsOverview trips={trips.trip} />
+      <CreateContent>
+        <CreateTrip />
+      </CreateContent>
+    </>
   );
 };

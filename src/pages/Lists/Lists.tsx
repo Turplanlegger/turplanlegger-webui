@@ -3,7 +3,7 @@ import { useRecoilValueLoadable } from 'recoil';
 import { DisplayError } from '../../components/DisplayError';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { myLists } from '../../state/listState';
-import { NoContentFound } from '../NoContentFound';
+import { CreateContent } from '../CreateContent';
 import { CreateList } from './CreateList';
 import { ListOverview } from './ListOverview';
 
@@ -15,9 +15,9 @@ export const Lists = () => {
   return isErrorResponse(response) ? (
     <>
       {response.status === 404 && (
-        <NoContentFound message={t('list.no_lists_found')}>
+        <CreateContent message={t('list.no_lists_found')}>
           <CreateList />
-        </NoContentFound>
+        </CreateContent>
       )}
       {response.status !== 404 && <DisplayError error={response} />}
     </>

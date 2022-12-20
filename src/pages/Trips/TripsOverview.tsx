@@ -1,5 +1,4 @@
-import { Box, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { Grid } from '@mui/material';
 import { Trip } from './CreateTrip';
 import { TripInfo } from './TripInfo';
 
@@ -8,6 +7,14 @@ interface Props {
 }
 
 export const TripsOverview = ({ trips }: Props) => {
-  const { t } = useTranslation();
-  return <Box>{trips && trips.map((trip) => <TripInfo key={trip.name} trip={trip} />)}</Box>;
+  return (
+    <Grid container spacing={2} direction="row" sx={{ margin: 1 }}>
+      {trips &&
+        trips.map((trip) => (
+          <Grid item key={trip.name}>
+            <TripInfo key={trip.name} trip={trip} />
+          </Grid>
+        ))}
+    </Grid>
+  );
 };

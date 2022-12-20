@@ -4,10 +4,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { ChangeEvent, useState } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { apiState } from '../../state/apiState';
+import { modalOpen } from '../../components/CustomModal/modalState';
+import { tripState } from '../../state/tripState';
 
 export interface Trip {
+  id: string;
   name: string;
   start_time: Date;
   end_time: Date;
@@ -24,12 +27,20 @@ export const CreateTrip = () => {
   const [publicTrip, setPublicTrip] = useState(true);
   const [tripName, setTripName] = useState('');
   const api = useRecoilValue(apiState);
+  const setOpen = useSetRecoilState(modalOpen);
+  const [trips, setTrips] = useRecoilState(tripState);
 
   const createTrip = async () => {
-    const trip = { name: tripName, start_time: startTime, end_time: endTime, private: !publicTrip };
-    const response = await api?.post('/trip', trip);
-    console.log('RES: ', response);
-    console.log('Create trip pressed');
+    const trip = {
+      name: tripName,
+      start_time: startTime,
+      end_time: endTime,
+      private: !publicTrip
+    } as Trip;
+    console.log('Trip: ', trip);
+    await api?.post('/trip', trip);
+    setOpen(false);
+    setTrips(trips + 1);
   };
 
   const handleTripNameChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -81,7 +92,9 @@ export const CreateTrip = () => {
         </Grid>
       </LocalizationProvider>
       <Box display={'flex'}>
-        <Button fullWidth={true}>Cancel</Button>
+        <Button fullWidth={true} onClick={() => setOpen(false)}>
+          Cancel
+        </Button>
         <Button fullWidth={true} onClick={createTrip}>
           Create
         </Button>

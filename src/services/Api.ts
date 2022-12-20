@@ -30,6 +30,14 @@ export class Api {
     return await response.json();
   }
 
+  async delete(path: string) {
+    const response = await fetch(this.url + path, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${await this.getToken()}` }
+    });
+    return await response.json();
+  }
+
   async get_list(id: number) {
     return await this.get(`/item_list/${id}`);
   }
