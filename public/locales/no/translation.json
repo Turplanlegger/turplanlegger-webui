@@ -7,7 +7,12 @@
     "add_new": "Legg til ny",
     "add": "Legg til",
     "create": "Opprett",
-    "something_went_wrong": "Something went wrong"
+    "something_went_wrong": "Something went wrong",
+    "start_time": "Start-tid",
+    "end_time": "Slutt-tid",
+    "public": "Offentlig",
+    "private": "Privat",
+    "cancel": "Avbryt"
   },
   "create": {
     "description": "Her kan du lage en tur!",
@@ -45,6 +50,9 @@
   "trip": {
     "trip": "Tur",
     "trips": "Turer",
-    "my_trips": "Mine turer"
+    "my_trips": "Mine turer",
+    "new_trip": "Ny tur",
+    "trip_name": "Navn på tur",
+    "no_trips_found": "Ingen turer funnet. Trykk på knappen nedenfor for å lage en"
   }
 }

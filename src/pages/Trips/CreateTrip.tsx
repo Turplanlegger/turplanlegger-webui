@@ -22,8 +22,8 @@ export interface Trip {
 
 export const CreateTrip = () => {
   const { t } = useTranslation();
-  const [startTime, setStartTime] = useState<Date | null>();
-  const [endTime, setEndTime] = useState<Date | null>();
+  const [startTime, setStartTime] = useState<Date | null>(null);
+  const [endTime, setEndTime] = useState<Date | null>(null);
   const [publicTrip, setPublicTrip] = useState(true);
   const [tripName, setTripName] = useState('');
   const api = useRecoilValue(apiState);
@@ -37,7 +37,7 @@ export const CreateTrip = () => {
       end_time: endTime,
       private: !publicTrip
     } as Trip;
-    console.log('Trip: ', trip);
+
     await api?.post('/trip', trip);
     setOpen(false);
     setTrips(trips + 1);
@@ -57,7 +57,7 @@ export const CreateTrip = () => {
           <Grid item>
             <TextField
               id="outlined-basic"
-              label="Trip name"
+              label={t('trip.trip_name')}
               variant="outlined"
               value={tripName}
               onChange={(e) => handleTripNameChange(e)}
@@ -65,38 +65,38 @@ export const CreateTrip = () => {
           </Grid>
           <Grid item>
             <DatePicker
-              label="Start time"
+              label={t('common.start_time')}
               value={startTime}
               onChange={(newValue) => {
                 setStartTime(newValue);
               }}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField {...params} label={t('common.start_time')} />}
             />
           </Grid>
           <Grid item>
             <DatePicker
-              label="End time"
+              label={t('common.end_time')}
               value={endTime}
               onChange={(newValue) => {
                 setEndTime(newValue);
               }}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => <TextField {...params} label={t('common.end_time')} />}
             />
           </Grid>
           <Grid item>
             <FormControlLabel
               control={<Switch defaultChecked onChange={() => setPublicTrip(!publicTrip)} />}
-              label={publicTrip ? 'Public' : 'Private'}
+              label={publicTrip ? t('common.public') : t('common.private')}
             />
           </Grid>
         </Grid>
       </LocalizationProvider>
       <Box display={'flex'}>
         <Button fullWidth={true} onClick={() => setOpen(false)}>
-          Cancel
+          {t('common.cancel')}
         </Button>
         <Button fullWidth={true} onClick={createTrip}>
-          Create
+          {t('common.create')}
         </Button>
       </Box>
     </Box>
