@@ -1,29 +1,37 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRecoilValueLoadable } from 'recoil';
-import { DisplayError } from '../../components/DisplayError';
-import { isErrorResponse } from '../../models/ErrorResponse';
-import { myTrips } from '../../state/tripState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { apiState } from '../../state/apiState';
+import { tripState } from '../../state/tripState';
 import { CreateContent } from '../CreateContent';
 import { CreateTrip } from './CreateTrip';
 import { TripsOverview } from './TripsOverview';
 
 export const Trips = () => {
-  const tripsLoadable = useRecoilValueLoadable(myTrips);
-  const trips = tripsLoadable.state === 'hasValue' ? tripsLoadable.contents : [];
+  const [trips, setTrips] = useRecoilState(tripState);
   const { t } = useTranslation();
+  const api = useRecoilValue(apiState);
 
-  return isErrorResponse(trips) ? (
-    <>
-      {trips.status === 404 && (
-        <CreateContent message={t('trip.no_trips_found')}>
-          <CreateTrip />
-        </CreateContent>
-      )}
-      {trips.status !== 404 && <DisplayError error={trips} />}
-    </>
+  useEffect(() => {
+    const initializeTrips = async () => {
+      if (api) {
+        const result = await api.get('/trip/mine');
+        if (result.status === 'ok') {
+          setTrips(result.trip);
+        }
+      }
+    };
+
+    initializeTrips();
+  }, []);
+
+  return trips.length === 0 ? (
+    <CreateContent message={t('trip.no_trips_found')}>
+      <CreateTrip />
+    </CreateContent>
   ) : (
     <>
-      <TripsOverview trips={trips.trip} />
+      <TripsOverview trips={trips} />
       <CreateContent>
         <CreateTrip />
       </CreateContent>

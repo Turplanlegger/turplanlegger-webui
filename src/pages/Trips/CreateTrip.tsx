@@ -3,22 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { apiState } from '../../state/apiState';
 import { modalOpen } from '../../components/CustomModal/modalState';
-import { tripState } from '../../state/tripState';
-
-export interface Trip {
-  id: string;
-  name: string;
-  start_time: Date;
-  end_time: Date;
-  private: boolean;
-  notes: any;
-  routes: any;
-  item_lists: any;
-}
+import { Trip, tripState } from '../../state/tripState';
 
 export const CreateTrip = () => {
   const { t } = useTranslation();
@@ -38,9 +27,9 @@ export const CreateTrip = () => {
       private: !publicTrip
     } as Trip;
 
-    await api?.post('/trip', trip);
+    const result = await api?.post('/trip', trip);
     setOpen(false);
-    setTrips(trips + 1);
+    setTrips([...trips, result]);
   };
 
   return (

@@ -11,8 +11,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { apiState } from '../../state/apiState';
-import { tripState } from '../../state/tripState';
-import { Trip } from './CreateTrip';
+import { Trip, tripState } from '../../state/tripState';
 
 interface Props {
   trip: Trip;
@@ -25,7 +24,9 @@ export const TripInfo = ({ trip }: Props) => {
 
   const deleteTrip = async () => {
     const res = await api?.delete(`/trip/${trip.id}`);
-    setTrips(trips + 1);
+    if (res.status === 'ok') {
+      setTrips(trips.filter((t) => t.id !== trip.id));
+    }
   };
 
   return (
@@ -37,32 +38,32 @@ export const TripInfo = ({ trip }: Props) => {
           </Grid>
           <Grid item>
             <TextField
-              label="Start time"
+              label={t('common.start_time')}
               variant="standard"
-              value={trip.start_time ? trip.start_time : 'Not set'}
+              value={trip.start_time ? trip.start_time : t('common.not_set')}
             />
           </Grid>
           <Grid item>
             <TextField
-              label="End time"
-              value={trip.end_time ? trip.end_time : 'Not set'}
+              label={t('common.end_time')}
+              value={trip.end_time ? trip.end_time : t('common.not_set')}
               variant="standard"
             />
           </Grid>
           <Grid item>
             <FormControlLabel
               control={<Switch checked={!trip.private} />}
-              label={trip.private ? 'Private' : 'Public'}
+              label={trip.private ? t('common.private') : t('common.public')}
             />
           </Grid>
         </Grid>
       </CardContent>
       <CardActions>
         <Button size="small" onClick={() => console.log('Edit')}>
-          Edit
+          {t('common.edit')}
         </Button>
         <Button size="small" onClick={() => deleteTrip()}>
-          Delete
+          {t('common.delete')}
         </Button>
       </CardActions>
     </Card>
