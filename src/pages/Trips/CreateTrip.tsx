@@ -43,10 +43,6 @@ export const CreateTrip = () => {
     setTrips(trips + 1);
   };
 
-  const handleTripNameChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setTripName(e?.target.value);
-  };
-
   return (
     <Box height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'space-around'}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -60,7 +56,7 @@ export const CreateTrip = () => {
               label={t('trip.trip_name')}
               variant="outlined"
               value={tripName}
-              onChange={(e) => handleTripNameChange(e)}
+              onChange={(e) => setTripName(e?.target.value)}
             />
           </Grid>
           <Grid item>
