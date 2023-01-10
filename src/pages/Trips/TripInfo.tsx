@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -9,9 +10,11 @@ import {
   TextField
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { apiState } from '../../state/apiState';
 import { Trip, tripState } from '../../state/tripState';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 interface Props {
   trip: Trip;
@@ -59,11 +62,11 @@ export const TripInfo = ({ trip }: Props) => {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => console.log('Edit')}>
-          {t('common.edit')}
-        </Button>
         <Button size="small" onClick={() => deleteTrip()}>
           {t('common.delete')}
+        </Button>
+        <Button size="small" component={Link} to={`/trips/${trip.id}`} endIcon={<LaunchIcon />}>
+          {t('common.edit')}
         </Button>
       </CardActions>
     </Card>
