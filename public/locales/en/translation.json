@@ -15,7 +15,9 @@
     "public": "Public",
     "private": "Private",
     "cancel": "Cancel",
-    "not_set": "Not set"
+    "not_set": "Not set",
+    "name": "Name",
+    "content": "Content"
   },
   "create": {
     "description": "You can create a trip here!",
@@ -43,7 +45,9 @@
   "note": {
     "note": "Note",
     "notes": "Notes",
-    "my_notes": "My notes"
+    "my_notes": "My notes",
+    "new_note": "New Note",
+    "no_notes_found": "No notes found. Press the button below to create a new note"
   },
   "route": {
     "route": "Route",

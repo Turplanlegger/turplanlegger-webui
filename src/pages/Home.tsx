@@ -22,7 +22,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 import { Profile } from './Profile';
 import { Trips } from './Trips/Trips';
 import { MyRoutes } from './MyRoutes';
-import { Notes } from './Notes';
+import { Notes } from './Notes/Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
 import { Lists } from './Lists/Lists';
 

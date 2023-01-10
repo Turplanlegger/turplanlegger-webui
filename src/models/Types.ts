@@ -1,8 +1,8 @@
 export interface Note {
-  index: number;
   id: number;
   name: string;
   content: string;
+  private: boolean;
 }
 
 export interface Trip {

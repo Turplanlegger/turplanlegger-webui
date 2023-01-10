@@ -1,13 +1,7 @@
-import { selector } from 'recoil';
-import { apiState } from './apiState';
+import { atom } from 'recoil';
+import { Note } from '../models/Types';
 
-export const myNotes = selector({
-  key: 'myNotes',
-  get: async ({ get }) => {
-    const api = get(apiState);
-
-    if (!api) return [];
-
-    return await api.get('/note/mine');
-  }
+export const noteState = atom<Note[]>({
+  key: 'noteState',
+  default: []
 });
