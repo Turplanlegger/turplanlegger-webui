@@ -24,24 +24,19 @@ export const NoteCard = ({ index, id, name, content }: Note) => {
 
   const noteCard = (
     <Grid key={index} xs={8} md={4}>
-      <Card>
+      <Card className={checked ? 'note-card-float' : ''} onClick={handleChange}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h3">
             {name}
           </Typography>
-          <Collapse in={checked} collapsedSize={77}>
+          <Collapse collapsedSize={77}>
             <TextField multiline fullWidth value={content} variant="standard" id="fullWidth" />
           </Collapse>
           <CardActions>
             <Fab color="primary" aria-label="sa" size="small">
               <SaveIcon />
             </Fab>
-            <Fab
-              color="primary"
-              aria-label="expand"
-              size="small"
-              onClick={handleChange}
-              data-key={id}>
+            <Fab color="primary" aria-label="expand" size="small" data-key={id}>
               <ExpandMoreIcon />
             </Fab>
           </CardActions>

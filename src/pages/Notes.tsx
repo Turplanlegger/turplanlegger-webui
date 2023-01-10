@@ -8,7 +8,6 @@ export const Notes = () => {
   const { t } = useTranslation();
   const notesLoadable = useRecoilValueLoadable(myNotes);
   const notes = notesLoadable.state === 'hasValue' ? notesLoadable.contents : undefined;
-  console.debug(notes);
   return (
     <>
       <Typography variant="h2">{t('note.my_notes')}</Typography>

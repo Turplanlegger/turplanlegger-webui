@@ -7,12 +7,6 @@ interface Props {
 }
 
 export const NoteList = ({ notes }: Props) => {
-  // const [checked, setChecked] = React.useState(false);
-
-  // const handleChange = () => {
-  //   setChecked((prev) => !prev);
-  // };
-
   const noteList = (
     <Grid container spacing={4}>
       {notes.map((item, index) => (
