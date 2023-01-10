@@ -20,7 +20,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useMsal } from '@azure/msal-react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { Profile } from './Profile';
-import { Trips } from './Trips';
+import { Trips } from './Trips/Trips';
 import { MyRoutes } from './MyRoutes';
 import { Notes } from './Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
@@ -65,6 +65,7 @@ export const menu_items = [
 
 export const Home = () => {
   const drawerWidth = 240;
+  const topbarHeight = 65;
   const { t } = useTranslation();
   document.title = t('app.turplanlegger');
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -140,7 +141,8 @@ export const Home = () => {
       <Box
         component="main"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` }
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          marginTop: `${topbarHeight}px`
         }}>
         <Routes>
           {menu_items.map((item) => (

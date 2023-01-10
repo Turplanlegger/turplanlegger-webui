@@ -12,12 +12,14 @@ interface Props {
 export const TopBar = ({ handleDrawerToggle }: Props) => {
   const { t } = useTranslation();
   const drawerWidth = 240;
+  const topbarHeight = 65;
 
   return (
     <AppBar
       sx={{
         width: { sm: `calc(100% - ${drawerWidth}px)` },
-        ml: { sm: `${drawerWidth}px` }
+        ml: { sm: `${drawerWidth}px` },
+        height: `${topbarHeight}px)`
       }}>
       <Toolbar>
         <IconButton
