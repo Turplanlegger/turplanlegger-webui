@@ -7,13 +7,7 @@ import Fab from '@mui/material/Fab';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import React from 'react';
-
-export interface Note {
-  index: number;
-  id: number;
-  name: string;
-  content: string;
-}
+import { Note } from '../models/Types';
 
 export const NoteCard = ({ index, id, name, content }: Note) => {
   const [checked, setChecked] = React.useState(false);
