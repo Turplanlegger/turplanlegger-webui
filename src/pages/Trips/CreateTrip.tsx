@@ -7,7 +7,8 @@ import { useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { apiState } from '../../state/apiState';
 import { modalOpen } from '../../components/CustomModal/modalState';
-import { Trip, tripState } from '../../state/tripState';
+import { tripState } from '../../state/tripState';
+import { Trip } from '../../models/Types';
 
 export const CreateTrip = () => {
   const { t } = useTranslation();

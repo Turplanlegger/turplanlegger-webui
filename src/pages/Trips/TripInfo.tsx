@@ -10,8 +10,9 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { Trip } from '../../models/Types';
 import { apiState } from '../../state/apiState';
-import { Trip, tripState } from '../../state/tripState';
+import { tripState } from '../../state/tripState';
 
 interface Props {
   trip: Trip;
