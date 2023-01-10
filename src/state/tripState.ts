@@ -1,13 +1,29 @@
-import { selector } from 'recoil';
-import { apiState } from './apiState';
+import { atom } from 'recoil';
 
-export const myTrips = selector({
-  key: 'myTrips',
-  get: async ({ get }) => {
-    const api = get(apiState);
-    if (api) {
-      return await api.get('/trip/mine');
-    }
-    return [];
-  }
+export interface Trip {
+  id: string;
+  name: string;
+  start_time: Date;
+  end_time: Date;
+  private: boolean;
+  notes: Note[];
+  routes: Route[];
+  item_lists: ItemList[];
+}
+
+interface Note {
+  id: string;
+}
+
+interface Route {
+  id: string;
+}
+
+interface ItemList {
+  id: string;
+}
+
+export const tripState = atom<Trip[]>({
+  key: 'tripState',
+  default: []
 });
