@@ -7,7 +7,15 @@
     "add_new": "Add new",
     "add": "Add",
     "create": "Create",
-    "something_went_wrong": "Something went wrong"
+    "delete": "Delete",
+    "edit": "Edit",
+    "something_went_wrong": "Something went wrong",
+    "start_time": "Start time",
+    "end_time": "End time",
+    "public": "Public",
+    "private": "Private",
+    "cancel": "Cancel",
+    "not_set": "Not set"
   },
   "create": {
     "description": "You can create a trip here!",
@@ -45,6 +53,9 @@
   "trip": {
     "trip": "Trip",
     "trips": "Trips",
-    "my_trips": "My Trips"
+    "my_trips": "My Trips",
+    "new_trip": "New Trip",
+    "trip_name": "Trip name",
+    "no_trips_found": "No trips found. Press the button below to create a trip"
   }
 }
