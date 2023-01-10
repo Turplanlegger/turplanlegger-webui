@@ -37,11 +37,4 @@ export const Notes = () => {
       </CreateContent>
     </>
   );
-
-  // return (
-  //   <>
-  //     <Typography variant="h2">{t('note.my_notes')}</Typography>
-  //     {notes && <NoteList notes={notes.note}></NoteList>}
-  //   </>
-  // );
 };

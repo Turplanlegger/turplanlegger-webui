@@ -46,15 +46,3 @@
     transform: rotate(360deg);
   }
 }
-
-.note-card-float {
-  position: absolute;
-  width: 60;
-  height: 70%;
-  top: 20%;
-  left: 20%;
-  align-items: 'center';
-  display: 'flex';
-  flex-direction: 'column';
-  background-color: 'background.paper';
-}
