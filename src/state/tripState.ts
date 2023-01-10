@@ -1,5 +1,4 @@
-import { atom, selector } from 'recoil';
-import { apiState } from './apiState';
+import { atom } from 'recoil';
 
 export interface Trip {
   id: string;
@@ -7,9 +6,21 @@ export interface Trip {
   start_time: Date;
   end_time: Date;
   private: boolean;
-  notes: any;
-  routes: any;
-  item_lists: any;
+  notes: Note[];
+  routes: Route[];
+  item_lists: ItemList[];
+}
+
+interface Note {
+  id: string;
+}
+
+interface Route {
+  id: string;
+}
+
+interface ItemList {
+  id: string;
 }
 
 export const tripState = atom<Trip[]>({
