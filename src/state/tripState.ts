@@ -1,7 +1,7 @@
 import { atom, selectorFamily } from 'recoil';
 
 export interface Trip {
-  id: string;
+  id: number;
   name: string;
   start_time: Date;
   end_time: Date;
@@ -31,15 +31,9 @@ export const tripState = atom<Trip[]>({
 export const tripByIdSelector = selectorFamily({
   key: 'tripByIdSelector',
   get:
-    (tripId: string) =>
+    (tripId: number) =>
     ({ get }) => {
       const trips = get(tripState);
-      console.log('tripId: ', tripId);
-
-      const trip = trips.filter((trip) => trip.id === tripId);
-      // HVORFOR ER IKKKE DISSE LIKE :(
-      console.log('TRIPs: ', trip);
-      console.log('TRIPs: ', '19' === '19');
-      return trip[0];
+      return trips.find((trip) => trip.id === tripId);
     }
 });

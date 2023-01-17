@@ -4,7 +4,7 @@ import { tripByIdSelector } from '../../state/tripState';
 
 export const TripDetail = () => {
   const { tripId } = useParams();
-  const trip = useRecoilValue(tripByIdSelector(tripId || ''));
+  const trip = useRecoilValue(tripByIdSelector(Number(tripId)));
   console.log('Trip: ', trip);
   return <>Hi {tripId}</>;
 };
