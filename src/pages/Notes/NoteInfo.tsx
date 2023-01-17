@@ -12,12 +12,12 @@ interface Props {
 export const NoteInfo = ({ note }: Props) => {
   const { t } = useTranslation();
   const api = useRecoilValue(apiState);
-  const [trips, setTrips] = useRecoilState(noteState);
+  const [notes, setNotes] = useRecoilState(noteState);
 
-  const deleteTrip = async () => {
+  const deleteNote = async () => {
     const res = await api?.delete(`/note/${note.id}`);
     if (res.status === 'ok') {
-      setTrips(trips.filter((t) => t.id !== note.id));
+      setNotes(notes.filter((n) => n.id !== note.id));
     }
   };
 
@@ -42,7 +42,7 @@ export const NoteInfo = ({ note }: Props) => {
         <Button size="small" onClick={() => console.log('Edit')}>
           {t('common.edit')}
         </Button>
-        <Button size="small" onClick={() => deleteTrip()}>
+        <Button size="small" onClick={() => deleteNote()}>
           {t('common.delete')}
         </Button>
       </CardActions>

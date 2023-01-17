@@ -19,7 +19,6 @@ export const CreateNote = () => {
 
   const createNote = async () => {
     const note = {
-      id: id,
       name: name,
       content: content,
       private: !publicNote
