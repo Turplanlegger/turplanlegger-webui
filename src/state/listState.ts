@@ -1,8 +1,8 @@
 import { selector } from 'recoil';
-import { ErrorResponse } from '../models/ErrorResponse';
+import { Trip } from '../models/Types';
 import { apiState } from './apiState';
 
-export const myLists = selector<Trip[] | ErrorResponse>({
+export const myLists = selector<Trip[]>({
   key: 'myLists',
   get: async ({ get }) => {
     const api = get(apiState);
@@ -10,7 +10,3 @@ export const myLists = selector<Trip[] | ErrorResponse>({
     return await api.get('/item_list/mine');
   }
 });
-
-interface Trip {
-  name: string;
-}

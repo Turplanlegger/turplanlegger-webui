@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Box,
+  CircularProgress,
   Divider,
   Drawer,
   List,
@@ -144,11 +145,18 @@ export const Home = () => {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           marginTop: `${topbarHeight}px`
         }}>
-        <Routes>
-          {menu_items.map((item) => (
-            <Route key={item.route} path={item.route} element={item.element} />
-          ))}
-        </Routes>
+        <React.Suspense
+          fallback={
+            <Box margin={5}>
+              <CircularProgress />
+            </Box>
+          }>
+          <Routes>
+            {menu_items.map((item) => (
+              <Route key={item.route} path={item.route} element={item.element} />
+            ))}
+          </Routes>
+        </React.Suspense>
       </Box>
     </Box>
   );
