@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import { Trip } from '../../state/tripState';
+import { Trip } from '../../models/Types';
 import { TripInfo } from './TripInfo';
 
 interface Props {
