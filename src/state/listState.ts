@@ -1,16 +1,12 @@
-import { selector } from 'recoil';
-import { ErrorResponse } from '../models/ErrorResponse';
-import { apiState } from './apiState';
+import { atom } from 'recoil';
+import { ItemList, ListItem } from '../models/Types';
 
-export const myLists = selector<Trip[] | ErrorResponse>({
-  key: 'myLists',
-  get: async ({ get }) => {
-    const api = get(apiState);
-    if (!api) return [];
-    return await api.get('/item_list/mine');
-  }
+export const itemListState = atom<ItemList[]>({
+  key: 'itemListState',
+  default: []
 });
 
-interface Trip {
-  name: string;
-}
+export const listItemState = atom<ListItem[]>({
+  key: 'listItemState',
+  default: []
+});

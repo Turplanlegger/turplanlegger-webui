@@ -1,27 +1,41 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRecoilValueLoadable } from 'recoil';
-import { DisplayError } from '../../components/DisplayError';
-import { isErrorResponse } from '../../models/ErrorResponse';
-import { myLists } from '../../state/listState';
+import { useRecoilState, useRecoilValue } from 'recoil';
+
+import { apiState } from '../../state/apiState';
+import { itemListState } from '../../state/listState';
 import { CreateContent } from '../CreateContent';
 import { CreateList } from './CreateList';
-import { ListOverview } from './ListOverview';
+import { ListsOverview } from './ListsOverview';
 
 export const Lists = () => {
-  const listsLoadable = useRecoilValueLoadable(myLists);
-  const response = listsLoadable.state === 'hasValue' ? listsLoadable.contents : [];
+  const [item_lists, setItemLists] = useRecoilState(itemListState);
   const { t } = useTranslation();
+  const api = useRecoilValue(apiState);
 
-  return isErrorResponse(response) ? (
-    <>
-      {response.status === 404 && (
-        <CreateContent message={t('list.no_lists_found')}>
-          <CreateList />
-        </CreateContent>
-      )}
-      {response.status !== 404 && <DisplayError error={response} />}
-    </>
+  useEffect(() => {
+    const initializeLists = async () => {
+      if (api) {
+        const result = await api.get('/item_list/mine');
+        if (result.status === 'ok') {
+          setItemLists(result.item_list);
+        }
+      }
+    };
+
+    initializeLists();
+  }, []);
+
+  return item_lists.length === 0 ? (
+    <CreateContent message={t('list.no_lists_found')}>
+      <CreateList />
+    </CreateContent>
   ) : (
-    <ListOverview />
+    <>
+      <ListsOverview item_lists={item_lists} />
+      <CreateContent>
+        <CreateList />
+      </CreateContent>
+    </>
   );
 };

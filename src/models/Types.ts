@@ -25,6 +25,7 @@ export interface ItemList {
   name: string;
   items: ListItem[];
   items_checked: ListItem[];
+  private: boolean;
 }
 
 export interface ListItem {

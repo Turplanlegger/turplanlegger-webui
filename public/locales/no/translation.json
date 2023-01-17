@@ -35,7 +35,9 @@
     "new_list": "Ny liste",
     "item": "Punkt",
     "items": "Punkter",
-    "no_lists_found": "Ingen lister funnet. Klikk på knappen nedenfor for å lage en liste"
+    "no_lists_found": "Ingen lister funnet. Klikk på knappen nedenfor for å lage en liste",
+    "checked_items": "Sjekket punkter",
+    "unchecked_items": "Uavsjekket punkter" 
   },
   "profile": {
     "my_page": "Min side",
