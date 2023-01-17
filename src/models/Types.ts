@@ -21,5 +21,15 @@ export interface Route {
 }
 
 export interface ItemList {
-  id: string;
+  id: number;
+  name: string;
+  items: ListItem[];
+  items_checked: ListItem[];
+}
+
+export interface ListItem {
+  id: number;
+  item_list: number;
+  checked: boolean;
+  content: string;
 }
