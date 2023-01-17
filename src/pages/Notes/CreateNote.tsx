@@ -9,7 +9,6 @@ import { noteState } from '../../state/noteState';
 
 export const CreateNote = () => {
   const { t } = useTranslation();
-  const [id] = useState<number>(0);
   const [name, setName] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [publicNote, setPublicNote] = useState(false);
