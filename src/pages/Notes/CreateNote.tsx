@@ -1,4 +1,4 @@
-import { Box, Button, FormControlLabel, Grid, Switch, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, Stack, Switch, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -60,10 +60,11 @@ export const CreateNote = () => {
           />
         </Grid>
         <Grid item>
-          <FormControlLabel
-            control={<Switch defaultChecked onChange={() => setPublicNote(!publicNote)} />}
-            label={publicNote ? t('common.public') : t('common.private')}
-          />
+          <Stack direction="row" spacing={1} alignItems="center">
+            <Typography>{t('common.private')}</Typography>
+            <Switch value={publicNote} onChange={() => setPublicNote(!publicNote)} />
+            <Typography>{t('common.public')}</Typography>
+          </Stack>
         </Grid>
       </Grid>
       <Box display={'flex'}>
