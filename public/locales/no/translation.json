@@ -15,7 +15,10 @@
     "public": "Offentlig",
     "private": "Privat",
     "cancel": "Avbryt",
-    "not_set": "Ikke angitt"
+    "not_set": "Ikke angitt",
+    "name": "Navn",
+    "content": "Innhold",
+    "coming_soon": "Kommer snart"
   },
   "create": {
     "description": "Her kan du lage en tur!",
@@ -43,7 +46,9 @@
   "note": {
     "note": "Notat",
     "notes": "Notater",
-    "my_notes": "Mine notater"
+    "new_note": "Nytt notat",
+    "my_notes": "Mine notater",
+    "no_notes_found": "Ingen notater funnet. Klikk på knappen nedenfor for å lage et nytt notat"
   },
   "route": {
     "route": "Rute",

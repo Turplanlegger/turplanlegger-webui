@@ -12,15 +12,16 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { Trip } from '../../models/Types';
 import { apiState } from '../../state/apiState';
-import { Trip, tripState } from '../../state/tripState';
 import LaunchIcon from '@mui/icons-material/Launch';
+import { tripState } from '../../state/tripState';
 
 interface Props {
   trip: Trip;
 }
 
-export const TripInfo = ({ trip }: Props) => {
+export const TripCard = ({ trip }: Props) => {
   const { t } = useTranslation();
   const api = useRecoilValue(apiState);
   const [trips, setTrips] = useRecoilState(tripState);
