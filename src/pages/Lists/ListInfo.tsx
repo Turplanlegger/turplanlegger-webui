@@ -40,14 +40,12 @@ export const ItemListInfo = ({ item_list }: Props) => {
         <Typography variant="h5" sx={{ mb: 2 }}>
           {item_list.name}
         </Typography>
-        <>
-          <Chip
-            color={item_list.private ? 'success' : 'warning'}
-            size="small"
-            label={item_list.private ? t('common.private') : t('common.public')}
-            sx={{ mb: '15px' }}
-          />
-        </>
+        <Chip
+          color={item_list.private ? 'success' : 'warning'}
+          size="small"
+          label={item_list.private ? t('common.private') : t('common.public')}
+          sx={{ mb: '15px' }}
+        />
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={12} md={6}>
             <Typography variant="h6" sx={{ mb: 2 }}>
