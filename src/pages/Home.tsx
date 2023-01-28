@@ -146,12 +146,14 @@ export const Home = () => {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           marginTop: `${topbarHeight}px`
         }}>
-        <Routes>
-          {menu_items.map((item) => (
-            <Route key={item.route} path={item.route} element={item.element} />
-          ))}
-          <Route path="/trips/:tripId" element={<TripDetail />} />
-        </Routes>
+        <React.Suspense fallback={<div>loading...</div>}>
+          <Routes>
+            {menu_items.map((item) => (
+              <Route key={item.route} path={item.route} element={item.element} />
+            ))}
+            <Route path="/trips/:tripId" element={<TripDetail />} />
+          </Routes>
+        </React.Suspense>
       </Box>
     </Box>
   );
