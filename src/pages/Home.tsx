@@ -26,6 +26,7 @@ import { MyRoutes } from './MyRoutes';
 import { Notes } from './Notes/Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
 import { Lists } from './Lists/Lists';
+import { TripDetail } from './Trips/TripDetail';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
@@ -145,18 +146,12 @@ export const Home = () => {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           marginTop: `${topbarHeight}px`
         }}>
-        <React.Suspense
-          fallback={
-            <Box margin={5}>
-              <CircularProgress />
-            </Box>
-          }>
-          <Routes>
-            {menu_items.map((item) => (
-              <Route key={item.route} path={item.route} element={item.element} />
-            ))}
-          </Routes>
-        </React.Suspense>
+        <Routes>
+          {menu_items.map((item) => (
+            <Route key={item.route} path={item.route} element={item.element} />
+          ))}
+          <Route path="/trips/:tripId" element={<TripDetail />} />
+        </Routes>
       </Box>
     </Box>
   );

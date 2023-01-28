@@ -17,7 +17,8 @@
     "cancel": "Cancel",
     "not_set": "Not set",
     "name": "Name",
-    "content": "Content"
+    "content": "Content",
+    "coming_soon": "Coming soon"
   },
   "create": {
     "description": "You can create a trip here!",
