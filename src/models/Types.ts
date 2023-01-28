@@ -6,7 +6,7 @@ export interface Note {
 }
 
 export interface Trip {
-  id: string;
+  id: number;
   name: string;
   start_time: Date;
   end_time: Date;

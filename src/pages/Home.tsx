@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Box,
+  CircularProgress,
   Divider,
   Drawer,
   List,
@@ -25,6 +26,7 @@ import { MyRoutes } from './MyRoutes';
 import { Notes } from './Notes/Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
 import { Lists } from './Lists/Lists';
+import { TripDetail } from './Trips/TripDetail';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
@@ -148,6 +150,7 @@ export const Home = () => {
           {menu_items.map((item) => (
             <Route key={item.route} path={item.route} element={item.element} />
           ))}
+          <Route path="/trips/:tripId" element={<TripDetail />} />
         </Routes>
       </Box>
     </Box>
