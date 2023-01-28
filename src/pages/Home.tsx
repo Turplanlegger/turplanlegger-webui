@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Box,
+  CircularProgress,
   Divider,
   Drawer,
   List,
