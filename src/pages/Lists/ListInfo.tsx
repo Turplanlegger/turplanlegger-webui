@@ -1,13 +1,15 @@
+import { CheckBox, CheckBoxOutlineBlank } from '@mui/icons-material';
 import {
   Button,
   Card,
   CardActions,
   CardContent,
-  Checkbox,
   Chip,
-  FormControlLabel,
-  FormGroup,
   Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   Typography
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
@@ -43,42 +45,33 @@ export const ItemListInfo = ({ item_list }: Props) => {
             <Typography variant="h6" sx={{ mb: 2 }}>
               {t('list.unchecked_items')}
             </Typography>
-            <FormGroup>
+            <List>
               {item_list.items &&
                 item_list.items.map((list_item) => (
-                  <FormControlLabel
-                    key={list_item.id}
-                    control={
-                      <Checkbox
-                        checked={false}
-                        disabled
-                        sx={{ '&.Mui-disabled': { color: 'rgba(0, 0, 0, 0.87)' } }}
-                      />
-                    }
-                    label={
-                      <Typography sx={{ color: 'rgba(0, 0, 0, 0.87)' }}>
-                        {list_item.content}
-                      </Typography>
-                    }
-                    onClick={() => console.debug('check')}
-                  />
+                  <ListItem key={list_item.id}>
+                    <ListItemIcon sx={{ minWidth: '30px' }}>
+                      <CheckBoxOutlineBlank />
+                    </ListItemIcon>
+                    <ListItemText primary={list_item.content} />
+                  </ListItem>
                 ))}
-            </FormGroup>
+            </List>
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography variant="h6" sx={{ mb: 2 }}>
               {t('list.checked_items')}
             </Typography>
-            <FormGroup>
+            <List>
               {item_list.items_checked &&
                 item_list.items_checked.map((list_item) => (
-                  <FormControlLabel
-                    key={list_item.id}
-                    control={<Checkbox checked />}
-                    label={list_item.content}
-                  />
+                  <ListItem key={list_item.id}>
+                    <ListItemIcon sx={{ minWidth: '30px' }}>
+                      <CheckBox />
+                    </ListItemIcon>
+                    <ListItemText primary={list_item.content} />
+                  </ListItem>
                 ))}
-            </FormGroup>
+            </List>
           </Grid>
         </Grid>
         <>
