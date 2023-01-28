@@ -48,8 +48,18 @@ export const ItemListInfo = ({ item_list }: Props) => {
                 item_list.items.map((list_item) => (
                   <FormControlLabel
                     key={list_item.id}
-                    control={<Checkbox checked={false} />}
-                    label={list_item.content}
+                    control={
+                      <Checkbox
+                        checked={false}
+                        disabled
+                        sx={{ '&.Mui-disabled': { color: 'rgba(0, 0, 0, 0.87)' } }}
+                      />
+                    }
+                    label={
+                      <Typography sx={{ color: 'rgba(0, 0, 0, 0.87)' }}>
+                        {list_item.content}
+                      </Typography>
+                    }
                     onClick={() => console.debug('check')}
                   />
                 ))}
