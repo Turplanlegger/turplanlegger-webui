@@ -9,16 +9,18 @@ import {
   TextField
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Trip } from '../../models/Types';
 import { apiState } from '../../state/apiState';
+import LaunchIcon from '@mui/icons-material/Launch';
 import { tripState } from '../../state/tripState';
 
 interface Props {
   trip: Trip;
 }
 
-export const TripInfo = ({ trip }: Props) => {
+export const TripCard = ({ trip }: Props) => {
   const { t } = useTranslation();
   const api = useRecoilValue(apiState);
   const [trips, setTrips] = useRecoilState(tripState);
@@ -60,11 +62,11 @@ export const TripInfo = ({ trip }: Props) => {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => console.log('Edit')}>
-          {t('common.edit')}
-        </Button>
         <Button size="small" onClick={() => deleteTrip()}>
           {t('common.delete')}
+        </Button>
+        <Button size="small" component={Link} to={`/trips/${trip.id}`} endIcon={<LaunchIcon />}>
+          {t('common.edit')}
         </Button>
       </CardActions>
     </Card>
