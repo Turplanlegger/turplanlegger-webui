@@ -36,7 +36,7 @@ export const CreateList = () => {
         <Grid item>
           <TextField
             id="outlined-basic"
-            label={t('trip.trip_name')}
+            label={t('list.list_name')}
             variant="outlined"
             value={listName}
             onChange={(e) => setListName(e?.target.value)}
