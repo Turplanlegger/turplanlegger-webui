@@ -51,7 +51,12 @@ export class Api {
     });
   }
 
+  noOp() {
+    return;
+  }
+
   async getToken() {
+    await this.noOp();
     const token = await this.instance.acquireTokenSilent({
       scopes: [
         'https://turplanlegger.onmicrosoft.com/0149fc65-259e-4895-9034-e144c242f733/Default'
