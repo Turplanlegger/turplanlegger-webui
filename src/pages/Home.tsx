@@ -26,6 +26,7 @@ import { Notes } from './Notes/Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
 import { Lists } from './Lists/Lists';
 import { TripDetail } from './Trips/TripDetail';
+import { DisplayErrors } from '../components/DisplayErrors';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
@@ -145,6 +146,7 @@ export const Home = () => {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           marginTop: `${topbarHeight}px`
         }}>
+        <DisplayErrors />
         <React.Suspense fallback={<div>loading...</div>}>
           <Routes>
             {menu_items.map((item) => (
