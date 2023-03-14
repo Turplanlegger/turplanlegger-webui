@@ -1,11 +1,7 @@
 import { atom } from 'recoil';
+import { ErrorResponse } from '../models/ErrorResponse';
 
-interface ApiError {
-  detail: string;
-  title: string;
-}
-
-export const errorState = atom<ApiError | undefined>({
+export const errorState = atom<ErrorResponse | undefined>({
   key: 'errorState',
   default: undefined
 });

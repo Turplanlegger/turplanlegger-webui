@@ -9,6 +9,8 @@ import { apiState } from '../../state/apiState';
 import { modalOpen } from '../../components/CustomModal/modalState';
 import { tripState } from '../../state/tripState';
 import { Trip } from '../../models/Types';
+import { isErrorResponse } from '../../models/ErrorResponse';
+import { errorState } from '../../state/errorState';
 
 export const CreateTrip = () => {
   const { t } = useTranslation();
@@ -19,6 +21,7 @@ export const CreateTrip = () => {
   const api = useRecoilValue(apiState);
   const setOpen = useSetRecoilState(modalOpen);
   const [trips, setTrips] = useRecoilState(tripState);
+  const setErrorState = useSetRecoilState(errorState);
 
   const createTrip = async () => {
     const trip = {
@@ -29,6 +32,10 @@ export const CreateTrip = () => {
     } as Trip;
 
     const result = await api?.post('/trip', trip);
+    if (isErrorResponse(result)) {
+      setErrorState(result);
+      return;
+    }
     setOpen(false);
     setTrips([...trips, result]);
   };

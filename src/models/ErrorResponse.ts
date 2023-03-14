@@ -15,3 +15,10 @@ export const isErrorResponse = (res: unknown): res is ErrorResponse => {
     parsed.title !== undefined
   );
 };
+
+export const isErrorResponseWithResponseCode = (
+  res: unknown,
+  codes: number[]
+): res is ErrorResponse => {
+  return isErrorResponse(res) && codes.some((code) => code === res.status);
+};
