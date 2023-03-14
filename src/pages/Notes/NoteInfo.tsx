@@ -28,7 +28,7 @@ export const NoteInfo = ({ note }: Props) => {
           {note.name}
         </Typography>
         <Typography variant="body2" sx={{ mb: 2 }}>
-          {note.content}
+          <pre>{note.content}</pre>
         </Typography>
         <>
           <Chip
