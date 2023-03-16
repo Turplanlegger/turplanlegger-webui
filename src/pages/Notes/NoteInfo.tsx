@@ -27,8 +27,8 @@ export const NoteInfo = ({ note }: Props) => {
         <Typography variant="h5" sx={{ mb: 2 }}>
           {note.name}
         </Typography>
-        <Typography variant="body2" sx={{ mb: 2 }}>
-          <pre>{note.content}</pre>
+        <Typography variant="body2" sx={{ mb: 2, whiteSpace: 'pre-line' }}>
+          {note.content}
         </Typography>
         <>
           <Chip
