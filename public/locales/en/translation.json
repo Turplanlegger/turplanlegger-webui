@@ -64,5 +64,8 @@
     "new_trip": "New Trip",
     "trip_name": "Trip name",
     "no_trips_found": "No trips found. Press the button below to create a trip"
+  },
+  "error": {
+    "title": "Woops, something went wrong"
   }
 }

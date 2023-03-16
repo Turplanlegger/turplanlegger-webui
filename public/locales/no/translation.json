@@ -64,5 +64,8 @@
     "new_trip": "Ny tur",
     "trip_name": "Navn på tur",
     "no_trips_found": "Ingen turer funnet. Trykk på knappen nedenfor for å lage en"
+  },
+  "error": {
+    "title": "Oida, noe gikk galt"
   }
 }
