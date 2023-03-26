@@ -5,39 +5,87 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  InputLabel,
   Switch,
   TextField,
   Typography
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalOpen } from '../../components/CustomModal/modalState';
-import { ItemList } from '../../models/Types';
+import { ItemList, ListItem } from '../../models/Types';
 import { apiState } from '../../state/apiState';
-import { itemListState } from '../../state/listState';
+import { itemListState, listItemState, emptyListItem } from '../../state/listState';
+
+const ListItemField = ({
+  item,
+  index,
+  list_len
+}: {
+  item: ListItem;
+  index: number;
+  list_len: number;
+}) => {
+  const { t } = useTranslation();
+  let timerId: NodeJS.Timeout;
+
+  const [listItems, setlistItems] = useRecoilState(listItemState);
+
+  const updateListItem = (id: number, value: number | string) => {
+    clearTimeout(timerId);
+    timerId = setTimeout(function () {
+      console.debug(`Value: ${value}`);
+      console.debug(`id: ${id}`);
+      item['content'] = value;
+    }, 1500);
+  };
+
+  return (
+    <TextField
+      fullWidth
+      label={t('list.item') + ' ' + (index + 1)}
+      id={'item-list-item' + index}
+      variant="standard"
+      onChange={(e) => updateListItem(index, e?.target?.value)}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="Remove item"
+              onClick={() => {
+                setlistItems(listItems.filter((_, j) => j !== index));
+                console.debug(`Remove item: ${index}`);
+              }}
+              disabled={list_len <= 1 ? true : false}>
+              <DeleteForeverIcon />
+            </IconButton>
+          </InputAdornment>
+        )
+      }}
+    />
+  );
+};
 
 export const CreateList = () => {
   const { t } = useTranslation();
-
-  const initialValue = [{ id: 0, content: '' }];
 
   const [publicList, setPublicList] = useState(false);
   const [listName, setListName] = useState('');
   const api = useRecoilValue(apiState);
   const setOpen = useSetRecoilState(modalOpen);
   const [lists, setLists] = useRecoilState(itemListState);
-  const [listItems, setlistItems] = useState(initialValue);
+  const [listItems, setlistItems] = useRecoilState(listItemState);
 
   const createList = async () => {
     const item_list = {
       name: listName,
-      private: !publicList
+      private: !publicList,
+      items: listItems
     } as ItemList;
 
+    console.debug(item_list);
     const result = await api?.post('/item_list', item_list);
     setOpen(false);
     setLists([...lists, result]);
@@ -60,34 +108,16 @@ export const CreateList = () => {
         </Grid>
         <Grid item id="items">
           <Typography sx={{ mt: 2 }}>{t('list.items')}</Typography>
-          {listItems.map((item) => (
-            <Grid item key={item.id} sx={{ mb: 1 }}>
-              <InputLabel htmlFor={'item-list-item' + item.id}>Remove</InputLabel>
-              <TextField
-                fullWidth
-                label={t('list.item') + ' ' + (item.id + 1)}
-                id={'item-list-item' + item.id}
-                variant="standard"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="Remove item"
-                        onClick={() => setlistItems(listItems.filter((i) => i.id !== item.id))}
-                        disabled={listItems.length <= 1 ? true : false}>
-                        <RemoveIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-              />
+          {listItems.map((item, index) => (
+            <Grid item key={index} sx={{ mb: 1 }}>
+              <ListItemField item={item} index={index} list_len={listItems.length} />
             </Grid>
           ))}
           <IconButton
             aria-label="add"
             color="primary"
             sx={{ mt: 0.5 }}
-            onClick={() => setlistItems([...listItems, { id: listItems.length, content: '' }])}>
+            onClick={() => setlistItems([...listItems, emptyListItem])}>
             <AddIcon />
           </IconButton>
         </Grid>
