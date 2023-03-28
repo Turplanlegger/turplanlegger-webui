@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useRecoilValue } from 'recoil';
 import { itemListState } from '../../state/listState';
 import { CreateContent } from '../CreateContent';
-import { CreateList } from './CreateList';
+import { CreateList } from './CreateList2';
 import { ListsOverview } from './ListsOverview';
 
 export const Lists = () => {

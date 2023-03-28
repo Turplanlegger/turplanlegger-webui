@@ -23,6 +23,17 @@ export const emptyListItem = {
   checked: false
 };
 
+export const newItemListAtom = atom<ItemList>({
+  key: 'newItemListAtom',
+  default: {
+    id: 0,
+    name: '',
+    items: [emptyListItem],
+    items_checked: [emptyListItem],
+    private: false
+  }
+});
+
 const initialValue = [emptyListItem];
 
 export const listItemState = atom<ListItem[]>({
