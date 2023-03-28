@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { ItemList, ListItem } from '../models/Types';
+import { ItemList } from '../models/Types';
 import { apiState } from './apiState';
 
 export const initializeItemListsSelector = selector<ItemList[]>({
@@ -32,11 +32,4 @@ export const newItemListAtom = atom<ItemList>({
     items_checked: [],
     private: false
   }
-});
-
-const initialValue = [emptyListItem];
-
-export const listItemState = atom<ListItem[]>({
-  key: 'listItemState',
-  default: initialValue
 });
