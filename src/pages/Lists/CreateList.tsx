@@ -11,35 +11,31 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { modalOpen } from '../../components/CustomModal/modalState';
-import { ItemList, ListItem } from '../../models/Types';
+import { emptyListItem, itemListState, newItemListAtom } from '../../state/listState';
 import { apiState } from '../../state/apiState';
-import { itemListState, listItemState, emptyListItem } from '../../state/listState';
 
-const ListItemField = ({
-  item,
-  index,
-  list_len
-}: {
-  item: ListItem;
-  index: number;
-  list_len: number;
-}) => {
+const ListItemField = ({ index }: { index: number }) => {
   const { t } = useTranslation();
-  let timerId: NodeJS.Timeout;
 
-  const [listItems, setlistItems] = useRecoilState(listItemState);
+  const [listItem, setListItem] = useRecoilState(newItemListAtom);
 
-  const updateListItem = (id: number, value: number | string) => {
-    clearTimeout(timerId);
-    timerId = setTimeout(function () {
-      console.debug(`Value: ${value}`);
-      console.debug(`id: ${id}`);
-      item['content'] = value;
-    }, 1500);
+  const updateListItem = (id: number, value: string) => {
+    setListItem({
+      ...listItem,
+      items: [
+        ...listItem.items.slice(0, index),
+        {
+          id: 0,
+          item_list: 0,
+          content: value,
+          checked: false
+        },
+        ...listItem.items.slice(index + 1)
+      ]
+    });
   };
 
   return (
@@ -47,6 +43,7 @@ const ListItemField = ({
       fullWidth
       label={t('list.item') + ' ' + (index + 1)}
       id={'item-list-item' + index}
+      value={listItem.items[index].content}
       variant="standard"
       onChange={(e) => updateListItem(index, e?.target?.value)}
       InputProps={{
@@ -54,11 +51,13 @@ const ListItemField = ({
           <InputAdornment position="end">
             <IconButton
               aria-label="Remove item"
-              onClick={() => {
-                setlistItems(listItems.filter((_, j) => j !== index));
-                console.debug(`Remove item: ${index}`);
-              }}
-              disabled={list_len <= 1 ? true : false}>
+              onClick={() =>
+                setListItem({
+                  ...listItem,
+                  items: [...listItem.items.slice(0, index), ...listItem.items.slice(index + 1)]
+                })
+              }
+              disabled={listItem.items.length <= 1 ? true : false}>
               <DeleteForeverIcon />
             </IconButton>
           </InputAdornment>
@@ -70,25 +69,21 @@ const ListItemField = ({
 
 export const CreateList = () => {
   const { t } = useTranslation();
-
-  const [publicList, setPublicList] = useState(false);
-  const [listName, setListName] = useState('');
-  const api = useRecoilValue(apiState);
   const setOpen = useSetRecoilState(modalOpen);
+
+  const api = useRecoilValue(apiState);
   const [lists, setLists] = useRecoilState(itemListState);
-  const [listItems, setlistItems] = useRecoilState(listItemState);
+  const [[listItem, setListItem], resetListItem] = [
+    useRecoilState(newItemListAtom),
+    useResetRecoilState(newItemListAtom)
+  ];
 
   const createList = async () => {
-    const item_list = {
-      name: listName,
-      private: !publicList,
-      items: listItems
-    } as ItemList;
-
-    console.debug(item_list);
-    const result = await api?.post('/item_list', item_list);
+    console.debug(listItem);
+    const result = await api?.post('/item_list', listItem);
     setOpen(false);
-    setLists([...lists, result]);
+    setLists([...lists, result.item_list]);
+    resetListItem();
   };
 
   return (
@@ -101,36 +96,59 @@ export const CreateList = () => {
           <TextField
             id="outlined-basic"
             label={t('list.list_name')}
+            value={listItem.name}
             variant="outlined"
-            value={listName}
-            onChange={(e) => setListName(e?.target.value)}
+            onChange={(e) =>
+              setListItem({
+                ...listItem,
+                name: e?.target.value
+              })
+            }
           />
         </Grid>
         <Grid item id="items">
           <Typography sx={{ mt: 2 }}>{t('list.items')}</Typography>
-          {listItems.map((item, index) => (
+          {listItem.items.map((item, index) => (
             <Grid item key={index} sx={{ mb: 1 }}>
-              <ListItemField item={item} index={index} list_len={listItems.length} />
+              <ListItemField index={index} />
             </Grid>
           ))}
           <IconButton
             aria-label="add"
             color="primary"
             sx={{ mt: 0.5 }}
-            onClick={() => setlistItems([...listItems, emptyListItem])}>
+            onClick={() =>
+              setListItem({
+                ...listItem,
+                items: [...listItem.items, emptyListItem]
+              })
+            }>
             <AddIcon />
           </IconButton>
         </Grid>
         <Grid item>
           <FormControlLabel
-            control={<Switch defaultChecked onChange={() => setPublicList(!publicList)} />}
-            label={publicList ? t('common.public') : t('common.private')}
+            control={
+              <Switch
+                defaultChecked
+                onChange={() =>
+                  setListItem({
+                    ...listItem,
+                    private: !listItem.private
+                  })
+                }
+              />
+            }
+            label={listItem.private ? t('common.private') : t('common.public')}
           />
         </Grid>
       </Grid>
       <Box display={'flex'}>
         <Button fullWidth={true} onClick={() => setOpen(false)}>
           {t('common.cancel')}
+        </Button>
+        <Button fullWidth={true} onClick={() => resetListItem()}>
+          {t('common.reset')}
         </Button>
         <Button fullWidth={true} onClick={createList}>
           {t('common.create')}

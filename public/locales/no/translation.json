@@ -18,7 +18,8 @@
     "not_set": "Ikke angitt",
     "name": "Navn",
     "content": "Innhold",
-    "coming_soon": "Kommer snart"
+    "coming_soon": "Kommer snart",
+    "reset": "Nullstill"
   },
   "create": {
     "description": "Her kan du lage en tur!",

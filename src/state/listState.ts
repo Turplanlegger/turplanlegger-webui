@@ -29,7 +29,7 @@ export const newItemListAtom = atom<ItemList>({
     id: 0,
     name: '',
     items: [emptyListItem],
-    items_checked: [emptyListItem],
+    items_checked: [],
     private: false
   }
 });
