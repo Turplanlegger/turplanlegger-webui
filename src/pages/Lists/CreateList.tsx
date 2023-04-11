@@ -79,7 +79,6 @@ export const CreateList = () => {
   ];
 
   const createList = async () => {
-    console.debug(listItem);
     const result = await api?.post('/item_list', listItem);
     setOpen(false);
     setLists([...lists, result.item_list]);
