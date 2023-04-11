@@ -1,8 +1,12 @@
-#!dependabot
-
 version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+    reviewers:
+      - "sixcare"
+      - "peseb"
+    labels:
+      - "npm dependencies"
+      - "dependencies"
