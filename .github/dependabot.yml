@@ -10,3 +10,25 @@ updates:
     labels:
       - "npm dependencies"
       - "dependencies"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "sixcare"
+      - "peseb"
+    labels:
+      - "Docker dependencies"
+      - "dependencies"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "sixcare"
+      - "peseb"
+    labels:
+      - "GitHub-actions dependencies"
+      - "dependencies"
