@@ -39,11 +39,11 @@ export class Api {
   }
 
   async get_list(id: number) {
-    return await this.get(`/item_list/${id}`);
+    return await this.get(`/item_lists/${id}`);
   }
 
   async create_list(type: string, name?: string, items?: string[], itemsChecked?: string[]) {
-    return await this.post('/item_list', {
+    return await this.post('/item_lists', {
       name: name,
       type: type,
       items: items,

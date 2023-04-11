@@ -6,7 +6,7 @@ const initializeTripsSelector = selector<Trip[]>({
   key: `initializeTripsSelector`,
   get: async ({ get }) => {
     const api = get(apiState);
-    const result = await api?.get('/trip/mine');
+    const result = await api?.get('/trips/mine');
     return result?.status === 'ok' ? result.trip : [];
   }
 });

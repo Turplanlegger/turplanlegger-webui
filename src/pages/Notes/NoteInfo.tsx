@@ -15,7 +15,7 @@ export const NoteInfo = ({ note }: Props) => {
   const [notes, setNotes] = useRecoilState(noteState);
 
   const deleteNote = async () => {
-    const res = await api?.delete(`/note/${note.id}`);
+    const res = await api?.delete(`/notes/${note.id}`);
     if (res.status === 'ok') {
       setNotes(notes.filter((n) => n.id !== note.id));
     }
