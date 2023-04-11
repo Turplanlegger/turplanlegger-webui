@@ -1,0 +1,73 @@
+{
+  "app": {
+    "menu": "Menu",
+    "turplanlegger": "Tripplanner"
+  },
+  "common": {
+    "add_new": "Add new",
+    "add": "Add",
+    "create": "Create",
+    "delete": "Delete",
+    "edit": "Edit",
+    "something_went_wrong": "Something went wrong",
+    "start_time": "Start time",
+    "end_time": "End time",
+    "public": "Public",
+    "private": "Private",
+    "cancel": "Cancel",
+    "not_set": "Not set",
+    "name": "Name",
+    "content": "Content",
+    "coming_soon": "Coming soon",
+    "reset": "Reset"
+  },
+  "create": {
+    "description": "You can create a trip here!",
+    "exit": "Back"
+  },
+  "home": {
+    "welcome": "Welcome!",
+    "title": "Front page"
+  },
+  "list": {
+    "list": "List",
+    "lists": "Lists",
+    "list_name": "List name",
+    "my_lists": "My lists",
+    "my_packlists": "My packing lists",
+    "new_list": "New list",
+    "item": "Item",
+    "items": "Items",
+    "no_lists_found": "No lists found. Press the button below to create a list",
+    "checked_items": "Checked items",
+    "unchecked_items": "Unchecked items" 
+  },
+  "profile": {
+    "my_page": "My Profile",
+    "profile": "Profile",
+    "login": "Login"
+  },
+  "note": {
+    "note": "Note",
+    "notes": "Notes",
+    "my_notes": "My notes",
+    "new_note": "New Note",
+    "no_notes_found": "No notes found. Press the button below to create a new note"
+  },
+  "route": {
+    "route": "Route",
+    "routes": "Routes",
+    "my_routes": "My Routes"
+  },
+  "trip": {
+    "trip": "Trip",
+    "trips": "Trips",
+    "my_trips": "My Trips",
+    "new_trip": "New Trip",
+    "trip_name": "Trip name",
+    "no_trips_found": "No trips found. Press the button below to create a trip"
+  },
+  "error": {
+    "title": "Woops, something went wrong"
+  }
+}

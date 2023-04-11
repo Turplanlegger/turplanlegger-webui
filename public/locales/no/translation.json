@@ -1,0 +1,74 @@
+{
+  "app": {
+    "menu": "Meny",
+    "turplanlegger": "Turplanlegger"
+  },
+  "common": {
+    "add_new": "Legg til ny",
+    "add": "Legg til",
+    "create": "Opprett",
+    "delete": "Slett",
+    "edit": "Rediger",
+    "something_went_wrong": "Noe gikk galt",
+    "start_time": "Start-tid",
+    "end_time": "Slutt-tid",
+    "public": "Offentlig",
+    "private": "Privat",
+    "cancel": "Avbryt",
+    "not_set": "Ikke angitt",
+    "name": "Navn",
+    "content": "Innhold",
+    "coming_soon": "Kommer snart",
+    "reset": "Nullstill"
+  },
+  "create": {
+    "description": "Her kan du lage en tur!",
+    "exit": "Tilbake"
+  },
+  "home": {
+    "welcome": "Velkommen!",
+    "title": "Forside"
+  },
+  "list": {
+    "list": "Liste",
+    "lists": "Lists",
+    "list_name": "Listens navn",
+    "my_lists": "Mine lister",
+    "my_packlists": "Mine pakkelister",
+    "new_list": "Ny liste",
+    "add_list_item": "Legg til et element i listen",
+    "item": "Punkt",
+    "items": "Punkter",
+    "no_lists_found": "Ingen lister funnet. Klikk på knappen nedenfor for å lage en liste",
+    "checked_items": "Sjekket punkter",
+    "unchecked_items": "Uavsjekket punkter" 
+  },
+  "profile": {
+    "my_page": "Min side",
+    "profile": "Profil",
+    "login": "Login"
+  },
+  "note": {
+    "note": "Notat",
+    "notes": "Notater",
+    "new_note": "Nytt notat",
+    "my_notes": "Mine notater",
+    "no_notes_found": "Ingen notater funnet. Klikk på knappen nedenfor for å lage et nytt notat"
+  },
+  "route": {
+    "route": "Rute",
+    "routes": "Ruter",
+    "my_routes": "Mine ruter"
+  },
+  "trip": {
+    "trip": "Tur",
+    "trips": "Turer",
+    "my_trips": "Mine turer",
+    "new_trip": "Ny tur",
+    "trip_name": "Navn på tur",
+    "no_trips_found": "Ingen turer funnet. Trykk på knappen nedenfor for å lage en"
+  },
+  "error": {
+    "title": "Oida, noe gikk galt"
+  }
+}

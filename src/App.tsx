@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useTranslation } from 'react-i18next';
 import './App.css';
+import { Home } from './pages/Home';
+import { Login } from './pages/Login';
+import { useIsAuthenticated } from '@azure/msal-react';
+import { Configuration } from '@azure/msal-browser';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+type Props = {
+  setInstanceAndLogin: (config: Configuration) => void;
+};
+
+export const App = ({ setInstanceAndLogin }: Props) => {
+  const { t } = useTranslation();
+  const isAuthenticated = useIsAuthenticated();
+  document.title = t('app.turplanlegger');
+
+  return isAuthenticated ? <Home /> : <Login setInstanceAndLogin={setInstanceAndLogin} />;
+};
 
 export default App;
