@@ -54,7 +54,7 @@ const ListItemField = ({ index }: { index: number }) => {
               onClick={() =>
                 setListItem({
                   ...listItem,
-                  items: [...listItem.items.slice(0, index), ...listItem.items.slice(index + 1)]
+                  items: [...listItem.items.filter((_, i) => i !== index)]
                 })
               }
               disabled={listItem.items.length <= 1 ? true : false}>
