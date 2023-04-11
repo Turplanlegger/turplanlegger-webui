@@ -1,13 +1,11 @@
-name: Turplanlegger-WebUI CI
+name: Code standards and unittests
 
 on:
-  push:
-    branches: [ "main", "develop" ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ main, develop ]
 
 jobs:
-  build:
+  lint:
 
     runs-on: ubuntu-latest
 
