@@ -50,6 +50,7 @@ export const ItemListInfo = ({ item_list }: Props) => {
           <Grid item xs={12} md={6}>
             <Typography variant="h6" sx={{ mb: 2 }}>
               {t('list.unchecked_items')}
+              <Chip label={item_list.items.length} size="small" sx={{ ml: 1, pt: 0.25 }} />
             </Typography>
             <List>
               {item_list.items &&
@@ -66,6 +67,7 @@ export const ItemListInfo = ({ item_list }: Props) => {
           <Grid item xs={12} md={6}>
             <Typography variant="h6" sx={{ mb: 2 }}>
               {t('list.checked_items')}
+              <Chip label={item_list.items_checked.length} size="small" sx={{ ml: 1, pt: 0.25 }} />
             </Typography>
             <List>
               {item_list.items_checked &&

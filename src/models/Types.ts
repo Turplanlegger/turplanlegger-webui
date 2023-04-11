@@ -32,5 +32,5 @@ export interface ListItem {
   id: number;
   item_list: number;
   checked: boolean;
-  content: string;
+  content?: number | string;
 }

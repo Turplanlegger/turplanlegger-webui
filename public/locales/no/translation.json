@@ -18,7 +18,8 @@
     "not_set": "Ikke angitt",
     "name": "Navn",
     "content": "Innhold",
-    "coming_soon": "Kommer snart"
+    "coming_soon": "Kommer snart",
+    "reset": "Nullstill"
   },
   "create": {
     "description": "Her kan du lage en tur!",
@@ -31,9 +32,11 @@
   "list": {
     "list": "Liste",
     "lists": "Lists",
+    "list_name": "Listens navn",
     "my_lists": "Mine lister",
     "my_packlists": "Mine pakkelister",
     "new_list": "Ny liste",
+    "add_list_item": "Legg til et element i listen",
     "item": "Punkt",
     "items": "Punkter",
     "no_lists_found": "Ingen lister funnet. Klikk på knappen nedenfor for å lage en liste",

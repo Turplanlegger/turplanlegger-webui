@@ -18,7 +18,8 @@
     "not_set": "Not set",
     "name": "Name",
     "content": "Content",
-    "coming_soon": "Coming soon"
+    "coming_soon": "Coming soon",
+    "reset": "Reset"
   },
   "create": {
     "description": "You can create a trip here!",
@@ -31,6 +32,7 @@
   "list": {
     "list": "List",
     "lists": "Lists",
+    "list_name": "List name",
     "my_lists": "My lists",
     "my_packlists": "My packing lists",
     "new_list": "New list",

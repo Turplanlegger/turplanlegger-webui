@@ -11,7 +11,8 @@ const style = {
   alignItems: 'center',
   display: 'flex',
   flexDirection: 'column',
-  bgcolor: 'background.paper'
+  bgcolor: 'background.paper',
+  overflowX: 'scroll'
 };
 
 interface Props {

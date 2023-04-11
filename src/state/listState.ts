@@ -15,3 +15,21 @@ export const itemListState = atom<ItemList[]>({
   key: 'itemListState',
   default: initializeItemListsSelector
 });
+
+export const emptyListItem = {
+  id: 0,
+  item_list: 0,
+  content: '',
+  checked: false
+};
+
+export const newItemListAtom = atom<ItemList>({
+  key: 'newItemListAtom',
+  default: {
+    id: 0,
+    name: '',
+    items: [emptyListItem],
+    items_checked: [],
+    private: false
+  }
+});
