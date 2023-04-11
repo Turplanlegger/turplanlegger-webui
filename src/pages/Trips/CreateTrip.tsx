@@ -31,7 +31,7 @@ export const CreateTrip = () => {
       private: !publicTrip
     } as Trip;
 
-    const result = await api?.post('/trip', trip);
+    const result = await api?.post('/trips', trip);
     if (isErrorResponse(result)) {
       setErrorState(result);
       return;

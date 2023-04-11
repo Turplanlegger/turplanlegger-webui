@@ -26,7 +26,7 @@ export const TripCard = ({ trip }: Props) => {
   const [trips, setTrips] = useRecoilState(tripState);
 
   const deleteTrip = async () => {
-    const res = await api?.delete(`/trip/${trip.id}`);
+    const res = await api?.delete(`/trips/${trip.id}`);
     if (res.status === 'ok') {
       setTrips(trips.filter((t) => t.id !== trip.id));
     }

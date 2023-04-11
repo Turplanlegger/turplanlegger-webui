@@ -28,7 +28,7 @@ export const ItemListInfo = ({ item_list }: Props) => {
   const [item_lists, setItemLists] = useRecoilState(itemListState);
 
   const deleteItemList = async () => {
-    const res = await api?.delete(`/item_list/${item_list.id}`);
+    const res = await api?.delete(`/item_lists/${item_list.id}`);
     if (res.status === 'ok') {
       setItemLists(item_lists.filter((il) => il.id !== item_list.id));
     }

@@ -6,7 +6,7 @@ const initializeNotesSelector = selector<Note[]>({
   key: `initializeNotesSelector`,
   get: async ({ get }) => {
     const api = get(apiState);
-    const result = await api?.get('/note/mine');
+    const result = await api?.get('/notes/mine');
     return result?.status === 'ok' ? result.note : [];
   }
 });

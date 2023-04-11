@@ -23,7 +23,7 @@ export const CreateNote = () => {
       private: !publicNote
     } as Note;
 
-    const result = await api?.post('/note', note);
+    const result = await api?.post('/notes', note);
     setOpen(false);
     setNotes([...notes, result]);
   };

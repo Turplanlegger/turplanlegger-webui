@@ -6,7 +6,7 @@ export const initializeItemListsSelector = selector<ItemList[]>({
   key: `initializeItemListsSelector`,
   get: async ({ get }) => {
     const api = get(apiState);
-    const result = await api?.get('/item_list/mine');
+    const result = await api?.get('/item_lists/mine');
     return result?.status === 'ok' ? result.item_list : [];
   }
 });
