@@ -43,13 +43,13 @@ export const TripCard = ({ trip }: Props) => {
             <TextField
               label={t('common.start_time')}
               variant="standard"
-              value={trip.start_time ? trip.start_time : t('common.not_set')}
+              value={trip.dates[0].start_time ? trip.dates[0].start_time : t('common.not_set')}
             />
           </Grid>
           <Grid item>
             <TextField
               label={t('common.end_time')}
-              value={trip.end_time ? trip.end_time : t('common.not_set')}
+              value={trip.dates[0].end_time ? trip.dates[0].end_time : t('common.not_set')}
               variant="standard"
             />
           </Grid>

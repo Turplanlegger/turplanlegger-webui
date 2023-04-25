@@ -15,3 +15,15 @@ export const noteState = atom<Note[]>({
   key: 'noteState',
   default: initializeNotesSelector
 });
+
+export const emptyNote = {
+  id: 0,
+  name: '',
+  content: '',
+  private: false
+};
+
+export const newNoteAtom = atom<Note>({
+  key: 'newNoteAtom',
+  default: emptyNote
+});

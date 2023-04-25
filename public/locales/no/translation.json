@@ -20,6 +20,8 @@
     "content": "Innhold",
     "coming_soon": "Kommer snart",
     "reset": "Nullstill"
+    "date": "Dato",
+    "dates": "Datoer"
   },
   "create": {
     "description": "Her kan du lage en tur!",

@@ -1,6 +1,9 @@
 import { atom, selectorFamily, selector } from 'recoil';
-import { Trip } from '../models/Types';
+import { Trip, TripDate } from '../models/Types';
 import { apiState } from './apiState';
+import { emptyNote } from './noteState';
+import { emptyRoute } from './routeState';
+import { emptyList } from './listState';
 
 const initializeTripsSelector = selector<Trip[]>({
   key: `initializeTripsSelector`,
@@ -24,4 +27,28 @@ export const tripByIdSelector = selectorFamily({
       const trips = get(tripState);
       return trips.find((trip) => trip.id === tripId);
     }
+});
+
+export const emptyTripDate = {
+  id: 0,
+  start_time: new Date(),
+  end_time: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+};
+
+export const newTripDateAtom = atom<TripDate>({
+  key: 'newTripDateAtom',
+  default: emptyTripDate
+});
+
+export const newTripAtom = atom<Trip>({
+  key: 'newTripAtom',
+  default: {
+    id: 0,
+    name: '',
+    dates: [emptyTripDate],
+    notes: [emptyNote],
+    routes: [emptyRoute],
+    item_lists: [emptyList],
+    private: false
+  }
 });

@@ -23,13 +23,15 @@ export const emptyListItem = {
   checked: false
 };
 
+export const emptyList = {
+  id: 0,
+  name: '',
+  items: [emptyListItem],
+  items_checked: [],
+  private: false
+};
+
 export const newItemListAtom = atom<ItemList>({
   key: 'newItemListAtom',
-  default: {
-    id: 0,
-    name: '',
-    items: [emptyListItem],
-    items_checked: [],
-    private: false
-  }
+  default: emptyList
 });

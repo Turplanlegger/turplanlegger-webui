@@ -19,7 +19,9 @@
     "name": "Name",
     "content": "Content",
     "coming_soon": "Coming soon",
-    "reset": "Reset"
+    "reset": "Reset",
+    "date": "Date",
+    "dates": "Dates"
   },
   "create": {
     "description": "You can create a trip here!",
