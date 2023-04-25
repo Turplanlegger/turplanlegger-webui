@@ -3,7 +3,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { signupMsalConfig, signinMsalConfig } from '..//authConfig';
 
 type Props = {
-  setInstanceAndLogin: (config: Configuration) => void;
+  setInstanceAndLogin: (confing: Configuration) => void;
 };
 
 export const Login = ({ setInstanceAndLogin }: Props) => {

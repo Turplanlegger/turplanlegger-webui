@@ -29,7 +29,8 @@ export const CustomModal = ({ children }: Props) => {
       onClose={() => setOpen(!open)}
       style={{ position: 'absolute' }}
       aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description">
+      aria-describedby="modal-modal-description"
+    >
       <Box sx={style}>{children}</Box>
     </Modal>
   );
