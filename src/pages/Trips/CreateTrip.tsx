@@ -63,7 +63,6 @@ export const CreateTrip = () => {
               onChange={(newValue) => {
                 setStartTime(newValue);
               }}
-              renderInput={(params) => <TextField {...params} label={t('common.start_time')} />}
             />
           </Grid>
           <Grid item>
@@ -73,7 +72,6 @@ export const CreateTrip = () => {
               onChange={(newValue) => {
                 setEndTime(newValue);
               }}
-              renderInput={(params) => <TextField {...params} label={t('common.end_time')} />}
             />
           </Grid>
           <Grid item>
