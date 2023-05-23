@@ -1,8 +1,37 @@
-#!dependabot
-
 version: 2
 updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
+    target-branch: "develop"
+    reviewers:
+      - "sixcare"
+      - "peseb"
+    labels:
+      - "npm dependencies"
+      - "dependencies"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "develop"
+    reviewers:
+      - "sixcare"
+      - "peseb"
+    labels:
+      - "Docker dependencies"
+      - "dependencies"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "develop"
+    reviewers:
+      - "sixcare"
+      - "peseb"
+    labels:
+      - "GitHub-actions dependencies"
+      - "dependencies"
