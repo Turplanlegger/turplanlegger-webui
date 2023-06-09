@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Divider,
   FormControlLabel,
   Grid,
   IconButton,
@@ -52,8 +53,10 @@ const TripDateField = ({ index }: { index: number }) => {
   return (
     <Box id={'trip-date' + index}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
-        <Typography component="h4">{t('common.date') + ' ' + (index + 1)}</Typography>
-        <Grid item>
+        <Grid item sx={{ mb: 1 }}>
+          <Typography component="h4">{t('common.date') + ' ' + (index + 1)}</Typography>
+        </Grid>
+        <Grid item sx={{ mb: 2 }}>
           <DatePicker
             label={t('common.start_time')}
             value={trip.dates[index].start_time}
@@ -81,6 +84,7 @@ const TripDateField = ({ index }: { index: number }) => {
         disabled={trip.dates.length <= 1 ? true : false}>
         <DeleteForeverIcon />
       </IconButton>
+      <Divider />
     </Box>
   );
 };
