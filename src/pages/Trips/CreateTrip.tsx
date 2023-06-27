@@ -27,7 +27,12 @@ const TripDateField = ({ index }: { index: number }) => {
 
   const [trip, setTrip] = useRecoilState(newTripAtom);
 
-  const updateTripDates = (id: number, start_time: Date | null, end_time: Date | null) => {
+  const updateTripDates = (
+    id: number,
+    start_time: Date | null,
+    end_time: Date | null,
+    selected: boolean
+  ) => {
     if (!start_time) {
       start_time = trip.dates[index].start_time;
     }
@@ -35,7 +40,7 @@ const TripDateField = ({ index }: { index: number }) => {
     if (!end_time) {
       end_time = trip.dates[index].end_time;
     }
-
+    selected = trip.dates.length > 1 ? true : false;
     setTrip({
       ...trip,
       dates: [
@@ -44,7 +49,7 @@ const TripDateField = ({ index }: { index: number }) => {
           id: 0,
           start_time: start_time,
           end_time: end_time,
-          selected: false // Add check if this is the only date set it to selected
+          selected: selected
         },
         ...trip.dates.slice(index + 1)
       ]
@@ -61,7 +66,9 @@ const TripDateField = ({ index }: { index: number }) => {
           <DatePicker
             label={t('common.start_time')}
             value={trip.dates[index].start_time}
-            onChange={(e) => updateTripDates(index, e, trip.dates[index].end_time)}
+            onChange={(e) =>
+              updateTripDates(index, e, trip.dates[index].end_time, trip.dates[index].selected)
+            }
             renderInput={(params) => <TextField {...params} label={t('common.start_time')} />}
           />
         </Grid>
@@ -69,7 +76,9 @@ const TripDateField = ({ index }: { index: number }) => {
           <DatePicker
             label={t('common.end_time')}
             value={trip.dates[index].end_time}
-            onChange={(e) => updateTripDates(index, trip.dates[index].start_time, e)}
+            onChange={(e) =>
+              updateTripDates(index, trip.dates[index].start_time, e, trip.dates[index].selected)
+            }
             renderInput={(params) => <TextField {...params} label={t('common.end_time')} />}
           />
         </Grid>
