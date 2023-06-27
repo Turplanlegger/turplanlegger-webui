@@ -19,6 +19,7 @@ export interface TripDate {
   id: number;
   start_time: Date;
   end_time: Date;
+  selected: boolean;
 }
 
 export interface Route {

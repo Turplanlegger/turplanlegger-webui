@@ -32,7 +32,8 @@ export const tripByIdSelector = selectorFamily({
 export const emptyTripDate = {
   id: 0,
   start_time: new Date(),
-  end_time: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+  end_time: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+  selected: false
 };
 
 export const newTripDateAtom = atom<TripDate>({

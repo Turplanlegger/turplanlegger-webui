@@ -11,7 +11,7 @@ export const TripsOverview = ({ trips }: Props) => {
     <Grid container spacing={2} direction="row" sx={{ margin: 1 }}>
       {trips &&
         trips.map((trip) => (
-          <Grid item key={trip.name}>
+          <Grid item key={trip.name} xs={8} md={4}>
             <TripCard key={trip.name} trip={trip} />
           </Grid>
         ))}

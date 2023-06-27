@@ -43,7 +43,8 @@ const TripDateField = ({ index }: { index: number }) => {
         {
           id: 0,
           start_time: start_time,
-          end_time: end_time
+          end_time: end_time,
+          selected: false // Add check if this is the only date set it to selected
         },
         ...trip.dates.slice(index + 1)
       ]
