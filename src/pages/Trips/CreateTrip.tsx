@@ -54,7 +54,7 @@ const TripDateField = ({ index }: { index: number }) => {
     <Box id={'trip-date' + index}>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <Grid item sx={{ mb: 1 }}>
-          <Typography component="h4">{t('common.date') + ' ' + (index + 1)}</Typography>
+          <Typography variant="h4">{t('common.date') + ' ' + (index + 1)}</Typography>
         </Grid>
         <Grid item sx={{ mb: 2 }}>
           <DatePicker
@@ -115,7 +115,7 @@ export const CreateTrip = () => {
     <Box height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'space-around'}>
       <Grid container direction="column" spacing={2}>
         <Grid item>
-          <Typography style={{ marginTop: 20 }}>{t('trip.new_trip')}</Typography>
+          <Typography variant="h2">{t('trip.new_trip')}</Typography>
         </Grid>
         <Grid item>
           <TextField
@@ -127,7 +127,9 @@ export const CreateTrip = () => {
           />
         </Grid>
         <Grid item id="dates">
-          <Typography sx={{ mt: 2 }}>{t('common.dates')}</Typography>
+          <Typography variant="h3" sx={{ mt: 2 }}>
+            {t('common.dates')}
+          </Typography>
           {trip.dates.map((date, index) => (
             <Grid item key={index} sx={{ mb: 1 }}>
               <TripDateField index={index} />
