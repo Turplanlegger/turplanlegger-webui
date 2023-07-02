@@ -64,7 +64,7 @@ export const TripInfo = ({ trip }: Props) => {
       <CardContent>
         <Grid container direction="column" spacing={2}>
           <Grid item>
-            <Typography variant="h4">{trip.name}</Typography>
+            <Typography variant="h3">{trip.name}</Typography>
             <Chip
               color={trip.private ? 'success' : 'warning'}
               size="small"

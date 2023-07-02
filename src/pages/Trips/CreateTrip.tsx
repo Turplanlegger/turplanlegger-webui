@@ -168,6 +168,7 @@ export const CreateTrip = () => {
     }
     setOpen(false);
     setTrips([...trips, result]);
+    resetTrip();
   };
 
   return (
