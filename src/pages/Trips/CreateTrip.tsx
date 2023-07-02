@@ -21,18 +21,46 @@ import { modalOpen } from '../../components/CustomModal/modalState';
 import { emptyTripDate, newTripAtom, tripState } from '../../state/tripState';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { errorState } from '../../state/errorState';
-import { Trip } from '../../models/Types';
 
-const setSelectedDate = () => {
-  const [trips, setTrips] = useRecoilState(tripState);
-  console.debug(trips);
-  return true;
+const useSetSelectedDate = () => {
+  const [trip, setTrip] = useRecoilState(newTripAtom);
+  const setSelectedDate = () => {
+    console.debug(trip.dates.length);
+    console.debug(trip.dates);
+    if (trip.dates.length > 1) {
+      console.debug('Too many dates to decide');
+    } else {
+      setTrip({
+        ...trip,
+        dates: [
+          {
+            ...trip.dates[0],
+            selected: true
+          },
+          ...trip.dates.slice(1)
+        ]
+      });
+    }
+    return true;
+  };
+  return setSelectedDate;
 };
 
 const TripDateField = ({ index }: { index: number }) => {
   const { t } = useTranslation();
 
   const [trip, setTrip] = useRecoilState(newTripAtom);
+
+  const setSelectedDate = useSetSelectedDate();
+
+  const removeDate = () => {
+    setTrip({
+      ...trip,
+      dates: [...trip.dates.filter((_, i) => i !== index)]
+    });
+
+    setSelectedDate();
+  };
 
   const updateTripDates = (
     id: number,
@@ -92,12 +120,7 @@ const TripDateField = ({ index }: { index: number }) => {
       </LocalizationProvider>
       <IconButton
         aria-label="Remove date"
-        onClick={() =>
-          setTrip({
-            ...trip,
-            dates: [...trip.dates.filter((_, i) => i !== index)]
-          })
-        }
+        onClick={() => removeDate()}
         disabled={trip.dates.length <= 1 ? true : false}>
         <DeleteForeverIcon />
       </IconButton>
@@ -118,23 +141,15 @@ export const CreateTrip = () => {
     useResetRecoilState(newTripAtom)
   ];
 
-  const addDate = () => {
-    console.debug('Here');
-    setSelectedDate();
-    console.debug('Here2');
+  const setSelectedDate = useSetSelectedDate();
 
+  const addDate = () => {
     setTrip({
       ...trip,
-      dates: [
-        ...trip.dates,
-        {
-          id: 0,
-          start_time: new Date(),
-          end_time: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-          selected: false
-        }
-      ]
+      dates: [...trip.dates, emptyTripDate]
     });
+
+    setSelectedDate();
   };
 
   const createTrip = async () => {
