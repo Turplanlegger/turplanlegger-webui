@@ -26,8 +26,6 @@ import { useEffect } from 'react';
 const useSetSelectedDate = () => {
   const [trip, setTrip] = useRecoilState(newTripAtom);
   const setSelectedDate = () => {
-    console.debug(trip.dates.length);
-    console.debug(trip.dates);
     if (trip.dates.length > 1 && trip.dates.some((date) => date.selected)) {
       setTrip({
         ...trip,
