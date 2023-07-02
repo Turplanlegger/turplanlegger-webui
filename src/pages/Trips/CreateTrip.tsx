@@ -21,6 +21,13 @@ import { modalOpen } from '../../components/CustomModal/modalState';
 import { emptyTripDate, newTripAtom, tripState } from '../../state/tripState';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { errorState } from '../../state/errorState';
+import { Trip } from '../../models/Types';
+
+const setSelectedDate = () => {
+  const [trips, setTrips] = useRecoilState(tripState);
+  console.debug(trips);
+  return true;
+};
 
 const TripDateField = ({ index }: { index: number }) => {
   const { t } = useTranslation();
@@ -111,6 +118,25 @@ export const CreateTrip = () => {
     useResetRecoilState(newTripAtom)
   ];
 
+  const addDate = () => {
+    console.debug('Here');
+    setSelectedDate();
+    console.debug('Here2');
+
+    setTrip({
+      ...trip,
+      dates: [
+        ...trip.dates,
+        {
+          id: 0,
+          start_time: new Date(),
+          end_time: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+          selected: false
+        }
+      ]
+    });
+  };
+
   const createTrip = async () => {
     const result = await api?.post('/trips', trip);
     if (isErrorResponse(result)) {
@@ -145,16 +171,7 @@ export const CreateTrip = () => {
               <TripDateField index={index} />
             </Grid>
           ))}
-          <IconButton
-            aria-label="add"
-            color="primary"
-            sx={{ mt: 0.5 }}
-            onClick={() =>
-              setTrip({
-                ...trip,
-                dates: [...trip.dates, emptyTripDate]
-              })
-            }>
+          <IconButton aria-label="add" color="primary" sx={{ mt: 0.5 }} onClick={() => addDate()}>
             <AddIcon />
           </IconButton>
         </Grid>
