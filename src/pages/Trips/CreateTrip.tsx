@@ -21,15 +21,21 @@ import { modalOpen } from '../../components/CustomModal/modalState';
 import { emptyTripDate, newTripAtom, tripState } from '../../state/tripState';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { errorState } from '../../state/errorState';
+import { useEffect } from 'react';
 
 const useSetSelectedDate = () => {
   const [trip, setTrip] = useRecoilState(newTripAtom);
   const setSelectedDate = () => {
     console.debug(trip.dates.length);
     console.debug(trip.dates);
-    if (trip.dates.length > 1) {
-      console.debug('Too many dates to decide');
-    } else {
+    if (trip.dates.length > 1 && trip.dates.some((date) => date.selected)) {
+      setTrip({
+        ...trip,
+        dates: trip.dates.map((date) => {
+          return { ...date, selected: false };
+        })
+      });
+    } else if (trip.dates.length == 1 && !trip.dates[0].selected) {
       setTrip({
         ...trip,
         dates: [
@@ -143,13 +149,15 @@ export const CreateTrip = () => {
 
   const setSelectedDate = useSetSelectedDate();
 
+  useEffect(() => {
+    setSelectedDate();
+  }, [trip.dates]);
+
   const addDate = () => {
     setTrip({
       ...trip,
       dates: [...trip.dates, emptyTripDate]
     });
-
-    setSelectedDate();
   };
 
   const createTrip = async () => {
