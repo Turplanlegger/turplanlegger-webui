@@ -47,7 +47,7 @@ export const SelectedTripDate = ({ dates }: { dates: TripDate[] }) => {
   }
 };
 
-export const TripCard = ({ trip }: Props) => {
+export const TripInfo = ({ trip }: Props) => {
   const { t } = useTranslation();
   const api = useRecoilValue(apiState);
   const [trips, setTrips] = useRecoilState(tripState);
