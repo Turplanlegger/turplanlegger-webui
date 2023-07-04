@@ -30,6 +30,9 @@
     "web-vitals": "^3.3.1"
   },
   "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "lint": "eslint src/**/*.ts[x]",
     "lint:fix": "eslint --fix src/**/*.ts[x]",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
@@ -55,10 +58,16 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.59.6",
-    "eslint": "^8.19.0",
+    "@vitejs/plugin-react-swc": "^3.3.2",
+    "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "vite": "^4.3.9",
+    "vite-plugin-checker": "^0.6.1",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-tsconfig-paths": "^4.2.0"
   }
 }
