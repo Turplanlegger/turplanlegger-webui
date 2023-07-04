@@ -1,3 +1,5 @@
+import { Dayjs } from 'dayjs';
+
 export interface Note {
   id: number;
   name: string;
@@ -17,8 +19,8 @@ export interface Trip {
 
 export interface TripDate {
   id: number;
-  start_time: Date;
-  end_time: Date;
+  start_time: Dayjs;
+  end_time: Dayjs;
   selected: boolean;
 }
 

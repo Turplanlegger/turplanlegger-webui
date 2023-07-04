@@ -8,7 +8,7 @@ import {
   DialogContentText,
   DialogTitle
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState } from 'recoil';
 import { errorState } from '../state/errorState';
 
@@ -16,7 +16,7 @@ export const DisplayErrors = () => {
   const [error, setError] = useRecoilState(errorState);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
 
   return (
     <Dialog

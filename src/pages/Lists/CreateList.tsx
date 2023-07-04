@@ -11,18 +11,18 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { modalOpen } from '../../components/CustomModal/modalState';
 import { emptyListItem, itemListState, newItemListAtom } from '../../state/listState';
 import { apiState } from '../../state/apiState';
 
 const ListItemField = ({ index }: { index: number }) => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
 
   const [listItem, setListItem] = useRecoilState(newItemListAtom);
 
-  const updateListItem = (id: number, value: string) => {
+  const updateListItem = (value: string) => {
     setListItem({
       ...listItem,
       items: [
@@ -45,7 +45,7 @@ const ListItemField = ({ index }: { index: number }) => {
       id={'item-list-item' + index}
       value={listItem.items[index].content}
       variant="standard"
-      onChange={(e) => updateListItem(index, e?.target?.value)}
+      onChange={(e) => updateListItem(e?.target?.value)}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
@@ -68,7 +68,7 @@ const ListItemField = ({ index }: { index: number }) => {
 };
 
 export const CreateList = () => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   const setOpen = useSetRecoilState(modalOpen);
 
   const api = useRecoilValue(apiState);
@@ -107,7 +107,7 @@ export const CreateList = () => {
         </Grid>
         <Grid item id="items">
           <Typography sx={{ mt: 2 }}>{t('list.items')}</Typography>
-          {listItem.items.map((item, index) => (
+          {listItem.items.map((_, index) => (
             <Grid item key={index} sx={{ mb: 1 }}>
               <ListItemField index={index} />
             </Grid>

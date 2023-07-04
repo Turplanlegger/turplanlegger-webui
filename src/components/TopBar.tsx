@@ -1,5 +1,5 @@
 import { AppBar, Typography, Toolbar } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import HikingIcon from '@mui/icons-material/Hiking';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const TopBar = ({ handleDrawerToggle }: Props) => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   const drawerWidth = 240;
   const topbarHeight = 65;
 
