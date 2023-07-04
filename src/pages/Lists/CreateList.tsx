@@ -22,7 +22,7 @@ const ListItemField = ({ index }: { index: number }) => {
 
   const [listItem, setListItem] = useRecoilState(newItemListAtom);
 
-  const updateListItem = (id: number, value: string) => {
+  const updateListItem = (value: string) => {
     setListItem({
       ...listItem,
       items: [
@@ -45,7 +45,7 @@ const ListItemField = ({ index }: { index: number }) => {
       id={'item-list-item' + index}
       value={listItem.items[index].content}
       variant="standard"
-      onChange={(e) => updateListItem(index, e?.target?.value)}
+      onChange={(e) => updateListItem(e?.target?.value)}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
@@ -107,7 +107,7 @@ export const CreateList = () => {
         </Grid>
         <Grid item id="items">
           <Typography sx={{ mt: 2 }}>{t('list.items')}</Typography>
-          {listItem.items.map((item, index) => (
+          {listItem.items.map((_, index) => (
             <Grid item key={index} sx={{ mb: 1 }}>
               <ListItemField index={index} />
             </Grid>
