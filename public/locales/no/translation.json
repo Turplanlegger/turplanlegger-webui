@@ -19,7 +19,11 @@
     "name": "Navn",
     "content": "Innhold",
     "coming_soon": "Kommer snart",
-    "reset": "Nullstill"
+    "reset": "Nullstill",
+    "date": "Dato",
+    "dates": "Datoer",
+    "start_date": "Start dato",
+    "end_date": "Slutt dato"
   },
   "create": {
     "description": "Her kan du lage en tur!",
@@ -66,7 +70,9 @@
     "my_trips": "Mine turer",
     "new_trip": "Ny tur",
     "trip_name": "Navn på tur",
-    "no_trips_found": "Ingen turer funnet. Trykk på knappen nedenfor for å lage en"
+    "no_trips_found": "Ingen turer funnet. Trykk på knappen nedenfor for å lage en",
+    "no_selected_date": "Ingen dato har blitt valgt for denne turen.",
+    "dates_available": "datoer er tilgjengelig for denne turen."
   },
   "error": {
     "title": "Oida, noe gikk galt"

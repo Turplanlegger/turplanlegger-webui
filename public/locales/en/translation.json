@@ -19,7 +19,11 @@
     "name": "Name",
     "content": "Content",
     "coming_soon": "Coming soon",
-    "reset": "Reset"
+    "reset": "Reset",
+    "date": "Date",
+    "dates": "Dates",
+    "start_date": "Start date",
+    "end_date": "End date"
   },
   "create": {
     "description": "You can create a trip here!",
@@ -65,7 +69,9 @@
     "my_trips": "My Trips",
     "new_trip": "New Trip",
     "trip_name": "Trip name",
-    "no_trips_found": "No trips found. Press the button below to create a trip"
+    "no_trips_found": "No trips found. Press the button below to create a trip",
+    "no_selected_date": "No date has been selected for this trip.",
+    "dates_available": "dates are available for this trip."
   },
   "error": {
     "title": "Woops, something went wrong"
