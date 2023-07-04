@@ -11,7 +11,6 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useTranslation } from 'react-i18next';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -22,6 +21,7 @@ import { emptyTripDate, newTripAtom, tripState } from '../../state/tripState';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { errorState } from '../../state/errorState';
 import { useEffect } from 'react';
+import { useTranslationWrapper } from 'services/Translation';
 
 const useSetSelectedDate = () => {
   const [trip, setTrip] = useRecoilState(newTripAtom);
@@ -51,7 +51,7 @@ const useSetSelectedDate = () => {
 };
 
 const TripDateField = ({ index }: { index: number }) => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
 
   const [trip, setTrip] = useRecoilState(newTripAtom);
 
@@ -66,12 +66,7 @@ const TripDateField = ({ index }: { index: number }) => {
     setSelectedDate();
   };
 
-  const updateTripDates = (
-    id: number,
-    start_time: Date | null,
-    end_time: Date | null,
-    selected: boolean
-  ) => {
+  const updateTripDates = (start_time: Date | null, end_time: Date | null, selected: boolean) => {
     if (!start_time) {
       start_time = trip.dates[index].start_time;
     }
@@ -106,9 +101,8 @@ const TripDateField = ({ index }: { index: number }) => {
             label={t('common.start_time')}
             value={trip.dates[index].start_time}
             onChange={(e) =>
-              updateTripDates(index, e, trip.dates[index].end_time, trip.dates[index].selected)
+              updateTripDates(e, trip.dates[index].end_time, trip.dates[index].selected)
             }
-            renderInput={(params) => <TextField {...params} label={t('common.start_time')} />}
           />
         </Grid>
         <Grid item>
@@ -116,9 +110,8 @@ const TripDateField = ({ index }: { index: number }) => {
             label={t('common.end_time')}
             value={trip.dates[index].end_time}
             onChange={(e) =>
-              updateTripDates(index, trip.dates[index].start_time, e, trip.dates[index].selected)
+              updateTripDates(trip.dates[index].start_time, e, trip.dates[index].selected)
             }
-            renderInput={(params) => <TextField {...params} label={t('common.end_time')} />}
           />
         </Grid>
       </LocalizationProvider>
@@ -134,7 +127,7 @@ const TripDateField = ({ index }: { index: number }) => {
 };
 
 export const CreateTrip = () => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   const setOpen = useSetRecoilState(modalOpen);
   const setErrorState = useSetRecoilState(errorState);
 
@@ -188,7 +181,7 @@ export const CreateTrip = () => {
           <Typography variant="h3" sx={{ mt: 2 }}>
             {t('common.dates')}
           </Typography>
-          {trip.dates.map((date, index) => (
+          {trip.dates.map((_, index) => (
             <Grid item key={index} sx={{ mb: 1 }}>
               <TripDateField index={index} />
             </Grid>
