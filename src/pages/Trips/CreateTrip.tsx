@@ -67,7 +67,11 @@ const TripDateField = ({ index }: { index: number }) => {
     setSelectedDate();
   };
 
-  const updateTripDates = (start_time: dayjs.Dayjs | null, end_time: dayjs.Dayjs | null, selected: boolean) => {
+  const updateTripDates = (
+    start_time: dayjs.Dayjs | null,
+    end_time: dayjs.Dayjs | null,
+    selected: boolean
+  ) => {
     if (!start_time) {
       start_time = trip.dates[index].start_time;
     }

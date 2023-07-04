@@ -14,7 +14,7 @@ const initializeTripsSelector = selector<Trip[]>({
   }
 });
 
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 export const tripState = atom<Trip[]>({
   key: 'tripState',
