@@ -1,5 +1,5 @@
 import { Button, Card, CardActions, CardContent, Chip, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Note } from '../../models/Types';
 import { apiState } from '../../state/apiState';
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const NoteInfo = ({ note }: Props) => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [notes, setNotes] = useRecoilState(noteState);
 

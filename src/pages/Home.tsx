@@ -14,7 +14,7 @@ import LandscapeIcon from '@mui/icons-material/Landscape';
 import HikingIcon from '@mui/icons-material/Hiking';
 import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import { TopBar } from '../components/TopBar';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useMsal } from '@azure/msal-react';
@@ -68,7 +68,7 @@ export const menu_items = [
 export const Home = () => {
   const drawerWidth = 240;
   const topbarHeight = 65;
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   document.title = t('app.turplanlegger');
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { instance } = useMsal();

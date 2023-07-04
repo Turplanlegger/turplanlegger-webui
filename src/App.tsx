@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import './App.css';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const App = ({ setInstanceAndLogin }: Props) => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   const isAuthenticated = useIsAuthenticated();
   document.title = t('app.turplanlegger');
 

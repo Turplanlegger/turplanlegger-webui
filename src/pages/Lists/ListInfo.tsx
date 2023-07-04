@@ -12,7 +12,7 @@ import {
   ListItemText,
   Typography
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { ItemList } from '../../models/Types';
 import { apiState } from '../../state/apiState';
@@ -23,7 +23,7 @@ interface Props {
 }
 
 export const ItemListInfo = ({ item_list }: Props) => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [item_lists, setItemLists] = useRecoilState(itemListState);
 

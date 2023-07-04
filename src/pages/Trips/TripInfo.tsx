@@ -1,5 +1,5 @@
 import { Button, Card, CardActions, CardContent, Chip, Grid, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Trip, TripDate } from '../../models/Types';
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const SelectedTripDate = ({ dates }: { dates: TripDate[] }) => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   let selected_date = undefined;
   dates.forEach((date, index) => {
     if (date.selected) {
@@ -48,7 +48,7 @@ export const SelectedTripDate = ({ dates }: { dates: TripDate[] }) => {
 };
 
 export const TripInfo = ({ trip }: Props) => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [trips, setTrips] = useRecoilState(tripState);
 

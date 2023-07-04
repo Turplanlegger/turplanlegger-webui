@@ -11,14 +11,14 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { modalOpen } from '../../components/CustomModal/modalState';
 import { emptyListItem, itemListState, newItemListAtom } from '../../state/listState';
 import { apiState } from '../../state/apiState';
 
 const ListItemField = ({ index }: { index: number }) => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
 
   const [listItem, setListItem] = useRecoilState(newItemListAtom);
 
@@ -68,7 +68,7 @@ const ListItemField = ({ index }: { index: number }) => {
 };
 
 export const CreateList = () => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   const setOpen = useSetRecoilState(modalOpen);
 
   const api = useRecoilValue(apiState);
