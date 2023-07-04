@@ -12,7 +12,7 @@ type Props = {
 export const App = ({ setInstanceAndLogin }: Props) => {
   const t = useTranslationWrapper();
   const isAuthenticated = useIsAuthenticated();
-  document.title = t('app.turplanlegger');
+  document.title = t('app.turplanlegger') || 'Tripplanner';
 
   return isAuthenticated ? <Home /> : <Login setInstanceAndLogin={setInstanceAndLogin} />;
 };

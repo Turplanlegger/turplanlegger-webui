@@ -69,7 +69,7 @@ export const Home = () => {
   const drawerWidth = 240;
   const topbarHeight = 65;
   const t = useTranslationWrapper();
-  document.title = t('app.turplanlegger');
+  document.title = t('app.turplanlegger') || 'Tripplanner';
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { instance } = useMsal();
 
