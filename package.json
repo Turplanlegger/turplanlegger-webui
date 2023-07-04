@@ -30,10 +30,6 @@
     "web-vitals": "^3.3.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --passWithNoTests",
-    "eject": "react-scripts eject",
     "lint": "eslint src/**/*.ts[x]",
     "lint:fix": "eslint --fix src/**/*.ts[x]",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
@@ -63,7 +59,6 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
-    "prettier": "^2.8.8",
-    "react-scripts": "^5.0.1"
+    "prettier": "^2.8.8"
   }
 }
