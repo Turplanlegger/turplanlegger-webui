@@ -12,8 +12,9 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { apiState } from '../../state/apiState';
 import { modalOpen } from '../../components/CustomModal/modalState';
@@ -66,7 +67,7 @@ const TripDateField = ({ index }: { index: number }) => {
     setSelectedDate();
   };
 
-  const updateTripDates = (start_time: Date | null, end_time: Date | null, selected: boolean) => {
+  const updateTripDates = (start_time: dayjs.Dayjs | null, end_time: dayjs.Dayjs | null, selected: boolean) => {
     if (!start_time) {
       start_time = trip.dates[index].start_time;
     }
@@ -92,14 +93,14 @@ const TripDateField = ({ index }: { index: number }) => {
 
   return (
     <Box id={'trip-date' + index}>
-      <LocalizationProvider dateAdapter={AdapterMoment}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Grid item sx={{ mb: 1 }}>
           <Typography variant="h4">{t('common.date') + ' ' + (index + 1)}</Typography>
         </Grid>
         <Grid item sx={{ mb: 2 }}>
           <DatePicker
             label={t('common.start_time')}
-            value={trip.dates[index].start_time}
+            value={dayjs(trip.dates[index].start_time)}
             onChange={(e) =>
               updateTripDates(e, trip.dates[index].end_time, trip.dates[index].selected)
             }

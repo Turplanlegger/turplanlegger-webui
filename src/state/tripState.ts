@@ -14,6 +14,8 @@ const initializeTripsSelector = selector<Trip[]>({
   }
 });
 
+import dayjs from 'dayjs'
+
 export const tripState = atom<Trip[]>({
   key: 'tripState',
   default: initializeTripsSelector
@@ -31,8 +33,8 @@ export const tripByIdSelector = selectorFamily({
 
 export const emptyTripDate = {
   id: 0,
-  start_time: new Date(),
-  end_time: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+  start_time: dayjs(),
+  end_time: dayjs().add(14, 'days'),
   selected: false
 };
 
