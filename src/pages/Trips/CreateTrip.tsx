@@ -15,6 +15,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
+import 'dayjs/locale/nb';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { apiState } from '../../state/apiState';
 import { modalOpen } from '../../components/CustomModal/modalState';
@@ -97,7 +98,7 @@ const TripDateField = ({ index }: { index: number }) => {
 
   return (
     <Box id={'trip-date' + index}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="nb">
         <Grid item sx={{ mb: 1 }}>
           <Typography variant="h4">{t('common.date') + ' ' + (index + 1)}</Typography>
         </Grid>
