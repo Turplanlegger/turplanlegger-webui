@@ -1,6 +1,6 @@
 import { Box, Button, Grid, Stack, Switch, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalOpen } from '../../components/CustomModal/modalState';
 import { Note } from '../../models/Types';
@@ -8,7 +8,7 @@ import { apiState } from '../../state/apiState';
 import { noteState } from '../../state/noteState';
 
 export const CreateNote = () => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   const [name, setName] = useState<string>('');
   const [content, setContent] = useState<string>('');
   const [publicNote, setPublicNote] = useState(false);

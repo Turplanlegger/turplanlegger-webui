@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
+import { useTranslationWrapper } from 'services/Translation';
 import { ErrorResponse } from '../models/ErrorResponse';
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const DisplayError = ({ error }: Props) => {
-  const { t } = useTranslation();
+  const t = useTranslationWrapper();
   return (
     <Box>
       <Typography>{t('common.something_went_wrong')}</Typography>
