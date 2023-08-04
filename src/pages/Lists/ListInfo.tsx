@@ -12,11 +12,14 @@ import {
   ListItemText,
   Typography
 } from '@mui/material';
+import LaunchIcon from '@mui/icons-material/Launch';
 import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { ItemList } from '../../models/Types';
 import { apiState } from '../../state/apiState';
 import { itemListState } from '../../state/listState';
+import { IconButton } from '@mui/material';
+import { Stack } from '@mui/material';
 
 interface Props {
   item_list: ItemList;
@@ -37,9 +40,19 @@ export const ItemListInfo = ({ item_list }: Props) => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" sx={{ mb: 2 }}>
-          {item_list.name}
-        </Typography>
+        <Stack direction="row" spacing={2} justifyContent="space-between">
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            {item_list.name}
+          </Typography>
+          <IconButton
+            aria-label="maximize"
+            sx={{ borderRadius: 0 }}
+            onClick={() => {
+              console.debug(`Bring big boi ${item_list.id}`);
+            }}>
+            <LaunchIcon />
+          </IconButton>
+        </Stack>
         <Chip
           color={item_list.private ? 'success' : 'warning'}
           size="small"
