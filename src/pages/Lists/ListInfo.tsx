@@ -14,12 +14,13 @@ import {
 } from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { useTranslationWrapper } from 'services/Translation';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { ItemList } from '../../models/Types';
 import { apiState } from '../../state/apiState';
 import { itemListState } from '../../state/listState';
 import { IconButton } from '@mui/material';
 import { Stack } from '@mui/material';
+import { viewModalOpen } from 'components/CustomModal/modalState';
 
 interface Props {
   item_list: ItemList;
@@ -29,6 +30,7 @@ export const ItemListInfo = ({ item_list }: Props) => {
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [item_lists, setItemLists] = useRecoilState(itemListState);
+  const setOpenView = useSetRecoilState(viewModalOpen);
 
   const deleteItemList = async () => {
     const res = await api?.delete(`/item_lists/${item_list.id}`);
@@ -49,6 +51,7 @@ export const ItemListInfo = ({ item_list }: Props) => {
             sx={{ borderRadius: 0 }}
             onClick={() => {
               console.debug(`Bring big boi ${item_list.id}`);
+              setOpenView(true);
             }}>
             <LaunchIcon />
           </IconButton>
