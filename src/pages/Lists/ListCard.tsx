@@ -26,7 +26,7 @@ interface Props {
   item_list: ItemList;
 }
 
-export const ItemListInfo = ({ item_list }: Props) => {
+export const ItemListCard = ({ item_list }: Props) => {
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [item_lists, setItemLists] = useRecoilState(itemListState);
