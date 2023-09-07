@@ -4,3 +4,8 @@ export const modalOpen = atom<boolean>({
   key: 'modalOpen',
   default: false
 });
+
+export const editModalOpen = atom<boolean>({
+  key: 'editModalOpen',
+  default: false
+});
