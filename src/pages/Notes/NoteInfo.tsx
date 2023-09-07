@@ -1,9 +1,10 @@
 import { Button, Card, CardActions, CardContent, Chip, Typography } from '@mui/material';
 import { useTranslationWrapper } from 'services/Translation';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Note } from '../../models/Types';
 import { apiState } from '../../state/apiState';
 import { noteState } from '../../state/noteState';
+import { editModalOpen } from 'components/CustomModal/modalState';
 
 interface Props {
   note: Note;
@@ -13,6 +14,7 @@ export const NoteInfo = ({ note }: Props) => {
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [notes, setNotes] = useRecoilState(noteState);
+  const setOpenEdit = useSetRecoilState(editModalOpen);
 
   const deleteNote = async () => {
     const res = await api?.delete(`/notes/${note.id}`);
@@ -39,7 +41,12 @@ export const NoteInfo = ({ note }: Props) => {
         </>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => console.log('Edit')}>
+        <Button
+          size="small"
+          onClick={() => {
+            setOpenEdit(true);
+            console.debug('Open me');
+          }}>
           {t('common.edit')}
         </Button>
         <Button size="small" onClick={() => deleteNote()}>
