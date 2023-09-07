@@ -42,3 +42,14 @@ export interface ListItem {
   checked: boolean;
   content?: number | string;
 }
+
+export interface User {
+  id: number;
+  name: string;
+  last_name: string;
+  email: string;
+  private: boolean;
+  deleted: boolean;
+  delete_time: Dayjs;
+  create_time: Dayjs;
+}
