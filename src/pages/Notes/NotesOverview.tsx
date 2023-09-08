@@ -1,7 +1,8 @@
 import { Grid } from '@mui/material';
 import { Note } from '../../models/Types';
-import { NoteInfo } from './NoteInfo';
+import { NoteContent } from './NoteContent';
 import { EditContent } from '../EditContent';
+import { NoteCard } from './NoteCard';
 
 interface Props {
   notes: Note[];
@@ -14,12 +15,12 @@ export const NotesOverview = ({ notes }: Props) => {
         {notes &&
           notes.map((note) => (
             <Grid item key={note.name} xs={8} md={4}>
-              <NoteInfo key={note.name} note={note} />
+              <NoteCard key={note.name} note={note} />
             </Grid>
           ))}
       </Grid>
       <EditContent>
-        <NoteInfo note={notes[0]} />
+        <NoteContent note={notes[0]} />
       </EditContent>
     </>
   );
