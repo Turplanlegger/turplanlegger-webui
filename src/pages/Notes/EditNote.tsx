@@ -40,13 +40,17 @@ export const EditNote = ({ note }: Props) => {
           <Typography>{t('common.public')}</Typography>
         </Stack>
       </Grid>
-      <Grid>
-        <Button fullWidth={true} onClick={() => console.debug(false)}>
-          {t('common.cancel')}
-        </Button>
-        <Button fullWidth={true} onClick={() => console.debug('yolo')}>
-          {t('common.save')}
-        </Button>
+      <Grid container justifyContent="flex-end">
+        <Grid>
+          <Button variant="outlined" color="warning" onClick={() => console.debug(false)}>
+            {t('common.cancel')}
+          </Button>
+        </Grid>
+        <Grid>
+          <Button variant="contained" color="success" onClick={() => console.debug('yolo')}>
+            {t('common.save')}
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );
