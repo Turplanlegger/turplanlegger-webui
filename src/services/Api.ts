@@ -30,6 +30,18 @@ export class Api {
     return await response.json();
   }
 
+  async patch(path: string, data: object) {
+    const response = await fetch(this.url + path, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'Application/json',
+        Authorization: `Bearer ${await this.getToken()}`
+      },
+      body: JSON.stringify(data)
+    });
+    return await response.json();
+  }
+
   async delete(path: string) {
     const response = await fetch(this.url + path, {
       method: 'DELETE',
