@@ -2,6 +2,7 @@ import { Grid } from '@mui/material';
 import { Note } from '../../models/Types';
 import { EditContent } from '../EditContent';
 import { NoteCard } from './NoteCard';
+// import { NoteContent } from './NoteContent';
 import { EditNote } from './EditNote';
 
 interface Props {
