@@ -23,7 +23,8 @@
     "date": "Date",
     "dates": "Dates",
     "start_date": "Start date",
-    "end_date": "End date"
+    "end_date": "End date",
+    "save": "Save"
   },
   "create": {
     "description": "You can create a trip here!",

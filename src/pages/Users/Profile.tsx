@@ -1,4 +1,4 @@
-import { Avatar, Box, Typography } from '@mui/material';
+import { Avatar, Box, Button, Link, Typography } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { useTranslationWrapper } from 'services/Translation';
 import { whoamiState } from 'state/userState';
@@ -29,6 +29,9 @@ export const Profile = () => {
         </Typography>
       </Box>
       {userAvatar()}
+      <Button component={Link} href="/profile/edit" variant="contained" color="primary">
+        Edit profile
+      </Button>
     </Box>
   );
 };

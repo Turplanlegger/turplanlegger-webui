@@ -19,7 +19,7 @@ import { TopBar } from '../components/TopBar';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useMsal } from '@azure/msal-react';
 import { Link, Route, Routes } from 'react-router-dom';
-import { Profile } from './Profile';
+import { Profile } from './Users/Profile';
 import { Trips } from './Trips/Trips';
 import { MyRoutes } from './MyRoutes';
 import { Notes } from './Notes/Notes';
@@ -27,6 +27,7 @@ import { IPublicClientApplication } from '@azure/msal-browser';
 import { Lists } from './Lists/Lists';
 import { TripDetail } from './Trips/TripDetail';
 import { DisplayErrors } from '../components/DisplayErrors';
+import { EditProfile } from './Users/EditProfile';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
@@ -153,6 +154,7 @@ export const Home = () => {
               <Route key={item.route} path={item.route} element={item.element} />
             ))}
             <Route path="/trips/:tripId" element={<TripDetail />} />
+            <Route path="/profile/edit" element={<EditProfile />} />
           </Routes>
         </React.Suspense>
       </Box>

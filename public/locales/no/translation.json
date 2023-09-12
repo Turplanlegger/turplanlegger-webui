@@ -23,7 +23,8 @@
     "date": "Dato",
     "dates": "Datoer",
     "start_date": "Start dato",
-    "end_date": "Slutt dato"
+    "end_date": "Slutt dato",
+    "save": "Lagre"
   },
   "create": {
     "description": "Her kan du lage en tur!",
