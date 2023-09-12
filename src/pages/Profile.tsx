@@ -13,9 +13,11 @@ export const Profile = () => {
       <Typography variant="h3"> U did boo-boo </Typography>
     </Box>
   ) : (
-    <Box>
+    <Box marginTop={5} marginLeft={5}>
       <Typography variant="h2">{t('profile.profile')}</Typography>
-      <Typography variant="h3"> {user.name} </Typography>
+      <Typography variant="h5">
+        Name: {user.name} {user.last_name}
+      </Typography>
     </Box>
   );
 };
