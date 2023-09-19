@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import { useRecoilValue } from 'recoil';
 import { MartinModal } from './modal';
 import { modalSelector, openModalSelector } from 'state/modalState';
+import { DrawerWidth } from 'components/TopBar';
 
 interface Props {
   children: React.ReactNode;
@@ -12,13 +13,12 @@ interface Props {
 
 export const ModalContent = ({ children, message, modal }: Props) => {
   const open = useRecoilValue(openModalSelector(modal));
-  const drawerWidth = 240;
 
   return (
     <Box
       style={{
         position: 'absolute',
-        width: `calc(100% - ${drawerWidth}px)`,
+        width: `calc(100% - ${DrawerWidth}px)`,
         top: 0,
         right: 0,
         display: 'flex',
