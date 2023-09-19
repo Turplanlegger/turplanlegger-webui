@@ -3,9 +3,9 @@ import Box from '@mui/material/Box';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { Fab } from '@mui/material';
-import { CustomModal } from '../components/CustomModal/CustomModal';
-import { useRecoilState } from 'recoil';
-import { modalOpen } from '../components/CustomModal/modalState';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { modalSelector, openModalSelector, openModalState } from 'state/modalState';
+import { MartinModal } from 'components/Modal/modal';
 
 interface Props {
   children: React.ReactNode;
@@ -13,7 +13,8 @@ interface Props {
 }
 
 export const CreateContent = ({ children, message }: Props) => {
-  const [open, setOpen] = useRecoilState(modalOpen);
+  const open = useRecoilValue(openModalSelector(modalSelector.CREATE));
+  const setOpen = useSetRecoilState(openModalState);
   const drawerWidth = 240;
 
   return (
@@ -34,11 +35,11 @@ export const CreateContent = ({ children, message }: Props) => {
       <Fab
         color="primary"
         aria-label="add"
-        onClick={() => setOpen(true)}
+        onClick={() => setOpen(modalSelector.CREATE)}
         sx={{ position: 'absolute', bottom: 0, marginBottom: 5 }}>
         <AddIcon />
       </Fab>
-      <CustomModal>{children}</CustomModal>
+      <MartinModal modal={modalSelector.CREATE}>{children}</MartinModal>
     </Box>
   );
 };

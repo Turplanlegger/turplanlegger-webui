@@ -15,10 +15,11 @@ const style = {
 
 interface Props {
   children: React.ReactNode;
+  modal: modalSelector;
 }
 
-export const ViewModal = ({ children }: Props) => {
-  const open = useRecoilValue(openModalSelector(modalSelector.VIEW));
+export const MartinModal = ({ children, modal }: Props) => {
+  const open = useRecoilValue(openModalSelector(modal));
   const setOpen = useSetRecoilState(openModalState);
 
   return (

@@ -2,6 +2,7 @@ import { atom, selectorFamily } from 'recoil';
 
 export enum modalSelector {
   NONE,
+  CREATE,
   EDIT,
   VIEW
 }

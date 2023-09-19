@@ -2,10 +2,10 @@ import { Box, Button, Grid, Stack, Switch, TextField, Typography } from '@mui/ma
 import { useState } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { modalOpen } from '../../components/CustomModal/modalState';
 import { Note } from '../../models/Types';
 import { apiState } from '../../state/apiState';
 import { noteState } from '../../state/noteState';
+import { modalSelector, openModalState } from 'state/modalState';
 
 export const CreateNote = () => {
   const t = useTranslationWrapper();
@@ -13,8 +13,8 @@ export const CreateNote = () => {
   const [content, setContent] = useState<string>('');
   const [publicNote, setPublicNote] = useState(false);
   const api = useRecoilValue(apiState);
-  const setOpen = useSetRecoilState(modalOpen);
   const [notes, setNotes] = useRecoilState(noteState);
+  const setOpen = useSetRecoilState(openModalState);
 
   const createNote = async () => {
     const note = {
@@ -24,7 +24,7 @@ export const CreateNote = () => {
     } as Note;
 
     const result = await api?.post('/notes', note);
-    setOpen(false);
+    setOpen(modalSelector.NONE);
     setNotes([...notes, result]);
   };
 
@@ -66,7 +66,7 @@ export const CreateNote = () => {
         </Grid>
       </Grid>
       <Box display={'flex'}>
-        <Button fullWidth={true} onClick={() => setOpen(false)}>
+        <Button fullWidth={true} onClick={() => setOpen(modalSelector.NONE)}>
           {t('common.cancel')}
         </Button>
         <Button fullWidth={true} onClick={createNote}>
