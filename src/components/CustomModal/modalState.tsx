@@ -4,3 +4,8 @@ export const modalOpen = atom<boolean>({
   key: 'modalOpen',
   default: false
 });
+
+export const viewModalOpen = atom<boolean>({
+  key: 'viewModalOpen',
+  default: false
+});
