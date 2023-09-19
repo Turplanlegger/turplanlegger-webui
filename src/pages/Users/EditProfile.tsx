@@ -34,7 +34,7 @@ export const EditProfile = () => {
       <Grid xs={4}>
         <FormGroup>
           <FormControlLabel
-            control={<Switch value={user.private} onChange={togglePrivate} />}
+            control={<Switch defaultChecked={user.private} onChange={togglePrivate} />}
             label={t('common.private')}
           />
         </FormGroup>
