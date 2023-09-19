@@ -18,6 +18,14 @@ export class Api {
     return await response.json();
   }
 
+  async patch(path: string) {
+    const response = await fetch(this.url + path, {
+      method: 'PATCH',
+      headers: { Authorization: `Bearer ${await this.getToken()}` }
+    });
+    return await response.json();
+  }
+
   async post(path: string, data: object) {
     const response = await fetch(this.url + path, {
       method: 'POST',
