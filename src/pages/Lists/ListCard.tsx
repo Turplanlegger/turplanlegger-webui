@@ -20,7 +20,7 @@ import { apiState } from '../../state/apiState';
 import { itemListState } from '../../state/listState';
 import { IconButton } from '@mui/material';
 import { Stack } from '@mui/material';
-import { viewModalOpen } from 'components/CustomModal/modalState';
+import { modalSelector, openModalState } from 'state/modalState';
 
 interface Props {
   item_list: ItemList;
@@ -30,7 +30,7 @@ export const ItemListCard = ({ item_list }: Props) => {
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [item_lists, setItemLists] = useRecoilState(itemListState);
-  const setOpenView = useSetRecoilState(viewModalOpen);
+  const setOpenView = useSetRecoilState(openModalState);
 
   const deleteItemList = async () => {
     const res = await api?.delete(`/item_lists/${item_list.id}`);
@@ -51,7 +51,7 @@ export const ItemListCard = ({ item_list }: Props) => {
             sx={{ borderRadius: 0 }}
             onClick={() => {
               console.debug(`Bring big boi ${item_list.id}`);
-              setOpenView(true);
+              setOpenView(modalSelector.VIEW);
             }}>
             <LaunchIcon />
           </IconButton>

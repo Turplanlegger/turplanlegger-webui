@@ -2,11 +2,11 @@ import { Button, Stack, Switch, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useTranslationWrapper } from 'services/Translation';
 import { Note } from '../../models/Types';
-import { editModalOpen } from 'components/CustomModal/modalState';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import { apiState } from 'state/apiState';
 import { noteState } from 'state/noteState';
+import { modalSelector, openModalState } from 'state/modalState';
 
 interface Props {
   note: Note;
@@ -15,7 +15,7 @@ interface Props {
 export const EditNote = ({ note }: Props) => {
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
-  const setOpen = useSetRecoilState(editModalOpen);
+  const setOpen = useSetRecoilState(openModalState);
   const [name, setName] = useState<string>(note.name);
   const [content, setContent] = useState<string>(note.content);
   const [privacy, setPrivacyNote] = useState(note.private);
@@ -80,7 +80,7 @@ export const EditNote = ({ note }: Props) => {
       </Grid>
       <Grid container justifyContent="flex-end">
         <Grid>
-          <Button variant="outlined" color="warning" onClick={() => setOpen(false)}>
+          <Button variant="outlined" color="warning" onClick={() => setOpen(modalSelector.EDIT)}>
             {t('common.cancel')}
           </Button>
         </Grid>

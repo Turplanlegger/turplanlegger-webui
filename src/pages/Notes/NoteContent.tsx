@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Note } from '../../models/Types';
 import { apiState } from '../../state/apiState';
 import { noteState } from '../../state/noteState';
-import { editModalOpen } from 'components/CustomModal/modalState';
+import { modalSelector, openModalState } from 'state/modalState';
 
 interface Props {
   note: Note;
@@ -36,7 +36,7 @@ export const NoteButtons = ({ note }: Props) => {
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [notes, setNotes] = useRecoilState(noteState);
-  const setOpenEdit = useSetRecoilState(editModalOpen);
+  const setOpenEdit = useSetRecoilState(openModalState);
 
   const deleteNote = async () => {
     const res = await api?.delete(`/notes/${note.id}`);
@@ -50,7 +50,7 @@ export const NoteButtons = ({ note }: Props) => {
       <Button
         size="small"
         onClick={() => {
-          setOpenEdit(true);
+          setOpenEdit(modalSelector.EDIT);
           console.debug('Open me');
         }}>
         {t('common.edit')}

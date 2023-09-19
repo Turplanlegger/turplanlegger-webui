@@ -1,17 +1,17 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { EditModal } from '../components/CustomModal/EditModal';
 import { useRecoilValue } from 'recoil';
-import { editModalOpen } from '../components/CustomModal/modalState';
+import { MartinModal } from './modal';
+import { modalSelector, openModalSelector } from 'state/modalState';
 
 interface Props {
   children: React.ReactNode;
   message?: string;
+  modal: modalSelector;
 }
 
-export const EditContent = ({ children, message }: Props) => {
-  const open = useRecoilValue(editModalOpen);
+export const ModalContent = ({ children, message, modal }: Props) => {
+  const open = useRecoilValue(openModalSelector(modal));
   const drawerWidth = 240;
 
   return (
@@ -28,8 +28,10 @@ export const EditContent = ({ children, message }: Props) => {
         justifyContent: 'space-around',
         zIndex: open ? 1 : -1
       }}>
-      {message && <Typography>{message}</Typography>}
-      <EditModal>{children}</EditModal>
+      {message && (
+        <Typography style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>{message}</Typography>
+      )}
+      <MartinModal modal={modal}>{children}</MartinModal>
     </Box>
   );
 };

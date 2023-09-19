@@ -1,8 +1,9 @@
 import { Grid } from '@mui/material';
 import { ItemList } from '../../models/Types';
 import { ItemListCard } from './ListCard';
-import { ViewContent } from '../ViewContent';
+import { ModalContent } from '../../components/Modal/content';
 import { ItemListContent } from './ListContent';
+import { modalSelector } from 'state/modalState';
 
 interface Props {
   item_lists: ItemList[];
@@ -19,9 +20,9 @@ export const ListsOverview = ({ item_lists }: Props) => {
             </Grid>
           ))}
       </Grid>
-      <ViewContent>
+      <ModalContent modal={modalSelector.VIEW}>
         <ItemListContent item_list={item_lists[0]} />
-      </ViewContent>
+      </ModalContent>
     </>
   );
 };
