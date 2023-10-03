@@ -43,9 +43,11 @@ export const Profile = () => {
       <Box marginTop={5} marginLeft={5}>
         <Typography variant="h2">{t('profile.profile')}</Typography>
         <Typography variant="h5">
-          Name: {user.name} {user.last_name}
+          {t('common.name')}: {user.name} {user.last_name}
         </Typography>
-        <Typography variant="h5">Joined: {user.create_time.toString()}</Typography>
+        <Typography variant="h5">
+          {t('common.joined')}: {user.create_time.toString()}
+        </Typography>
       </Box>
       {userAvatar()}
       <Grid container columns={1} sx={{ margin: 1 }}>
