@@ -1,11 +1,19 @@
-import { Avatar, Box, Button, Link, Typography } from '@mui/material';
-import { useRecoilValue } from 'recoil';
+import { Avatar, Box, FormControlLabel, FormGroup, Switch, Typography } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
+import { isErrorResponse } from 'models/ErrorResponse';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useTranslationWrapper } from 'services/Translation';
+import { apiState } from 'state/apiState';
+import { errorState } from 'state/errorState';
 import { whoamiState } from 'state/userState';
 
 export const Profile = () => {
-  const user = useRecoilValue(whoamiState);
+  // const user = useRecoilValue(whoamiState);
   const t = useTranslationWrapper();
+  const api = useRecoilValue(apiState);
+  const setErrorState = useSetRecoilState(errorState);
+  const [user, setUser] = useRecoilState(whoamiState);
+
   const userAvatar = () => {
     if (user.private) {
       return (
@@ -14,6 +22,17 @@ export const Profile = () => {
     } else {
       return <Avatar alt="Public user" src="/static/public.png" sx={{ width: 128, height: 128 }} />;
     }
+  };
+  const togglePrivate = async () => {
+    const result = await api?.patch(`/users/${user.id}/private`);
+    if (isErrorResponse(result)) {
+      setErrorState(result);
+      return;
+    }
+    setUser({
+      ...user,
+      private: !user.private
+    });
   };
   return Object.keys(user).length === 0 ? (
     <Box marginTop={5} marginLeft={5}>
@@ -27,11 +46,19 @@ export const Profile = () => {
         <Typography variant="h5">
           Name: {user.name} {user.last_name}
         </Typography>
+        <Typography variant="h5">Joined: {user.create_time.toString()}</Typography>
       </Box>
       {userAvatar()}
-      <Button component={Link} href="/profile/edit" variant="contained" color="primary">
-        Edit profile
-      </Button>
+      <Grid container columns={1} sx={{ margin: 1 }}>
+        <Grid xs={4}>
+          <FormGroup>
+            <FormControlLabel
+              control={<Switch defaultChecked={user.private} onChange={togglePrivate} />}
+              label={t('common.private')}
+            />
+          </FormGroup>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
