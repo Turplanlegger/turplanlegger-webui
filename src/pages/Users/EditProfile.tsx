@@ -49,5 +49,4 @@ export const EditProfile = () => {
       </Grid>
     </Grid>
   );
-  // return <>{user.name}</>;
 };
