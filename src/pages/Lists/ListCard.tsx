@@ -12,20 +12,25 @@ import {
   ListItemText,
   Typography
 } from '@mui/material';
+import LaunchIcon from '@mui/icons-material/Launch';
 import { useTranslationWrapper } from 'services/Translation';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { ItemList } from '../../models/Types';
 import { apiState } from '../../state/apiState';
 import { itemListState } from '../../state/listState';
+import { IconButton } from '@mui/material';
+import { Stack } from '@mui/material';
+import { modalSelector, openModalState } from 'state/modalState';
 
 interface Props {
   item_list: ItemList;
 }
 
-export const ItemListInfo = ({ item_list }: Props) => {
+export const ItemListCard = ({ item_list }: Props) => {
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [item_lists, setItemLists] = useRecoilState(itemListState);
+  const setOpenView = useSetRecoilState(openModalState);
 
   const deleteItemList = async () => {
     const res = await api?.delete(`/item_lists/${item_list.id}`);
@@ -37,9 +42,19 @@ export const ItemListInfo = ({ item_list }: Props) => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" sx={{ mb: 2 }}>
-          {item_list.name}
-        </Typography>
+        <Stack direction="row" spacing={2} justifyContent="space-between">
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            {item_list.name}
+          </Typography>
+          <IconButton
+            aria-label="maximize"
+            sx={{ borderRadius: 0 }}
+            onClick={() => {
+              setOpenView(modalSelector.VIEW);
+            }}>
+            <LaunchIcon />
+          </IconButton>
+        </Stack>
         <Chip
           color={item_list.private ? 'success' : 'warning'}
           size="small"

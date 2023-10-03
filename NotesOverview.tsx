@@ -1,9 +1,8 @@
 import { Grid } from '@mui/material';
 import { Note } from '../../models/Types';
+import { EditContent } from '../EditContent';
 import { NoteCard } from './NoteCard';
 import { EditNote } from './EditNote';
-import { ModalContent } from 'components/Modal/content';
-import { modalSelector } from 'state/modalState';
 
 interface Props {
   notes: Note[];
@@ -20,9 +19,9 @@ export const NotesOverview = ({ notes }: Props) => {
             </Grid>
           ))}
       </Grid>
-      <ModalContent modal={modalSelector.EDIT}>
+      <EditContent>
         <EditNote note={notes[0]} />
-      </ModalContent>
+      </EditContent>
     </>
   );
 };
