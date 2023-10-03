@@ -50,7 +50,6 @@ export const ItemListCard = ({ item_list }: Props) => {
             aria-label="maximize"
             sx={{ borderRadius: 0 }}
             onClick={() => {
-              console.debug(`Bring big boi ${item_list.id}`);
               setOpenView(modalSelector.VIEW);
             }}>
             <LaunchIcon />
