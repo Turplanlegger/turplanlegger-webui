@@ -1,4 +1,4 @@
-import { Avatar, Box, FormControlLabel, FormGroup, Switch, Typography } from '@mui/material';
+import { Avatar, Box, FormControlLabel, Switch, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { isErrorResponse } from 'models/ErrorResponse';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -8,7 +8,6 @@ import { errorState } from 'state/errorState';
 import { whoamiState } from 'state/userState';
 
 export const Profile = () => {
-  // const user = useRecoilValue(whoamiState);
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const setErrorState = useSetRecoilState(errorState);
@@ -51,12 +50,10 @@ export const Profile = () => {
       {userAvatar()}
       <Grid container columns={1} sx={{ margin: 1 }}>
         <Grid xs={4}>
-          <FormGroup>
-            <FormControlLabel
-              control={<Switch defaultChecked={user.private} onChange={togglePrivate} />}
-              label={t('common.private')}
-            />
-          </FormGroup>
+          <FormControlLabel
+            control={<Switch defaultChecked={user.private} onChange={togglePrivate} />}
+            label={t('common.private')}
+          />
         </Grid>
       </Grid>
     </Box>
