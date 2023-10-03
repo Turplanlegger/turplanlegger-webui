@@ -8,6 +8,8 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '60%',
+  maxHeight: '60%',
+  overflowY: 'auto',
   bgcolor: 'background.paper',
   boxShadow: 50,
   p: 4
@@ -26,10 +28,8 @@ export const MartinModal = ({ children, modal }: Props) => {
     <Modal
       disablePortal
       open={open}
-      onClose={() => setOpen(modalSelector.NONE)}
       style={{ position: 'absolute' }}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description">
+      onClose={() => setOpen(modalSelector.NONE)}>
       <Box sx={style}>{children}</Box>
     </Modal>
   );
