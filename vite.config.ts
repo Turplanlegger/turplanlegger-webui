@@ -19,5 +19,8 @@ export default defineConfig({
     checker({
       typescript: true
     })
-  ]
+  ],
+  optimizeDeps: {
+    include: ['@mui/material/Unstable_Grid2']
+  }
 });
