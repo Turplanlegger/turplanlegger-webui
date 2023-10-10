@@ -1,4 +1,13 @@
-import { Avatar, Box, FormControlLabel, Switch, Typography } from '@mui/material';
+import {
+  Avatar,
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  FormControlLabel,
+  Switch,
+  Typography
+} from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { isErrorResponse } from 'models/ErrorResponse';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -14,12 +23,15 @@ export const Profile = () => {
   const [user, setUser] = useRecoilState(whoamiState);
 
   const userAvatar = () => {
+    const style = {
+      margin: ' auto',
+      width: 128,
+      height: 128
+    };
     if (user.private) {
-      return (
-        <Avatar alt="Private user" src="/static/private.png" sx={{ width: 128, height: 128 }} />
-      );
+      return <Avatar alt="Private user" src="/static/private.png" sx={style} />;
     } else {
-      return <Avatar alt="Public user" src="/static/public.png" sx={{ width: 128, height: 128 }} />;
+      return <Avatar alt="Public user" src="/static/public.png" sx={style} />;
     }
   };
   const togglePrivate = async () => {
@@ -39,25 +51,31 @@ export const Profile = () => {
       <Typography variant="h3"> U did boo-boo </Typography>
     </Box>
   ) : (
-    <Box>
-      <Box marginTop={5} marginLeft={5}>
-        <Typography variant="h2">{t('profile.profile')}</Typography>
-        <Typography variant="h5">
-          {t('common.name')}: {user.name} {user.last_name}
-        </Typography>
-        <Typography variant="h5">
-          {t('common.joined')}: {user.create_time.toString()}
-        </Typography>
-      </Box>
-      {userAvatar()}
-      <Grid container columns={1} sx={{ margin: 1 }}>
-        <Grid xs={4}>
-          <FormControlLabel
-            control={<Switch defaultChecked={user.private} onChange={togglePrivate} />}
-            label={t('common.private')}
-          />
-        </Grid>
+    <Grid container sx={{ margin: 1 }}>
+      <Grid md={4}>
+        <Card>
+          <CardContent>
+            {/* <Typography variant="h2">{t('profile.profile')}</Typography> */}
+            {userAvatar()}
+            <Typography variant="h2" sx={{ textAlign: 'center' }}>
+              {user.name} {user.last_name}
+            </Typography>
+            <Typography variant="subtitle1" gutterBottom sx={{ textAlign: 'center' }}>
+              <i>
+                {t('common.joined')} on the {user.create_time.toString()}
+              </i>
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Grid xs={4}>
+              <FormControlLabel
+                control={<Switch defaultChecked={user.private} onChange={togglePrivate} />}
+                label={t('common.private')}
+              />
+            </Grid>
+          </CardActions>
+        </Card>
       </Grid>
-    </Box>
+    </Grid>
   );
 };
