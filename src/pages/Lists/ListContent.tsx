@@ -36,7 +36,7 @@ export const ItemListContent = ({ item_list }: Props) => {
 
     const newItemList = { ...item_list, items: uncheckedItems, items_checked: checkedItems };
     setItemLists((old) => [...old.filter((l) => l.id !== item_list.id), newItemList]);
-    // Save changes in backend?
+    // TODO: Save changes in backend
   };
 
   return (
