@@ -7,9 +7,17 @@ export const initializeItemListsSelector = selector<ItemList[]>({
   get: async ({ get }) => {
     const api = get(apiState);
     const result = await api?.get('/item_lists/mine');
-    return result?.status === 'ok' ? result.item_list : [];
+    return result?.status === 'ok' ? parseItemLists(result.item_list) : [];
   }
 });
+
+const parseItemLists = (item_lists: ItemList[]) => {
+  return item_lists.map((list) => ({
+    ...list,
+    items: list.items.map((i) => ({ ...i, checked: false })),
+    items_checked: list.items_checked.map((i) => ({ ...i, checked: true }))
+  }));
+};
 
 export const itemListState = atom<ItemList[]>({
   key: 'itemListState',

@@ -99,7 +99,7 @@ export const ItemListCard = ({ item_list }: Props) => {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => console.log('Edit')}>
+        <Button size="small" onClick={() => setOpenView(modalSelector.VIEW)}>
           {t('common.edit')}
         </Button>
         <Button size="small" onClick={() => deleteItemList()}>
