@@ -50,7 +50,7 @@ export const ItemListCard = ({ item_list }: Props) => {
             aria-label="maximize"
             sx={{ borderRadius: 0 }}
             onClick={() => {
-              setOpenView(modalSelector.VIEW);
+              setOpenView(modalSelector.EDIT);
             }}>
             <LaunchIcon />
           </IconButton>
@@ -99,7 +99,7 @@ export const ItemListCard = ({ item_list }: Props) => {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={() => setOpenView(modalSelector.VIEW)}>
+        <Button size="small" onClick={() => setOpenView(modalSelector.EDIT)}>
           {t('common.edit')}
         </Button>
         <Button size="small" onClick={() => deleteItemList()}>
