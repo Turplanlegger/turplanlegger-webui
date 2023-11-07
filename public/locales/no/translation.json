@@ -25,7 +25,7 @@
     "start_date": "Start dato",
     "end_date": "Slutt dato",
     "save": "Lagre",
-    "joined": "Medlem siden"
+    "member_since": "Medlem siden"
   },
   "create": {
     "description": "Her kan du lage en tur!",

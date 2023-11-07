@@ -24,7 +24,7 @@ export const Profile = () => {
 
   const userAvatar = () => {
     const style = {
-      margin: ' auto',
+      margin: 'auto',
       width: 128,
       height: 128
     };
@@ -55,14 +55,13 @@ export const Profile = () => {
       <Grid md={4}>
         <Card>
           <CardContent>
-            {/* <Typography variant="h2">{t('profile.profile')}</Typography> */}
             {userAvatar()}
             <Typography variant="h2" sx={{ textAlign: 'center' }}>
               {user.name} {user.last_name}
             </Typography>
             <Typography variant="subtitle1" gutterBottom sx={{ textAlign: 'center' }}>
               <i>
-                {t('common.joined')} on the {user.create_time.toString()}
+                {t('common.member_since')} on the {user.create_time.toString()}
               </i>
             </Typography>
           </CardContent>
