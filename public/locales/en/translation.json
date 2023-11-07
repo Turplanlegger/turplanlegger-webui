@@ -24,7 +24,10 @@
     "dates": "Dates",
     "save": "Save",
     "start_date": "Start date",
-    "end_date": "End date"
+    "end_date": "End date",
+    "save": "Save",
+    "member_since": "Member since"
+
   },
   "create": {
     "description": "You can create a trip here!",
