@@ -38,7 +38,7 @@ export class Api {
     return await response.json();
   }
 
-  async patch(path: string, data: object) {
+  async patch_with_data(path: string, data: object) {
     const response = await fetch(this.url + path, {
       method: 'PATCH',
       headers: {
