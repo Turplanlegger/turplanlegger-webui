@@ -22,8 +22,11 @@
     "reset": "Nullstill",
     "date": "Dato",
     "dates": "Datoer",
+    "save": "Lagre",
     "start_date": "Start dato",
-    "end_date": "Slutt dato"
+    "end_date": "Slutt dato",
+    "save": "Lagre",
+    "member_since": "Medlem siden"
   },
   "create": {
     "description": "Her kan du lage en tur!",
