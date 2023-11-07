@@ -18,12 +18,12 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/nb';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { apiState } from '../../state/apiState';
-import { modalOpen } from '../../components/CustomModal/modalState';
 import { emptyTripDate, newTripAtom, tripState } from '../../state/tripState';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { errorState } from '../../state/errorState';
 import { useEffect } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
+import { modalSelector, openModalState } from 'state/modalState';
 
 const useSetSelectedDate = () => {
   const [trip, setTrip] = useRecoilState(newTripAtom);
@@ -134,7 +134,7 @@ const TripDateField = ({ index }: { index: number }) => {
 
 export const CreateTrip = () => {
   const t = useTranslationWrapper();
-  const setOpen = useSetRecoilState(modalOpen);
+  const setOpen = useSetRecoilState(openModalState);
   const setErrorState = useSetRecoilState(errorState);
 
   const api = useRecoilValue(apiState);
@@ -163,7 +163,7 @@ export const CreateTrip = () => {
       setErrorState(result);
       return;
     }
-    setOpen(false);
+    setOpen(modalSelector.NONE);
     setTrips([...trips, result]);
     resetTrip();
   };
@@ -214,7 +214,7 @@ export const CreateTrip = () => {
         </Grid>
       </Grid>
       <Box display={'flex'}>
-        <Button fullWidth={true} onClick={() => setOpen(false)}>
+        <Button fullWidth={true} onClick={() => setOpen(modalSelector.NONE)}>
           {t('common.cancel')}
         </Button>
         <Button fullWidth={true} onClick={() => resetTrip()}>

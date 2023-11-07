@@ -22,6 +22,7 @@
     "reset": "Reset",
     "date": "Date",
     "dates": "Dates",
+    "save": "Save",
     "start_date": "Start date",
     "end_date": "End date",
     "save": "Save",
@@ -45,7 +46,7 @@
     "new_list": "New list",
     "item": "Item",
     "items": "Items",
-    "no_lists_found": "No lists found. Press the button below to create a list",
+    "no_lists_found": "No lists found.\nPress the button below to create a list",
     "checked_items": "Checked items",
     "unchecked_items": "Unchecked items"
   },
@@ -59,7 +60,7 @@
     "notes": "Notes",
     "my_notes": "My notes",
     "new_note": "New Note",
-    "no_notes_found": "No notes found. Press the button below to create a new note"
+    "no_notes_found": "No notes found.\nPress the button below to create a new note"
   },
   "route": {
     "route": "Route",
@@ -72,7 +73,7 @@
     "my_trips": "My Trips",
     "new_trip": "New Trip",
     "trip_name": "Trip name",
-    "no_trips_found": "No trips found. Press the button below to create a trip",
+    "no_trips_found": "No trips found.\nPress the button below to create a trip",
     "no_selected_date": "No date has been selected for this trip.",
     "dates_available": "dates are available for this trip."
   },

@@ -13,9 +13,9 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
-import { modalOpen } from '../../components/CustomModal/modalState';
 import { emptyListItem, itemListState, newItemListAtom } from '../../state/listState';
 import { apiState } from '../../state/apiState';
+import { modalSelector, openModalState } from 'state/modalState';
 
 const ListItemField = ({ index }: { index: number }) => {
   const t = useTranslationWrapper();
@@ -69,7 +69,7 @@ const ListItemField = ({ index }: { index: number }) => {
 
 export const CreateList = () => {
   const t = useTranslationWrapper();
-  const setOpen = useSetRecoilState(modalOpen);
+  const setOpen = useSetRecoilState(openModalState);
 
   const api = useRecoilValue(apiState);
   const [lists, setLists] = useRecoilState(itemListState);
@@ -80,7 +80,7 @@ export const CreateList = () => {
 
   const createList = async () => {
     const result = await api?.post('/item_lists', listItem);
-    setOpen(false);
+    setOpen(modalSelector.NONE);
     setLists([...lists, result.item_list]);
     resetListItem();
   };
@@ -143,7 +143,7 @@ export const CreateList = () => {
         </Grid>
       </Grid>
       <Box display={'flex'}>
-        <Button fullWidth={true} onClick={() => setOpen(false)}>
+        <Button fullWidth={true} onClick={() => setOpen(modalSelector.NONE)}>
           {t('common.cancel')}
         </Button>
         <Button fullWidth={true} onClick={() => resetListItem()}>
