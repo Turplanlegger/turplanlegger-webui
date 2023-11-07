@@ -1,6 +1,6 @@
 {
   "name": "turplanlegger-webui",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": true,
   "dependencies": {
     "@azure/msal-browser": "^2.38.3",
