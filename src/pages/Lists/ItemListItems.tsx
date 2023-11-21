@@ -13,9 +13,10 @@ import { ListItem } from 'models/Types';
 interface Props {
   title?: string;
   items: ListItem[];
+  toggleItem: (items: ListItem) => void;
 }
 
-export const ItemListItems = ({ title, items }: Props) => {
+export const ItemListItems = ({ title, items, toggleItem }: Props) => {
   return (
     <>
       <Typography variant="h6" sx={{ mb: 2 }}>
@@ -30,13 +31,13 @@ export const ItemListItems = ({ title, items }: Props) => {
                 <ListItemButton
                   role={undefined}
                   onClick={() => {
-                    console.debug('uncheck me');
+                    toggleItem(list_item);
                   }}
                   dense
                   sx={{ pr: 0.7, mr: 1 }}>
                   <Checkbox
                     edge="start"
-                    checked
+                    checked={list_item.checked}
                     tabIndex={-1}
                     disableRipple
                     inputProps={{ 'aria-labelledby': list_item.content?.toString() }}

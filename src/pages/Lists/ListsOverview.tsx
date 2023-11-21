@@ -20,7 +20,7 @@ export const ListsOverview = ({ item_lists }: Props) => {
             </Grid>
           ))}
       </Grid>
-      <ModalContent modal={modalSelector.VIEW}>
+      <ModalContent modal={modalSelector.EDIT}>
         <ItemListContent item_list={item_lists[0]} />
       </ModalContent>
     </>
