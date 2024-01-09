@@ -9,11 +9,6 @@ import {
   Typography
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from 'dayjs';
 import 'dayjs/locale/nb';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { apiState } from '../../state/apiState';
@@ -23,106 +18,8 @@ import { errorState } from '../../state/errorState';
 import { useEffect } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
 import { modalSelector, openModalState } from 'state/modalState';
-
-const useSetSelectedDate = () => {
-  const [trip, setTrip] = useRecoilState(newTripAtom);
-  const setSelectedDate = () => {
-    if (trip.dates.length > 1 && trip.dates.some((date) => date.selected)) {
-      setTrip({
-        ...trip,
-        dates: trip.dates.map((date) => {
-          return { ...date, selected: false };
-        })
-      });
-    } else if (trip.dates.length == 1 && !trip.dates[0].selected) {
-      setTrip({
-        ...trip,
-        dates: [
-          {
-            ...trip.dates[0],
-            selected: true
-          },
-          ...trip.dates.slice(1)
-        ]
-      });
-    }
-    return true;
-  };
-  return setSelectedDate;
-};
-
-const TripDateField = ({ index }: { index: number }) => {
-  const t = useTranslationWrapper();
-
-  const [trip, setTrip] = useRecoilState(newTripAtom);
-
-  const setSelectedDate = useSetSelectedDate();
-
-  const removeDate = () => {
-    setTrip({
-      ...trip,
-      dates: [...trip.dates.filter((_, i) => i !== index)]
-    });
-
-    setSelectedDate();
-  };
-
-  const updateTripDates = (
-    start_time: dayjs.Dayjs | null,
-    end_time: dayjs.Dayjs | null,
-    selected: boolean
-  ) => {
-    if (!start_time) {
-      start_time = trip.dates[index].start_time;
-    }
-
-    if (!end_time) {
-      end_time = trip.dates[index].end_time;
-    }
-    selected = trip.dates.length > 1 ? true : false;
-    setTrip({
-      ...trip,
-      dates: [
-        ...trip.dates.slice(0, index),
-        {
-          id: 0,
-          start_time: start_time,
-          end_time: end_time,
-          selected: selected
-        },
-        ...trip.dates.slice(index + 1)
-      ]
-    });
-  };
-
-  return (
-    <Box id={'trip-date' + index}>
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="nb">
-        <Typography marginBottom={1}>{t('common.date') + ' ' + (index + 1) + ':'}</Typography>
-        <DatePicker
-          label={t('common.start_time')}
-          value={dayjs(trip.dates[index].start_time)}
-          onChange={(e) =>
-            updateTripDates(e, trip.dates[index].end_time, trip.dates[index].selected)
-          }
-        />
-        <DatePicker
-          label={t('common.end_time')}
-          value={trip.dates[index].end_time}
-          onChange={(e) =>
-            updateTripDates(trip.dates[index].start_time, e, trip.dates[index].selected)
-          }
-        />
-      </LocalizationProvider>
-      <IconButton
-        aria-label="Remove date"
-        onClick={() => removeDate()}
-        disabled={trip.dates.length <= 1 ? true : false}>
-        <DeleteForeverIcon />
-      </IconButton>
-    </Box>
-  );
-};
+import { TripDateField } from './TripDateField';
+import { useSetSelectedDate } from './useSetSelectedDate';
 
 export const CreateTrip = () => {
   const t = useTranslationWrapper();
