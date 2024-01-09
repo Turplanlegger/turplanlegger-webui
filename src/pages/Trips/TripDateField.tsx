@@ -57,8 +57,17 @@ export const TripDateField = ({ index }: { index: number }) => {
   return (
     <Box id={'trip-date' + index}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="nb">
-        <Typography marginBottom={1}>{t('common.date') + ' ' + (index + 1) + ':'}</Typography>
+        <Box display="flex" alignItems={'center'} marginBottom={1}>
+          <IconButton
+            aria-label="Remove date"
+            onClick={() => removeDate()}
+            disabled={trip.dates.length <= 1 ? true : false}>
+            <DeleteForeverIcon />
+          </IconButton>
+          <Typography>{t('common.date') + ' ' + (index + 1)}</Typography>
+        </Box>
         <DatePicker
+          sx={{ marginRight: 1 }}
           label={t('common.start_time')}
           value={dayjs(trip.dates[index].start_time)}
           onChange={(e) =>
@@ -73,12 +82,6 @@ export const TripDateField = ({ index }: { index: number }) => {
           }
         />
       </LocalizationProvider>
-      <IconButton
-        aria-label="Remove date"
-        onClick={() => removeDate()}
-        disabled={trip.dates.length <= 1 ? true : false}>
-        <DeleteForeverIcon />
-      </IconButton>
     </Box>
   );
 };
