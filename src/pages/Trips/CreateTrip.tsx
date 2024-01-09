@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Divider,
   FormControlLabel,
   Grid,
   IconButton,
@@ -99,27 +98,21 @@ const TripDateField = ({ index }: { index: number }) => {
   return (
     <Box id={'trip-date' + index}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="nb">
-        <Grid item sx={{ mb: 1 }}>
-          <Typography variant="h4">{t('common.date') + ' ' + (index + 1)}</Typography>
-        </Grid>
-        <Grid item sx={{ mb: 2 }}>
-          <DatePicker
-            label={t('common.start_time')}
-            value={dayjs(trip.dates[index].start_time)}
-            onChange={(e) =>
-              updateTripDates(e, trip.dates[index].end_time, trip.dates[index].selected)
-            }
-          />
-        </Grid>
-        <Grid item>
-          <DatePicker
-            label={t('common.end_time')}
-            value={trip.dates[index].end_time}
-            onChange={(e) =>
-              updateTripDates(trip.dates[index].start_time, e, trip.dates[index].selected)
-            }
-          />
-        </Grid>
+        <Typography marginBottom={1}>{t('common.date') + ' ' + (index + 1) + ':'}</Typography>
+        <DatePicker
+          label={t('common.start_time')}
+          value={dayjs(trip.dates[index].start_time)}
+          onChange={(e) =>
+            updateTripDates(e, trip.dates[index].end_time, trip.dates[index].selected)
+          }
+        />
+        <DatePicker
+          label={t('common.end_time')}
+          value={trip.dates[index].end_time}
+          onChange={(e) =>
+            updateTripDates(trip.dates[index].start_time, e, trip.dates[index].selected)
+          }
+        />
       </LocalizationProvider>
       <IconButton
         aria-label="Remove date"
@@ -127,7 +120,6 @@ const TripDateField = ({ index }: { index: number }) => {
         disabled={trip.dates.length <= 1 ? true : false}>
         <DeleteForeverIcon />
       </IconButton>
-      <Divider />
     </Box>
   );
 };
@@ -183,19 +175,6 @@ export const CreateTrip = () => {
             onChange={(e) => setTrip({ ...trip, name: e?.target.value })}
           />
         </Grid>
-        <Grid item id="dates">
-          <Typography variant="h3" sx={{ mt: 2 }}>
-            {t('common.dates')}
-          </Typography>
-          {trip.dates.map((_, index) => (
-            <Grid item key={index} sx={{ mb: 1 }}>
-              <TripDateField index={index} />
-            </Grid>
-          ))}
-          <IconButton aria-label="add" color="primary" sx={{ mt: 0.5 }} onClick={() => addDate()}>
-            <AddIcon />
-          </IconButton>
-        </Grid>
         <Grid item>
           <FormControlLabel
             control={
@@ -211,6 +190,19 @@ export const CreateTrip = () => {
             }
             label={trip.private ? t('common.private') : t('common.public')}
           />
+        </Grid>
+        <Grid item id="dates">
+          <Typography variant="h3" sx={{ mt: 2 }}>
+            {t('common.dates')}
+          </Typography>
+          {trip.dates.map((_, index) => (
+            <Grid item key={index} sx={{ mb: 1 }}>
+              <TripDateField index={index} />
+            </Grid>
+          ))}
+          <IconButton aria-label="add" color="primary" sx={{ mt: 0.5 }} onClick={() => addDate()}>
+            <AddIcon />
+          </IconButton>
         </Grid>
       </Grid>
       <Box display={'flex'}>
