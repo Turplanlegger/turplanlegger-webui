@@ -36,8 +36,8 @@ export const EditNote = ({ note }: Props) => {
     await api
       ?.put(`/notes/${note.id}`, updatedNote)
       .then((response) => {
-        console.log(response); // TODO: API response does not contain full data yet. Set notes to updated note instead of response until this is fixed
-        setNotes((old) => [...old.filter((n) => n.id !== note.id), updatedNote]);
+        console.log(response);
+        setNotes((old) => [...old.filter((n) => n.id !== note.id), response.note]);
       })
       .catch((response) => {
         console.error('Not ok!');
