@@ -61,7 +61,9 @@ export const CreateTrip = () => {
     <Box height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'space-around'}>
       <Grid container direction="column" spacing={2}>
         <Grid item>
-          <Typography variant="h2">{t('trip.new_trip')}</Typography>
+          <Typography component="h2" variant="h4">
+            {t('trip.new_trip')}
+          </Typography>
         </Grid>
         <Grid item>
           <TextField
@@ -69,27 +71,33 @@ export const CreateTrip = () => {
             label={t('trip.trip_name')}
             variant="outlined"
             value={trip.name}
+            sx={{ width: '60%' }}
             onChange={(e) => setTrip({ ...trip, name: e?.target.value })}
           />
         </Grid>
-        <Grid item>
-          <FormControlLabel
-            control={
-              <Switch
-                defaultChecked
-                onChange={() =>
-                  setTrip({
-                    ...trip,
-                    private: !trip.private
-                  })
-                }
-              />
-            }
-            label={trip.private ? t('common.private') : t('common.public')}
-          />
+        <Grid item id="privacy">
+          <Typography variant="h5" component="h2" sx={{ mt: 2 }}>
+            {t('common.privacy')}
+          </Typography>
+          <Box display="flex" alignItems={'center'}>
+            <FormControlLabel
+              control={
+                <Switch
+                  defaultChecked
+                  onChange={() =>
+                    setTrip({
+                      ...trip,
+                      private: !trip.private
+                    })
+                  }
+                />
+              }
+              label={trip.private ? t('common.private') : t('common.public')}
+            />
+          </Box>
         </Grid>
         <Grid item id="dates">
-          <Typography variant="h3" sx={{ mt: 2 }}>
+          <Typography variant="h5" component="h2" sx={{ mt: 2 }}>
             {t('common.dates')}
           </Typography>
           {trip.dates.map((_, index) => (

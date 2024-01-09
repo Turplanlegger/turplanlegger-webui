@@ -26,7 +26,8 @@
     "start_date": "Start dato",
     "end_date": "Slutt dato",
     "save": "Lagre",
-    "member_since": "Medlem siden"
+    "member_since": "Medlem siden",
+    "privacy": "Synlighet"
   },
   "create": {
     "description": "Her kan du lage en tur!",
