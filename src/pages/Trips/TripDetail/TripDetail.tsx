@@ -1,4 +1,4 @@
-import { Box, Chip, Typography } from '@mui/material';
+import { Box, Chip, IconButton, Typography } from '@mui/material';
 import { TripLists } from './TripLists';
 import { TripParticipants } from './TripParticipants';
 import { TripRoutes } from './TripRoutes';
@@ -9,6 +9,7 @@ import { PrivacyToggle } from '../PrivacyToggle';
 import { TripDate } from 'models/Types';
 import dayjs from 'dayjs';
 import { useEditTripState } from './useEditTripState';
+import SaveIcon from '@mui/icons-material/Save';
 
 const getSelectedDateString = (dates: TripDate[]) => {
   const selected = dates.find((d) => d.selected);
@@ -24,11 +25,25 @@ export const TripDetail = () => {
   const { editTripState, setEditTripState } = useEditTripState();
   const t = useTranslationWrapper();
 
+  function saveTrip(): void {
+    throw new Error('Function not implemented.');
+  }
+
   return editTripState ? (
-    <Box marginTop={5} marginLeft={5}>
-      <Typography component="h1" variant="h4">
-        {editTripState.name}
-      </Typography>
+    <Box marginTop={5} marginLeft={5} width="fit-content">
+      <Box display="flex" alignItems={'center'} justifyContent={'space-between'}>
+        <Typography component="h1" variant="h4">
+          {editTripState.name}
+        </Typography>
+        <IconButton
+          aria-label="save"
+          color="primary"
+          style={{ border: '1px solid', borderRadius: '10%' }}
+          onClick={() => saveTrip()}>
+          <>Save</>
+          <SaveIcon />
+        </IconButton>
+      </Box>
       <Typography component="h2" variant="h5">
         Date: {getSelectedDateString(editTripState.dates)}
       </Typography>
