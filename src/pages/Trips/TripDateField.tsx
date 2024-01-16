@@ -1,5 +1,7 @@
 import { Box, IconButton, Typography } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import DoneIcon from '@mui/icons-material/Done';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -59,6 +61,27 @@ export const TripDateField = ({
     });
   };
 
+  function voteDate(id: number): void {
+    console.log('Voted for date with id: ', id);
+    throw new Error('Function not implemented.');
+  }
+
+  function selectDate(id: number, index: number): void {
+    const date = trip.dates.find((d) => d.id === id);
+    date &&
+      setTrip({
+        ...trip,
+        dates: [
+          ...trip.dates.slice(0, index).map((d) => ({ ...d, selected: false })),
+          {
+            ...date,
+            selected: true
+          },
+          ...trip.dates.slice(index + 1).map((d) => ({ ...d, selected: false }))
+        ]
+      });
+  }
+
   return (
     <Box id={'trip-date' + index}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="nb">
@@ -87,6 +110,23 @@ export const TripDateField = ({
           }
         />
       </LocalizationProvider>
+      {trip.dates[index].id > 0 ? (
+        <>
+          <IconButton aria-label="Vote for date" onClick={() => voteDate(trip.dates[index].id)}>
+            <ThumbUpIcon />
+          </IconButton>
+          <IconButton
+            aria-label="Select date"
+            onClick={() => selectDate(trip.dates[index].id, index)}
+            style={
+              trip.dates[index].selected
+                ? { background: 'green', borderRadius: '25%', padding: 5 }
+                : {}
+            }>
+            <DoneIcon />
+          </IconButton>
+        </>
+      ) : null}
     </Box>
   );
 };

@@ -1,7 +1,4 @@
 import { Box, Chip, Typography } from '@mui/material';
-import { useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { tripByIdSelector } from '../../../state/tripState';
 import { TripLists } from './TripLists';
 import { TripParticipants } from './TripParticipants';
 import { TripRoutes } from './TripRoutes';
@@ -9,26 +6,39 @@ import { TripDates } from './TripDates';
 import { TripNotes } from './TripNotes';
 import { useTranslationWrapper } from 'services/Translation';
 import { PrivacyToggle } from '../PrivacyToggle';
-import { useState } from 'react';
+import { TripDate } from 'models/Types';
+import dayjs from 'dayjs';
+import { useEditTripState } from './useEditTripState';
+
+const getSelectedDateString = (dates: TripDate[]) => {
+  const selected = dates.find((d) => d.selected);
+  const startTime = dayjs(selected?.start_time);
+  const endTime = dayjs(selected?.end_time);
+
+  return selected !== undefined
+    ? `${startTime.format('DD/MM/YYYY')} - ${endTime.format('DD/MM/YYYY')}`
+    : 'No date selected';
+};
 
 export const TripDetail = () => {
-  const { tripId } = useParams();
-  const trip = useRecoilValue(tripByIdSelector(Number(tripId)));
-  const [localTrip, setLocalTrip] = useState(trip);
+  const { editTripState, setEditTripState } = useEditTripState();
   const t = useTranslationWrapper();
 
-  return trip ? (
+  return editTripState ? (
     <Box marginTop={5} marginLeft={5}>
       <Typography component="h1" variant="h4">
-        {trip.name}
+        {editTripState.name}
+      </Typography>
+      <Typography component="h2" variant="h5">
+        Date: {getSelectedDateString(editTripState.dates)}
       </Typography>
       <Chip
-        color={trip.private ? 'success' : 'warning'}
+        color={editTripState.private ? 'success' : 'warning'}
         size="small"
-        label={trip.private ? t('common.private') : t('common.public')}
+        label={editTripState.private ? t('common.private') : t('common.public')}
         sx={{ mb: '15px' }}
       />
-      {localTrip && <PrivacyToggle trip={localTrip} setTrip={setLocalTrip} />}
+      {editTripState && <PrivacyToggle trip={editTripState} setTrip={setEditTripState} />}
       <TripParticipants />
       <TripDates />
       <TripRoutes />
