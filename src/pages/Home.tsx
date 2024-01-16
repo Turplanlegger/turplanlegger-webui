@@ -25,7 +25,7 @@ import { MyRoutes } from './MyRoutes';
 import { Notes } from './Notes/Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
 import { Lists } from './Lists/Lists';
-import { TripDetail } from './Trips/TripDetail';
+import { TripDetail } from './Trips/TripDetail/TripDetail';
 import { DisplayErrors } from '../components/DisplayErrors';
 
 const handleLogout = (instance: IPublicClientApplication) => {

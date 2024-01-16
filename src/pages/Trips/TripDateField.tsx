@@ -5,15 +5,20 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import 'dayjs/locale/nb';
-import { useRecoilState } from 'recoil';
-import { newTripAtom } from '../../state/tripState';
 import { useTranslationWrapper } from 'services/Translation';
 import { useSetSelectedDate } from './useSetSelectedDate';
+import { Trip } from 'models/Types';
 
-export const TripDateField = ({ index }: { index: number }) => {
+export const TripDateField = ({
+  index,
+  trip,
+  setTrip
+}: {
+  index: number;
+  trip: Trip;
+  setTrip: (value: Trip) => void;
+}) => {
   const t = useTranslationWrapper();
-
-  const [trip, setTrip] = useRecoilState(newTripAtom);
 
   const setSelectedDate = useSetSelectedDate();
 
@@ -76,7 +81,7 @@ export const TripDateField = ({ index }: { index: number }) => {
         />
         <DatePicker
           label={t('common.end_time')}
-          value={trip.dates[index].end_time}
+          value={dayjs(trip.dates[index].end_time)}
           onChange={(e) =>
             updateTripDates(trip.dates[index].start_time, e, trip.dates[index].selected)
           }

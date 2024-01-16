@@ -43,6 +43,11 @@ export const newTripDateAtom = atom<TripDate>({
   default: emptyTripDate
 });
 
+export const editTripAtom = atom<Trip>({
+  key: 'newTripAtom',
+  default: undefined
+});
+
 export const newTripAtom = atom<Trip>({
   key: 'newTripAtom',
   default: {

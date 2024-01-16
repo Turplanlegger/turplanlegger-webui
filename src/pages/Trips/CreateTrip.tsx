@@ -1,25 +1,17 @@
-import {
-  Box,
-  Button,
-  FormControlLabel,
-  Grid,
-  IconButton,
-  Switch,
-  TextField,
-  Typography
-} from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+
 import 'dayjs/locale/nb';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { apiState } from '../../state/apiState';
-import { emptyTripDate, newTripAtom, tripState } from '../../state/tripState';
+import { newTripAtom, tripState } from '../../state/tripState';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { errorState } from '../../state/errorState';
 import { useEffect } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
 import { modalSelector, openModalState } from 'state/modalState';
-import { TripDateField } from './TripDateField';
 import { useSetSelectedDate } from './useSetSelectedDate';
+import { PrivacyToggle } from './PrivacyToggle';
+import { DatesList } from './DatesList';
 
 export const CreateTrip = () => {
   const t = useTranslationWrapper();
@@ -38,13 +30,6 @@ export const CreateTrip = () => {
   useEffect(() => {
     setSelectedDate();
   }, [trip.dates]);
-
-  const addDate = () => {
-    setTrip({
-      ...trip,
-      dates: [...trip.dates, emptyTripDate]
-    });
-  };
 
   const createTrip = async () => {
     const result = await api?.post('/trips', trip);
@@ -76,38 +61,10 @@ export const CreateTrip = () => {
           />
         </Grid>
         <Grid item id="privacy">
-          <Typography variant="h5" component="h2" sx={{ mt: 2 }}>
-            {t('common.privacy')}
-          </Typography>
-          <Box display="flex" alignItems={'center'}>
-            <FormControlLabel
-              control={
-                <Switch
-                  defaultChecked
-                  onChange={() =>
-                    setTrip({
-                      ...trip,
-                      private: !trip.private
-                    })
-                  }
-                />
-              }
-              label={trip.private ? t('common.private') : t('common.public')}
-            />
-          </Box>
+          <PrivacyToggle trip={trip} setTrip={setTrip} />
         </Grid>
         <Grid item id="dates">
-          <Typography variant="h5" component="h2" sx={{ mt: 2 }}>
-            {t('common.dates')}
-          </Typography>
-          {trip.dates.map((_, index) => (
-            <Grid item key={index} sx={{ mb: 1 }}>
-              <TripDateField index={index} />
-            </Grid>
-          ))}
-          <IconButton aria-label="add" color="primary" sx={{ mt: 0.5 }} onClick={() => addDate()}>
-            <AddIcon />
-          </IconButton>
+          <DatesList trip={trip} setTrip={setTrip} />
         </Grid>
       </Grid>
       <Box display={'flex'}>
