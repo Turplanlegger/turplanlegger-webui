@@ -30,7 +30,7 @@ export const TripDetail = () => {
   }
 
   return editTripState ? (
-    <Box marginTop={5} marginLeft={5} width="fit-content">
+    <Box marginTop={5} marginLeft={5} marginRight={5} width="fit-content">
       <Box display="flex" alignItems={'center'} justifyContent={'space-between'}>
         <Typography component="h1" variant="h4">
           {editTripState.name}
