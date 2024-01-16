@@ -26,6 +26,7 @@ export const TripDetail = () => {
   const t = useTranslationWrapper();
 
   function saveTrip(): void {
+    TODO: Implement this
     throw new Error('Function not implemented.');
   }
 
