@@ -18,7 +18,7 @@
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.3.0",
     "dayjs": "^1.11.12",
-    "i18next": "^23.12.1",
+    "i18next": "^23.12.2",
     "i18next-browser-languagedetector": "^7.1.0",
     "i18next-http-backend": "^2.2.2",
     "moment": "^2.30.1",
