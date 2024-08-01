@@ -2,7 +2,7 @@ import { Button, Stack, Switch, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useTranslationWrapper } from 'services/Translation';
 import { Note } from '../../models/Types';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useState } from 'react';
 import { apiState } from 'state/apiState';
 import { noteState } from 'state/noteState';
@@ -19,7 +19,7 @@ export const EditNote = ({ note }: Props) => {
   const [name, setName] = useState<string>(note.name);
   const [content, setContent] = useState<string>(note.content);
   const [privacy, setPrivacyNote] = useState(note.private);
-  const [notes, setNotes] = useRecoilState(noteState);
+  const setNotes = useSetRecoilState(noteState);
 
   const updateNote = async () => {
     if (name === note.name && content === note.content && note.private == privacy) {
@@ -33,19 +33,15 @@ export const EditNote = ({ note }: Props) => {
       private: privacy
     } as Note;
 
-    console.log(notes, setNotes);
-
-    const result = await api
-      ?.put(`/note/${note.id}`, updatedNote) // This does not yet exist in the API
+    await api
+      ?.put(`/notes/${note.id}`, updatedNote)
       .then((response) => {
-        console.debug('Ok?');
-        console.debug(response.status, response.ok);
+        setNotes((old) => [...old.filter((n) => n.id !== note.id), response.note]);
       })
       .catch((response) => {
         console.error('Not ok!');
         console.debug(response.status, response.ok);
       });
-    console.debug(result);
   };
 
   return (
@@ -80,7 +76,7 @@ export const EditNote = ({ note }: Props) => {
       </Grid>
       <Grid container justifyContent="flex-end">
         <Grid>
-          <Button variant="outlined" color="warning" onClick={() => setOpen(modalSelector.EDIT)}>
+          <Button variant="outlined" color="warning" onClick={() => setOpen(modalSelector.NONE)}>
             {t('common.cancel')}
           </Button>
         </Grid>
