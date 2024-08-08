@@ -1,8 +1,9 @@
 import { Grid } from '@mui/material';
 import { Trip } from '../../models/Types';
 import { TripCard } from './TripCard';
-// import { ModalContent } from 'components/Modal/content';
-// import { modalSelector } from 'state/modalState';
+import { ModalContent } from 'components/Modal/content';
+import { modalSelector } from 'state/modalState';
+import { EditTrip } from './EditTrip';
 
 interface Props {
   trips: Trip[];
@@ -19,9 +20,9 @@ export const TripsOverview = ({ trips }: Props) => {
             </Grid>
           ))}
       </Grid>
-      {/* <ModalContent modal={modalSelector.EDIT}>
+      <ModalContent modal={modalSelector.EDIT}>
         <EditTrip trip={trips[0]} />
-      </ModalContent> */}
+      </ModalContent>
     </>
   );
 };
