@@ -18,95 +18,57 @@ import AddIcon from '@mui/icons-material/Add';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { emptyTripDate } from 'state/tripState';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface Props {
   trip: Trip;
 }
 
-interface Props2 {
+interface TripDateProps {
   date: TripDate;
+  index: number;
+  onRemove: (index: number) => void;
 }
 
-const TripDateField = ({ date }: Props2) => {
+const TripDateField = ({ date, index, onRemove }: TripDateProps) => {
   const t = useTranslationWrapper();
+  // const [date, setDate] = useState<TripDate>(date);
+  const [startTime, setStartTime] = useState<Dayjs>(date.start_time);
+  const [endTime, setEndTime] = useState<Dayjs>(date.end_time);
+  // const [selected, setSelected] = useState<boolean>(date.selected);
 
-  console.debug('Any of these fail?');
-  // console.debug('Index:', index);
-  console.debug('Date: ', date);
-  console.debug(typeof date);
-  // console.debug(date.start_time);
-  // console.debug(typeof date.start_time);
-  // console.debug(date.end_time);
-  // console.debug(typeof date.end_time);
-
-  // const [trip, setTrip] = useRecoilState(newTripAtom);
-
-  // const setSelectedDate = useSetSelectedDate();
-
-  const removeDate = () => {
-    console.debug('Remove date');
-    // setTrip({
-    //   ...trip,
-    //   dates: [...trip.dates.filter((_, i) => i !== index)]
-    // });
-
-    // setSelectedDate();
+  const updateStartTime = (startTime: dayjs.Dayjs | null) => {
+    startTime && setStartTime(startTime);
   };
 
-  // const updateTripDates = (
-  //   start_time: dayjs.Dayjs | null,
-  //   end_time: dayjs.Dayjs | null,
-  //   selected: boolean
-  // ) => {
-  //   console.debug('Can you find me?');
-  //   console.debug(start_time, end_time, selected);
-  //   // if (!start_time) {
-  //   //   start_time = trip.dates[index].start_time;
-  //   // }
-
-  //   // if (!end_time) {
-  //   //   end_time = trip.dates[index].end_time;
-  //   // }
-  //   // selected = trip.dates.length > 1 ? true : false;
-  //   // setTrip({
-  //   //   ...trip,
-  //   //   dates: [
-  //   //     ...trip.dates.slice(0, index),
-  //   //     {
-  //   //       id: 0,
-  //   //       start_time: start_time,
-  //   //       end_time: end_time,
-  //   //       selected: selected
-  //   //     },
-  //   //     ...trip.dates.slice(index + 1)
-  //   //   ]
-  //   // });
-  // };
+  const updateEndTime = (endTime: dayjs.Dayjs | null) => {
+    endTime && setEndTime(endTime);
+  };
 
   return (
-    <Box id={'trip-date' + date.id}>
+    <Box id={'trip-date' + index}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="nb">
         <Grid item sx={{ mb: 1 }}>
-          <Typography variant="h4">{t('common.date') + ' ' + date.id}</Typography>
+          <Typography variant="h4">{t('common.date') + ' ' + index}</Typography>
         </Grid>
         <Grid item sx={{ mb: 2 }}>
-          <Typography>Test</Typography>
-          {/* <DatePicker
+          <DatePicker
             label={t('common.start_time')}
-            value={dayjs(date.start_time)}
-            onChange={(e) => updateTripDates(e, date.end_time, date.selected)}
-          /> */}
+            value={startTime}
+            onChange={(e) => updateStartTime(e)}
+          />
         </Grid>
         <Grid item>
-          <Typography>Test</Typography>
-          {/* <DatePicker
+          <DatePicker
             label={t('common.end_time')}
-            value={date.end_time}
-            onChange={(e) => updateTripDates(date.start_time, e, date.selected)}
-          /> */}
+            value={endTime}
+            onChange={(e) => updateEndTime(e)}
+          />
         </Grid>
       </LocalizationProvider>
-      <IconButton aria-label="Remove date" onClick={() => removeDate()} disabled={false}>
+      <IconButton aria-label="Remove date" onClick={() => onRemove(index)} disabled={false}>
         <DeleteForeverIcon />
       </IconButton>
       <Divider />
@@ -116,15 +78,21 @@ const TripDateField = ({ date }: Props2) => {
 
 export const EditTrip = ({ trip }: Props) => {
   const t = useTranslationWrapper();
-  // const api = useRecoilValue(apiState);
+
   const setOpen = useSetRecoilState(openModalState);
   const [name, setName] = useState<string>(trip.name);
-  // const [dates, setDates] = useState(trip.dates)
-  const [privacy, setPrivacyNote] = useState(trip.private);
+  const [privacy, setPrivacyNote] = useState<boolean>(trip.private);
+  const [dates, setDates] = useState<TripDate[]>(trip.dates);
 
-  console.debug('SEARCH FOR ME');
   const addDate = async () => {
-    console.debug('Add trip date');
+    setDates([...dates, emptyTripDate]);
+  };
+
+  // There is a bug here!
+  // Try adding three dates, change the last two dates
+  // Delet the middle one, and it deletes the wrong one
+  const removeDate = async (index: number) => {
+    setDates(dates.filter((_, i) => i !== index));
   };
 
   const updateTrip = async () => {
@@ -151,9 +119,10 @@ export const EditTrip = ({ trip }: Props) => {
         <Typography variant="h3" sx={{ mt: 2 }}>
           {t('common.dates')}
         </Typography>
-        {trip.dates.map((date, index) => (
+        {dates.map((date, index) => (
+          // Add a button to select the date
           <Grid item key={index} sx={{ mb: 1 }}>
-            <TripDateField date={date} />
+            <TripDateField date={date} index={index} onRemove={removeDate} />
           </Grid>
         ))}
         <IconButton aria-label="add" color="primary" sx={{ mt: 0.5 }} onClick={() => addDate()}>
