@@ -11,11 +11,29 @@ const initializeTripsSelector = selector<Trip[]>({
   get: async ({ get }) => {
     const api = get(apiState);
     const result = await api?.get('/trips/mine');
-    return result?.status === 'ok' ? result.trip : [];
+
+    let trips: Trip[] = [];
+
+    if (result?.status === 'ok') {
+      trips = convertStringsToDates(result.trip);
+    }
+
+    return trips;
   }
 });
 
-import dayjs from 'dayjs';
+const convertStringsToDates = (trips: [Trip]) => {
+  trips.forEach((trip) => {
+    trip.create_time = dayjs(trip.create_time);
+    trip.dates.forEach((date) => {
+      date.create_time = dayjs(date.create_time);
+      date.start_time = dayjs(date.start_time);
+      date.end_time = dayjs(date.end_time);
+    });
+  });
+
+  return trips;
+};
 
 export const tripState = atom<Trip[]>({
   key: 'tripState',
