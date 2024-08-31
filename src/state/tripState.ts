@@ -1,4 +1,5 @@
 import { atom, selectorFamily, selector } from 'recoil';
+import dayjs from 'dayjs';
 import { Trip, TripDate } from '../models/Types';
 import { apiState } from './apiState';
 import { emptyNote } from './noteState';
@@ -33,6 +34,7 @@ export const tripByIdSelector = selectorFamily({
 
 export const emptyTripDate = {
   id: 0,
+  create_time: dayjs(),
   start_time: dayjs(),
   end_time: dayjs().add(14, 'days'),
   selected: false
@@ -47,6 +49,7 @@ export const newTripAtom = atom<Trip>({
   key: 'newTripAtom',
   default: {
     id: 0,
+    create_time: dayjs(),
     name: '',
     dates: [emptyTripDate],
     notes: [emptyNote],

@@ -87,6 +87,7 @@ const TripDateField = ({ index }: { index: number }) => {
         ...trip.dates.slice(0, index),
         {
           id: 0,
+          create_time: dayjs(),
           start_time: start_time,
           end_time: end_time,
           selected: selected
