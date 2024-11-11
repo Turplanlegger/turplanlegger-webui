@@ -20,7 +20,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { emptyTripDate } from 'state/tripState';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 
 interface Props {
   trip: Trip;
@@ -28,23 +28,20 @@ interface Props {
 
 interface TripDateProps {
   date: TripDate;
+  updateDate: (updatedDate: TripDate, index: number) => void;
   index: number;
   onRemove: (index: number) => void;
 }
 
-const TripDateField = ({ date, index, onRemove }: TripDateProps) => {
+const TripDateField = ({ date, updateDate, index, onRemove }: TripDateProps) => {
   const t = useTranslationWrapper();
-  // const [date, setDate] = useState<TripDate>(date);
-  const [startTime, setStartTime] = useState<Dayjs>(date.start_time);
-  const [endTime, setEndTime] = useState<Dayjs>(date.end_time);
-  // const [selected, setSelected] = useState<boolean>(date.selected);
 
   const updateStartTime = (startTime: dayjs.Dayjs | null) => {
-    startTime && setStartTime(startTime);
+    startTime && updateDate({ ...date, start_time: startTime }, index);
   };
 
   const updateEndTime = (endTime: dayjs.Dayjs | null) => {
-    endTime && setEndTime(endTime);
+    endTime && updateDate({ ...date, end_time: endTime }, index);
   };
 
   return (
@@ -56,14 +53,14 @@ const TripDateField = ({ date, index, onRemove }: TripDateProps) => {
         <Grid item sx={{ mb: 2 }}>
           <DatePicker
             label={t('common.start_time')}
-            value={startTime}
+            value={date.start_time}
             onChange={(e) => updateStartTime(e)}
           />
         </Grid>
         <Grid item>
           <DatePicker
             label={t('common.end_time')}
-            value={endTime}
+            value={date.end_time}
             onChange={(e) => updateEndTime(e)}
           />
         </Grid>
@@ -88,11 +85,14 @@ export const EditTrip = ({ trip }: Props) => {
     setDates([...dates, emptyTripDate]);
   };
 
-  // There is a bug here!
-  // Try adding three dates, change the last two dates
-  // Delet the middle one, and it deletes the wrong one
   const removeDate = async (index: number) => {
     setDates(dates.filter((_, i) => i !== index));
+  };
+
+  const updateDate = async (updatedDate: TripDate, index: number) => {
+    const datesCopy = [...dates];
+    datesCopy[index] = updatedDate;
+    setDates(datesCopy);
   };
 
   const updateTrip = async () => {
@@ -122,7 +122,12 @@ export const EditTrip = ({ trip }: Props) => {
         {dates.map((date, index) => (
           // Add a button to select the date
           <Grid item key={index} sx={{ mb: 1 }}>
-            <TripDateField date={date} index={index} onRemove={removeDate} />
+            <TripDateField
+              date={date}
+              updateDate={updateDate}
+              index={index}
+              onRemove={removeDate}
+            />
           </Grid>
         ))}
         <IconButton aria-label="add" color="primary" sx={{ mt: 0.5 }} onClick={() => addDate()}>
