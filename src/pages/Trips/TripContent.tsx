@@ -1,12 +1,11 @@
-import { Button, Chip, Grid, Typography } from '@mui/material';
+import { Button, Chip, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { useTranslationWrapper } from 'services/Translation';
-// import { Link } from 'react-router-dom';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { Trip, TripDate } from '../../models/Types';
 import { apiState } from '../../state/apiState';
-// import LaunchIcon from '@mui/icons-material/Launch';
 import { tripState } from '../../state/tripState';
-import { modalSelector, openModalState } from 'state/modalState';
+import { Link } from 'react-router-dom';
 
 interface Props {
   trip: Trip;
@@ -36,7 +35,6 @@ export const TripButtons = ({ trip }: Props) => {
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [trips, setTrips] = useRecoilState(tripState);
-  const setOpenEdit = useSetRecoilState(openModalState);
 
   const deleteTrip = async () => {
     const res = await api?.delete(`/notes/${trip.id}`);
@@ -47,11 +45,7 @@ export const TripButtons = ({ trip }: Props) => {
 
   return (
     <>
-      <Button
-        size="small"
-        onClick={() => {
-          setOpenEdit(modalSelector.EDIT);
-        }}>
+      <Button component={Link} to={'/trips/' + trip.id + '/edit'} size="small">
         {t('common.edit')}
       </Button>
       <Button size="small" onClick={() => deleteTrip()}>
@@ -73,7 +67,7 @@ export const SelectedTripDate = ({ dates }: { dates: TripDate[] }) => {
 
   if (selected_date != undefined) {
     return (
-      <Grid item>
+      <Grid>
         <Typography variant="h5">{t('common.dates')}</Typography>
         <>
           <Typography variant="h6">{t('common.start_date')}</Typography>
@@ -87,7 +81,7 @@ export const SelectedTripDate = ({ dates }: { dates: TripDate[] }) => {
     );
   } else {
     return (
-      <Grid item>
+      <Grid>
         <Typography variant="h5">{t('common.dates')}</Typography>
         <Typography>
           {t('trip.no_selected_date')} <br />

@@ -1,5 +1,5 @@
 import { Button, Chip, Typography } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid2';
 import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { ItemList, ListItem } from '../../models/Types';
@@ -41,12 +41,12 @@ export const ItemListContent = ({ item_list }: Props) => {
 
   return (
     <Grid container justifyContent="center">
-      <Grid xs={12}>
+      <Grid size={{ xs: 12 }}>
         <Typography variant="h5" sx={{ mb: 2 }}>
           {item_list.name}
         </Typography>
       </Grid>
-      <Grid xs={12}>
+      <Grid size={{ xs: 12 }}>
         <Chip
           color={item_list.private ? 'success' : 'warning'}
           size="small"
@@ -54,21 +54,21 @@ export const ItemListContent = ({ item_list }: Props) => {
           sx={{ mb: '15px' }}
         />
       </Grid>
-      <Grid xs={12} md={6}>
+      <Grid size={{ xs: 12, md: 6 }}>
         <ItemListItems
           title={t('list.unchecked_items')}
           items={item_list.items}
           toggleItem={toggleItem}
         />
       </Grid>
-      <Grid xs={12} md={6}>
+      <Grid size={{ xs: 12, md: 6 }}>
         <ItemListItems
           title={t('list.checked_items')}
           items={item_list.items_checked}
           toggleItem={toggleItem}
         />
       </Grid>
-      <Grid xs={12} display="flex" justifyContent="center" sx={{ mt: 2 }}>
+      <Grid size={{ xs: 12 }} display="flex" justifyContent="center" sx={{ mt: 2 }}>
         <Button size="small" onClick={() => console.log('Edit')}>
           {t('common.edit')}
         </Button>

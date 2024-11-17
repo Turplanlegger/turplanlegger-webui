@@ -1,30 +1,28 @@
 import {
+  Alert,
   Box,
   Button,
   Divider,
-  Grid,
   IconButton,
   Stack,
   Switch,
   TextField,
   Typography
 } from '@mui/material';
-import { Trip, TripDate } from 'models/Types';
+import Grid from '@mui/material/Grid2';
+import { TripDate } from 'models/Types';
 import { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useTranslationWrapper } from 'services/Translation';
 import { modalSelector, openModalState } from 'state/modalState';
 import AddIcon from '@mui/icons-material/Add';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { emptyTripDate } from 'state/tripState';
+import { emptyTripDate, tripByIdSelector } from 'state/tripState';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
-
-interface Props {
-  trip: Trip;
-}
+import { useParams } from 'react-router-dom';
 
 interface TripDateProps {
   date: TripDate;
@@ -47,21 +45,23 @@ const TripDateField = ({ date, updateDate, index, onRemove }: TripDateProps) => 
   return (
     <Box id={'trip-date' + index}>
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="nb">
-        <Grid item sx={{ mb: 1 }}>
-          <Typography variant="h4">{t('common.date') + ' ' + index}</Typography>
+        <Grid sx={{ mb: 1 }}>
+          <Typography variant="h4">{t('common.date') + ' ' + (index + 1)}</Typography>
         </Grid>
-        <Grid item sx={{ mb: 2 }}>
+        <Grid sx={{ mb: 2 }}>
           <DatePicker
             label={t('common.start_time')}
             value={date.start_time}
             onChange={(e) => updateStartTime(e)}
+            sx={{ width: '100%' }}
           />
         </Grid>
-        <Grid item>
+        <Grid>
           <DatePicker
             label={t('common.end_time')}
             value={date.end_time}
             onChange={(e) => updateEndTime(e)}
+            sx={{ width: '100%' }}
           />
         </Grid>
       </LocalizationProvider>
@@ -73,8 +73,20 @@ const TripDateField = ({ date, updateDate, index, onRemove }: TripDateProps) => 
   );
 };
 
-export const EditTrip = ({ trip }: Props) => {
+export const EditTrip = () => {
+  const { tripId } = useParams();
+  const trip = useRecoilValue(tripByIdSelector(Number(tripId)));
   const t = useTranslationWrapper();
+
+  if (trip == undefined) {
+    return (
+      <>
+        <Alert variant="filled" severity="error">
+          ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> Failed to laod trip
+        </Alert>
+      </>
+    );
+  }
 
   const setOpen = useSetRecoilState(openModalState);
   const [name, setName] = useState<string>(trip.name);
@@ -100,28 +112,34 @@ export const EditTrip = ({ trip }: Props) => {
   };
 
   return (
-    <Grid container direction="column" spacing={2}>
-      <Grid>
+    <Grid
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      sx={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
+      <Grid size={{ xs: 4 }}>
         <Typography variant="h5" sx={{ mb: 2 }}>
           Edit trip {trip.id}: {trip.name}
         </Typography>
       </Grid>
-      <Grid>
+      <Grid size={{ xs: 4 }}>
         <TextField
           id="outlined-basic"
           label={t('common.name')}
           variant="outlined"
           value={name}
           onChange={(e) => setName(e?.target.value)}
+          sx={{ width: '100%' }}
         />
       </Grid>
-      <Grid item id="dates">
+      <Grid size={{ xs: 4 }}>
         <Typography variant="h3" sx={{ mt: 2 }}>
           {t('common.dates')}
         </Typography>
         {dates.map((date, index) => (
           // Add a button to select the date
-          <Grid item key={index} sx={{ mb: 1 }}>
+          <Grid key={index} sx={{ mb: 1 }}>
             <TripDateField
               date={date}
               updateDate={updateDate}
@@ -134,36 +152,22 @@ export const EditTrip = ({ trip }: Props) => {
           <AddIcon />
         </IconButton>
       </Grid>
-      {/* <Grid>
-            <TextField
-              multiline
-              fullWidth
-              rows={5}
-              id="outlined-basic"
-              label={t('common.content')}
-              variant="outlined"
-              value={content}
-              onChange={(e) => setContent(e?.target.value)}
-            />
-          </Grid> */}
-      <Grid>
+      <Grid size={{ xs: 4 }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <Typography>{t('common.private')}</Typography>
           <Switch value={privacy} onChange={() => setPrivacyNote(!privacy)} />
           <Typography>{t('common.public')}</Typography>
         </Stack>
       </Grid>
-      <Grid container justifyContent="flex-end">
-        <Grid>
+      <Grid>
+        <Stack direction="row" spacing={1} alignItems="center">
           <Button variant="outlined" color="warning" onClick={() => setOpen(modalSelector.NONE)}>
             {t('common.cancel')}
           </Button>
-        </Grid>
-        <Grid>
           <Button variant="contained" color="success" onClick={() => updateTrip()}>
             {t('common.save')}
           </Button>
-        </Grid>
+        </Stack>
       </Grid>
     </Grid>
   );
