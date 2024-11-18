@@ -19,7 +19,7 @@ export interface Trip {
 }
 
 export interface TripDate {
-  id: number;
+  id: number | undefined;
   create_time: Dayjs;
   start_time: Dayjs;
   end_time: Dayjs;

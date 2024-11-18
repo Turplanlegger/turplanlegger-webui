@@ -51,7 +51,7 @@ export const tripByIdSelector = selectorFamily({
 });
 
 export const emptyTripDate = {
-  id: 0,
+  id: undefined,
   create_time: dayjs(),
   start_time: dayjs(),
   end_time: dayjs().add(14, 'days'),

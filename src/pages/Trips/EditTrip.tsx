@@ -10,19 +10,19 @@ import {
   Typography
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { TripDate } from 'models/Types';
+import { Trip, TripDate } from 'models/Types';
 import { useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useTranslationWrapper } from 'services/Translation';
-import { modalSelector, openModalState } from 'state/modalState';
 import AddIcon from '@mui/icons-material/Add';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { emptyTripDate, tripByIdSelector } from 'state/tripState';
+import { emptyTripDate, tripByIdSelector, tripState } from 'state/tripState';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { apiState } from 'state/apiState';
 
 interface TripDateProps {
   date: TripDate;
@@ -82,13 +82,15 @@ export const EditTrip = () => {
     return (
       <>
         <Alert variant="filled" severity="error">
-          ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> Failed to laod trip
+          ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> Failed to load trip
         </Alert>
       </>
     );
   }
 
-  const setOpen = useSetRecoilState(openModalState);
+  const api = useRecoilValue(apiState);
+  const setTrip = useSetRecoilState(tripState);
+
   const [name, setName] = useState<string>(trip.name);
   const [privacy, setPrivacyNote] = useState<boolean>(trip.private);
   const [dates, setDates] = useState<TripDate[]>(trip.dates);
@@ -108,7 +110,26 @@ export const EditTrip = () => {
   };
 
   const updateTrip = async () => {
-    console.debug(trip.id);
+    if (name === trip.name && dates == trip.dates && trip.private == privacy) {
+      console.warn('No fields updated');
+      return false;
+    }
+
+    const updatedTrip = {
+      name: name,
+      dates: dates,
+      private: privacy
+    } as Trip;
+
+    await api
+      ?.put(`/trips/${trip.id}`, updatedTrip)
+      .then((response) => {
+        setTrip((old) => [...old.filter((n) => n.id !== trip.id), response.trip]);
+      })
+      .catch((response) => {
+        console.error('Not ok!');
+        console.debug(response.status, response.ok);
+      });
   };
 
   return (
@@ -161,8 +182,8 @@ export const EditTrip = () => {
       </Grid>
       <Grid>
         <Stack direction="row" spacing={1} alignItems="center">
-          <Button variant="outlined" color="warning" onClick={() => setOpen(modalSelector.NONE)}>
-            {t('common.cancel')}
+          <Button component={Link} to={'/trips'} variant="outlined" color="warning">
+            {t('common.edit')}
           </Button>
           <Button variant="contained" color="success" onClick={() => updateTrip()}>
             {t('common.save')}
