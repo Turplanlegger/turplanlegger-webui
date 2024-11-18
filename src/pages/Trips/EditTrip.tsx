@@ -2,6 +2,7 @@ import {
   Alert,
   Box,
   Button,
+  Collapse,
   Divider,
   IconButton,
   Stack,
@@ -23,6 +24,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import { Link, useParams } from 'react-router-dom';
 import { apiState } from 'state/apiState';
+import CheckIcon from '@mui/icons-material/Check';
+import WarningIcon from '@mui/icons-material/Warning';
 
 interface TripDateProps {
   date: TripDate;
@@ -94,6 +97,23 @@ export const EditTrip = () => {
   const [name, setName] = useState<string>(trip.name);
   const [privacy, setPrivacyNote] = useState<boolean>(trip.private);
   const [dates, setDates] = useState<TripDate[]>(trip.dates);
+  const [updateError, setUpdateError] = useState<string>('');
+  const [successUpdateFeedback, setSuccessUpdateFeedback] = useState<boolean>(false);
+  const [failedUpdateFeedback, setFailedUpdateFeedback] = useState<boolean>(false);
+
+  const hideSuccessFeedback = () => {
+    const timer = setTimeout(() => {
+      setSuccessUpdateFeedback(false);
+    }, 5 * 1000);
+    return () => clearTimeout(timer);
+  };
+
+  const hideFailedFeedback = () => {
+    const timer = setTimeout(() => {
+      setFailedUpdateFeedback(false);
+    }, 5 * 1000);
+    return () => clearTimeout(timer);
+  };
 
   const addDate = async () => {
     setDates([...dates, emptyTripDate]);
@@ -110,8 +130,12 @@ export const EditTrip = () => {
   };
 
   const updateTrip = async () => {
+    setFailedUpdateFeedback(false);
+    setSuccessUpdateFeedback(false);
     if (name === trip.name && dates == trip.dates && trip.private == privacy) {
-      console.warn('No fields updated');
+      setUpdateError('No fields are changed');
+      setFailedUpdateFeedback(true);
+      hideFailedFeedback();
       return false;
     }
 
@@ -125,10 +149,15 @@ export const EditTrip = () => {
       ?.put(`/trips/${trip.id}`, updatedTrip)
       .then((response) => {
         setTrip((old) => [...old.filter((n) => n.id !== trip.id), response.trip]);
+        setSuccessUpdateFeedback(true);
+        hideSuccessFeedback();
       })
       .catch((response) => {
         console.error('Not ok!');
         console.debug(response.status, response.ok);
+        setUpdateError('Something failed, but who knows what?');
+        setFailedUpdateFeedback(true);
+        hideFailedFeedback();
       });
   };
 
@@ -139,12 +168,12 @@ export const EditTrip = () => {
       justifyContent="center"
       alignItems="center"
       sx={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
-      <Grid size={{ xs: 4 }}>
+      <Grid size={{ sm: 12, md: 8, lg: 4 }}>
         <Typography variant="h5" sx={{ mb: 2 }}>
           Edit trip {trip.id}: {trip.name}
         </Typography>
       </Grid>
-      <Grid size={{ xs: 4 }}>
+      <Grid size={{ sm: 12, md: 8, lg: 4 }}>
         <TextField
           id="outlined-basic"
           label={t('common.name')}
@@ -154,7 +183,7 @@ export const EditTrip = () => {
           sx={{ width: '100%' }}
         />
       </Grid>
-      <Grid size={{ xs: 4 }}>
+      <Grid size={{ sm: 12, md: 8, lg: 4 }}>
         <Typography variant="h3" sx={{ mt: 2 }}>
           {t('common.dates')}
         </Typography>
@@ -173,7 +202,7 @@ export const EditTrip = () => {
           <AddIcon />
         </IconButton>
       </Grid>
-      <Grid size={{ xs: 4 }}>
+      <Grid size={{ sm: 12, md: 8, lg: 4 }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <Typography>{t('common.private')}</Typography>
           <Switch value={privacy} onChange={() => setPrivacyNote(!privacy)} />
@@ -183,12 +212,33 @@ export const EditTrip = () => {
       <Grid>
         <Stack direction="row" spacing={1} alignItems="center">
           <Button component={Link} to={'/trips'} variant="outlined" color="warning">
-            {t('common.edit')}
+            {t('common.cancel')}
           </Button>
           <Button variant="contained" color="success" onClick={() => updateTrip()}>
             {t('common.save')}
           </Button>
         </Stack>
+      </Grid>
+      <Grid size={{ sm: 12, md: 8, lg: 4 }}>
+        <Collapse in={successUpdateFeedback}>
+          <Alert
+            hidden={successUpdateFeedback}
+            icon={<CheckIcon fontSize="inherit" />}
+            severity="success"
+            sx={{ mt: 2 }}>
+            Trip was updated
+          </Alert>
+        </Collapse>
+        <Collapse in={failedUpdateFeedback}>
+          <Alert
+            icon={<WarningIcon fontSize="inherit" />}
+            variant="filled"
+            severity="warning"
+            sx={{ mt: 2 }}>
+            Trip was not updated <br />
+            {updateError}
+          </Alert>
+        </Collapse>
       </Grid>
     </Grid>
   );
