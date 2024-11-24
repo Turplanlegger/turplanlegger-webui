@@ -83,11 +83,9 @@ export const EditTrip = () => {
 
   if (trip == undefined) {
     return (
-      <>
-        <Alert variant="filled" severity="error">
-          ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> {t('trip.failed_to_load')}
-        </Alert>
-      </>
+      <Alert variant="filled" severity="error">
+        ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> {t('trip.failed_to_load')}
+      </Alert>
     );
   }
 

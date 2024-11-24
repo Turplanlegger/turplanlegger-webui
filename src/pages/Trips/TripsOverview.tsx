@@ -13,7 +13,6 @@ interface Props {
 export const TripsOverview = ({ trips }: Props) => {
   const [activeItem] = useState<number | null>(null);
   const activeTrip = trips.find((element) => element.id === activeItem);
-  console.debug(activeItem);
 
   return (
     <>
