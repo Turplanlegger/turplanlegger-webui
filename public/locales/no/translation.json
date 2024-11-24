@@ -25,7 +25,10 @@
     "save": "Lagre",
     "start_date": "Start dato",
     "end_date": "Slutt dato",
-    "member_since": "Medlem siden"
+    "member_since": "Medlem siden",
+    "no_changed_fields": "Ingen felt er endret",
+    "was_updated": "ble oppdatert",
+    "was_not_updated": "ble ikke oppdatert"
   },
   "create": {
     "description": "Her kan du lage en tur!",
@@ -74,9 +77,11 @@
     "trip_name": "Navn på tur",
     "no_trips_found": "Ingen turer funnet. Trykk på knappen nedenfor for å lage en",
     "no_selected_date": "Ingen dato har blitt valgt for denne turen.",
-    "dates_available": "datoer er tilgjengelig for denne turen."
+    "dates_available": "datoer er tilgjengelig for denne turen.",
+    "failed_to_load": "Lasting av tur feilet"
   },
   "error": {
-    "title": "Oida, noe gikk galt"
+    "title": "Oida, noe gikk galt",
+    "unknown_error1": "Oida, noe gikk galt, men hvem vet hva?"
   }
 }

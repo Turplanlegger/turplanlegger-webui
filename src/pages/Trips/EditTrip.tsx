@@ -85,7 +85,7 @@ export const EditTrip = () => {
     return (
       <>
         <Alert variant="filled" severity="error">
-          ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> Failed to load trip
+          ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> {t('trip.failed_to_load')}
         </Alert>
       </>
     );
@@ -133,7 +133,8 @@ export const EditTrip = () => {
     setFailedUpdateFeedback(false);
     setSuccessUpdateFeedback(false);
     if (name === trip.name && dates == trip.dates && trip.private == privacy) {
-      setUpdateError('No fields are changed');
+      const err = t('common.no_changed_fields') || "No fields are changed";
+      setUpdateError(err);
       setFailedUpdateFeedback(true);
       hideFailedFeedback();
       return false;
@@ -153,9 +154,10 @@ export const EditTrip = () => {
         hideSuccessFeedback();
       })
       .catch((response) => {
+        const err = t('error.unknown_error1') || "Woops, something went wrong, but who knows what?";
         console.error('Not ok!');
         console.debug(response.status, response.ok);
-        setUpdateError('Something failed, but who knows what?');
+        setUpdateError(err);
         setFailedUpdateFeedback(true);
         hideFailedFeedback();
       });
@@ -170,7 +172,7 @@ export const EditTrip = () => {
       sx={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
       <Grid size={{ sm: 12, md: 8, lg: 4 }}>
         <Typography variant="h5" sx={{ mb: 2 }}>
-          Edit trip {trip.id}: {trip.name}
+          {t('common.edit')} {t('trip.trip')?.toLowerCase()} {trip.id}: {trip.name}
         </Typography>
       </Grid>
       <Grid size={{ sm: 12, md: 8, lg: 4 }}>
@@ -226,7 +228,7 @@ export const EditTrip = () => {
             icon={<CheckIcon fontSize="inherit" />}
             severity="success"
             sx={{ mt: 2 }}>
-            Trip was updated
+            {t('trip.trip')} {t('common.was_updated')}
           </Alert>
         </Collapse>
         <Collapse in={failedUpdateFeedback}>
@@ -235,7 +237,7 @@ export const EditTrip = () => {
             variant="filled"
             severity="warning"
             sx={{ mt: 2 }}>
-            Trip was not updated <br />
+            {t('trip.trip')} {t('common.was_not_uptdated')} <br />
             {updateError}
           </Alert>
         </Collapse>
