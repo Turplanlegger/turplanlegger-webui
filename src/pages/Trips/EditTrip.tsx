@@ -93,7 +93,7 @@ export const EditTrip = () => {
   const setTrip = useSetRecoilState(tripState);
 
   const [name, setName] = useState<string>(trip.name);
-  const [privacy, setPrivacyNote] = useState<boolean>(trip.private);
+  const [privacy, setPrivacy] = useState<boolean>(trip.private);
   const [dates, setDates] = useState<TripDate[]>(trip.dates);
   const [updateError, setUpdateError] = useState<string>('');
   const [successUpdateFeedback, setSuccessUpdateFeedback] = useState<boolean>(false);
@@ -205,7 +205,7 @@ export const EditTrip = () => {
       <Grid size={{ sm: 12, md: 8, lg: 4 }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <Typography>{t('common.private')}</Typography>
-          <Switch value={privacy} onChange={() => setPrivacyNote(!privacy)} />
+          <Switch value={privacy} onChange={() => setPrivacy(!privacy)} />
           <Typography>{t('common.public')}</Typography>
         </Stack>
       </Grid>
