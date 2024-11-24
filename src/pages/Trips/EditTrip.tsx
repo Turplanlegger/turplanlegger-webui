@@ -131,7 +131,7 @@ export const EditTrip = () => {
     setFailedUpdateFeedback(false);
     setSuccessUpdateFeedback(false);
     if (name === trip.name && dates == trip.dates && trip.private == privacy) {
-      const err = t('common.no_changed_fields') || "No fields are changed";
+      const err = t('common.no_changed_fields') || 'No fields are changed';
       setUpdateError(err);
       setFailedUpdateFeedback(true);
       hideFailedFeedback();
@@ -152,7 +152,7 @@ export const EditTrip = () => {
         hideSuccessFeedback();
       })
       .catch((response) => {
-        const err = t('error.unknown_error1') || "Woops, something went wrong, but who knows what?";
+        const err = t('error.unknown_error1') || 'Woops, something went wrong, but who knows what?';
         console.error('Not ok!');
         console.debug(response.status, response.ok);
         setUpdateError(err);
