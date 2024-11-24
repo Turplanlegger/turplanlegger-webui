@@ -1,11 +1,13 @@
 import { Button, Chip, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useTranslationWrapper } from 'services/Translation';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Trip, TripDate } from '../../models/Types';
 import { apiState } from '../../state/apiState';
 import { tripState } from '../../state/tripState';
 import { Link } from 'react-router-dom';
+import { isErrorResponse } from 'models/ErrorResponse';
+import { errorState } from 'state/errorState';
 
 interface Props {
   trip: Trip;
@@ -35,12 +37,17 @@ export const TripButtons = ({ trip }: Props) => {
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
   const [trips, setTrips] = useRecoilState(tripState);
+  const setErrorState = useSetRecoilState(errorState);
 
   const deleteTrip = async () => {
-    const res = await api?.delete(`/notes/${trip.id}`);
-    if (res.status === 'ok') {
-      setTrips(trips.filter((trip) => trip.id !== trip.id));
+    const result = await api?.delete(`/trips/${trip.id}`);
+
+    if (isErrorResponse(result)) {
+      setErrorState(result);
+      return;
     }
+
+    setTrips(trips.filter((t) => t.id !== trip.id));
   };
 
   return (

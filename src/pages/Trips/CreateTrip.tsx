@@ -18,12 +18,18 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/nb';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { apiState } from '../../state/apiState';
-import { emptyTripDate, newTripAtom, tripState } from '../../state/tripState';
+import {
+  convertTripDatesFromString,
+  emptyTripDate,
+  newTripAtom,
+  tripState
+} from '../../state/tripState';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { errorState } from '../../state/errorState';
 import { useEffect } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
 import { modalSelector, openModalState } from 'state/modalState';
+import { Trip } from 'models/Types';
 
 const useSetSelectedDate = () => {
   const [trip, setTrip] = useRecoilState(newTripAtom);
@@ -139,7 +145,7 @@ export const CreateTrip = () => {
   const setErrorState = useSetRecoilState(errorState);
 
   const api = useRecoilValue(apiState);
-  const [trips, setTrips] = useRecoilState(tripState);
+  const [trips, setTrips] = useRecoilState<Trip[]>(tripState);
   const [[trip, setTrip], resetTrip] = [
     useRecoilState(newTripAtom),
     useResetRecoilState(newTripAtom)
@@ -160,12 +166,14 @@ export const CreateTrip = () => {
 
   const createTrip = async () => {
     const result = await api?.post('/trips', trip);
+
     if (isErrorResponse(result)) {
       setErrorState(result);
       return;
     }
+    const newTrip = convertTripDatesFromString(result as Trip);
     setOpen(modalSelector.NONE);
-    setTrips([...trips, result]);
+    setTrips([...trips, newTrip]);
     resetTrip();
   };
 
