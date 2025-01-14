@@ -83,11 +83,9 @@ export const EditTrip = () => {
 
   if (trip == undefined) {
     return (
-      <>
-        <Alert variant="filled" severity="error">
-          ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> Failed to load trip
-        </Alert>
-      </>
+      <Alert variant="filled" severity="error">
+        ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> Failed to load trip
+      </Alert>
     );
   }
 
@@ -129,10 +127,11 @@ export const EditTrip = () => {
     setDates(datesCopy);
   };
 
+  const noChangesMade = name === trip.name && dates == trip.dates && trip.private == privacy;
   const updateTrip = async () => {
     setFailedUpdateFeedback(false);
     setSuccessUpdateFeedback(false);
-    if (name === trip.name && dates == trip.dates && trip.private == privacy) {
+    if (noChangesMade) {
       setUpdateError('No fields are changed');
       setFailedUpdateFeedback(true);
       hideFailedFeedback();
@@ -205,7 +204,7 @@ export const EditTrip = () => {
       <Grid size={{ sm: 12, md: 8, lg: 4 }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <Typography>{t('common.private')}</Typography>
-          <Switch value={privacy} onChange={() => setPrivacyNote(!privacy)} />
+          <Switch value={privacy} checked={!privacy} onChange={() => setPrivacyNote(!privacy)} />
           <Typography>{t('common.public')}</Typography>
         </Stack>
       </Grid>
@@ -214,7 +213,7 @@ export const EditTrip = () => {
           <Button component={Link} to={'/trips'} variant="outlined" color="warning">
             {t('common.cancel')}
           </Button>
-          <Button variant="contained" color="success" onClick={() => updateTrip()}>
+          <Button variant="contained" color="success" onClick={() => updateTrip()} disabled={noChangesMade}>
             {t('common.save')}
           </Button>
         </Stack>
