@@ -131,7 +131,8 @@ const TripDateField = ({ index }: { index: number }) => {
       <IconButton
         aria-label="Remove date"
         onClick={() => removeDate()}
-        disabled={trip.dates.length <= 1 ? true : false}>
+        disabled={trip.dates.length <= 1 ? true : false}
+      >
         <DeleteForeverIcon />
       </IconButton>
       <Divider />

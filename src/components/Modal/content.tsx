@@ -27,7 +27,8 @@ export const ModalContent = ({ children, message, modal }: Props) => {
         alignItems: 'center',
         justifyContent: 'space-around',
         zIndex: open ? 1 : -1
-      }}>
+      }}
+    >
       {message && (
         <Typography style={{ textAlign: 'center', whiteSpace: 'pre-line' }}>{message}</Typography>
       )}

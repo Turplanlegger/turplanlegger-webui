@@ -167,7 +167,8 @@ export const EditTrip = () => {
       direction="column"
       justifyContent="center"
       alignItems="center"
-      sx={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
+      sx={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}
+    >
       <Grid size={{ sm: 12, md: 8, lg: 4 }}>
         <Typography variant="h5" sx={{ mb: 2 }}>
           {t('common.edit')} {t('trip.trip')?.toLowerCase()} {trip.id}: {trip.name}
@@ -214,7 +215,12 @@ export const EditTrip = () => {
           <Button component={Link} to={'/trips'} variant="outlined" color="warning">
             {t('common.cancel')}
           </Button>
-          <Button variant="contained" color="success" onClick={() => updateTrip()} disabled={noChangesMade}>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => updateTrip()}
+            disabled={noChangesMade}
+          >
             {t('common.save')}
           </Button>
         </Stack>
@@ -225,7 +231,8 @@ export const EditTrip = () => {
             hidden={successUpdateFeedback}
             icon={<CheckIcon fontSize="inherit" />}
             severity="success"
-            sx={{ mt: 2 }}>
+            sx={{ mt: 2 }}
+          >
             {t('trip.trip')} {t('common.was_updated')}
           </Alert>
         </Collapse>
@@ -234,7 +241,8 @@ export const EditTrip = () => {
             icon={<WarningIcon fontSize="inherit" />}
             variant="filled"
             severity="warning"
-            sx={{ mt: 2 }}>
+            sx={{ mt: 2 }}
+          >
             {t('trip.trip')} {t('common.was_not_uptdated')} <br />
             {updateError}
           </Alert>
