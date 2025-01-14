@@ -15,24 +15,27 @@ const initializeTripsSelector = selector<Trip[]>({
     let trips: Trip[] = [];
 
     if (result?.status === 'ok') {
-      trips = convertStringsToDates(result.trip);
+      trips = convertAllTripDatesFromString(result.trip);
     }
 
     return trips;
   }
 });
 
-const convertStringsToDates = (trips: [Trip]) => {
-  trips.forEach((trip) => {
-    trip.create_time = dayjs(trip.create_time);
-    trip.dates.forEach((date) => {
-      date.create_time = dayjs(date.create_time);
-      date.start_time = dayjs(date.start_time);
-      date.end_time = dayjs(date.end_time);
-    });
+const convertAllTripDatesFromString = (trips: [Trip]) => {
+  trips.map(convertTripDatesFromString);
+  return trips;
+};
+
+export const convertTripDatesFromString = (trip: Trip) => {
+  trip.create_time = dayjs(trip.create_time);
+  trip.dates.forEach((date) => {
+    date.create_time = dayjs(date.create_time);
+    date.start_time = dayjs(date.start_time);
+    date.end_time = dayjs(date.end_time);
   });
 
-  return trips;
+  return trip;
 };
 
 export const tripState = atom<Trip[]>({

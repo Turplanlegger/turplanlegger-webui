@@ -84,7 +84,7 @@ export const EditTrip = () => {
   if (trip == undefined) {
     return (
       <Alert variant="filled" severity="error">
-        ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> Failed to load trip
+        ʕノ•ᴥ•ʔノ ︵ ┻━┻ <br /> {t('trip.failed_to_load')}
       </Alert>
     );
   }
@@ -93,7 +93,7 @@ export const EditTrip = () => {
   const setTrip = useSetRecoilState(tripState);
 
   const [name, setName] = useState<string>(trip.name);
-  const [privacy, setPrivacyNote] = useState<boolean>(trip.private);
+  const [privacy, setPrivacy] = useState<boolean>(trip.private);
   const [dates, setDates] = useState<TripDate[]>(trip.dates);
   const [updateError, setUpdateError] = useState<string>('');
   const [successUpdateFeedback, setSuccessUpdateFeedback] = useState<boolean>(false);
@@ -152,9 +152,10 @@ export const EditTrip = () => {
         hideSuccessFeedback();
       })
       .catch((response) => {
+        const err = t('error.unknown_error1') || 'Woops, something went wrong, but who knows what?';
         console.error('Not ok!');
         console.debug(response.status, response.ok);
-        setUpdateError('Something failed, but who knows what?');
+        setUpdateError(err);
         setFailedUpdateFeedback(true);
         hideFailedFeedback();
       });
@@ -169,7 +170,7 @@ export const EditTrip = () => {
       sx={{ minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
       <Grid size={{ sm: 12, md: 8, lg: 4 }}>
         <Typography variant="h5" sx={{ mb: 2 }}>
-          Edit trip {trip.id}: {trip.name}
+          {t('common.edit')} {t('trip.trip')?.toLowerCase()} {trip.id}: {trip.name}
         </Typography>
       </Grid>
       <Grid size={{ sm: 12, md: 8, lg: 4 }}>
@@ -204,7 +205,7 @@ export const EditTrip = () => {
       <Grid size={{ sm: 12, md: 8, lg: 4 }}>
         <Stack direction="row" spacing={1} alignItems="center">
           <Typography>{t('common.private')}</Typography>
-          <Switch value={privacy} checked={!privacy} onChange={() => setPrivacyNote(!privacy)} />
+          <Switch value={privacy} checked={!privacy} onChange={() => setPrivacy(!privacy)} />
           <Typography>{t('common.public')}</Typography>
         </Stack>
       </Grid>
@@ -225,7 +226,7 @@ export const EditTrip = () => {
             icon={<CheckIcon fontSize="inherit" />}
             severity="success"
             sx={{ mt: 2 }}>
-            Trip was updated
+            {t('trip.trip')} {t('common.was_updated')}
           </Alert>
         </Collapse>
         <Collapse in={failedUpdateFeedback}>
@@ -234,7 +235,7 @@ export const EditTrip = () => {
             variant="filled"
             severity="warning"
             sx={{ mt: 2 }}>
-            Trip was not updated <br />
+            {t('trip.trip')} {t('common.was_not_uptdated')} <br />
             {updateError}
           </Alert>
         </Collapse>
