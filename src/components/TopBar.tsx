@@ -21,16 +21,14 @@ export const TopBar = ({ handleDrawerToggle }: Props) => {
         width: { sm: `calc(100% - ${DrawerWidth}px)` },
         ml: { sm: `${DrawerWidth}px` },
         height: `${TopbarHeight}px)`
-      }}
-    >
+      }}>
       <Toolbar>
         <IconButton
           color="inherit"
           aria-label="open drawer"
           edge="start"
           onClick={handleDrawerToggle}
-          sx={{ mr: 2, display: { sm: 'none' } }}
-        >
+          sx={{ mr: 2, display: { sm: 'none' } }}>
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" sx={{ display: { xs: 'none', sm: 'flex' }, flex: '1 0 auto' }}>
@@ -43,8 +41,7 @@ export const TopBar = ({ handleDrawerToggle }: Props) => {
               width: '100%',
               textAlign: 'center',
               lineHeight: '64px'
-            }}
-          >
+            }}>
             {t('app.turplanlegger')}
           </Link>
         </Typography>
@@ -52,8 +49,7 @@ export const TopBar = ({ handleDrawerToggle }: Props) => {
           size="large"
           color="inherit"
           aria-label={t('app.turplanlegger')}
-          sx={{ mx: 'auto', display: { xs: 'flex', sm: 'none' } }}
-        >
+          sx={{ mx: 'auto', display: { xs: 'flex', sm: 'none' } }}>
           <HikingIcon />
         </IconButton>
       </Toolbar>
