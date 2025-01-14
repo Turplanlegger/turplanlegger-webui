@@ -34,7 +34,8 @@ export const ItemListItems = ({ title, items, toggleItem }: Props) => {
                     toggleItem(list_item);
                   }}
                   dense
-                  sx={{ pr: 0.7, mr: 1 }}>
+                  sx={{ pr: 0.7, mr: 1 }}
+                >
                   <Checkbox
                     edge="start"
                     checked={list_item.checked}

@@ -8,7 +8,7 @@ import {
   Switch,
   Typography
 } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid2';
 import { isErrorResponse } from 'models/ErrorResponse';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useTranslationWrapper } from 'services/Translation';
@@ -52,7 +52,7 @@ export const Profile = () => {
     </Box>
   ) : (
     <Grid container sx={{ margin: 1 }}>
-      <Grid md={4}>
+      <Grid size={{ md: 4 }}>
         <Card>
           <CardContent>
             {userAvatar()}
@@ -66,7 +66,7 @@ export const Profile = () => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Grid xs={4}>
+            <Grid size={4}>
               <FormControlLabel
                 control={<Switch defaultChecked={user.private} onChange={togglePrivate} />}
                 label={t('common.private')}

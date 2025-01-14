@@ -27,6 +27,7 @@ import { IPublicClientApplication } from '@azure/msal-browser';
 import { Lists } from './Lists/Lists';
 import { TripDetail } from './Trips/TripDetail';
 import { DisplayErrors } from '../components/DisplayErrors';
+import { EditTrip } from './Trips/EditTrip';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
@@ -85,7 +86,8 @@ export const Home = () => {
             <Link
               to={item.route}
               color="inherit"
-              style={{ display: 'flex', flex: '1 0 auto', color: 'inherit' }}>
+              style={{ display: 'flex', flex: '1 0 auto', color: 'inherit' }}
+            >
               <ListItemText primary={t(item.display_name_key)} />
               <ListItemIcon>{item.icon}</ListItemIcon>
             </Link>
@@ -107,7 +109,8 @@ export const Home = () => {
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders">
+        aria-label="mailbox folders"
+      >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           variant="temporary"
@@ -119,7 +122,8 @@ export const Home = () => {
           sx={{
             display: { xs: 'block', sm: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
-          }}>
+          }}
+        >
           <div>
             <Toolbar className="menu-header" />
             <Divider />
@@ -132,7 +136,8 @@ export const Home = () => {
             display: { xs: 'none', sm: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth }
           }}
-          open>
+          open
+        >
           <div>
             <Toolbar className="menu-header" />
             <Divider />
@@ -145,7 +150,8 @@ export const Home = () => {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           marginTop: `${topbarHeight}px`
-        }}>
+        }}
+      >
         <DisplayErrors />
         <React.Suspense fallback={<div>loading...</div>}>
           <Routes>
@@ -153,6 +159,7 @@ export const Home = () => {
               <Route key={item.route} path={item.route} element={item.element} />
             ))}
             <Route path="/trips/:tripId" element={<TripDetail />} />
+            <Route path="/trips/:tripId/edit" element={<EditTrip />} />
           </Routes>
         </React.Suspense>
       </Box>

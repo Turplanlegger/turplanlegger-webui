@@ -57,7 +57,8 @@ const ListItemField = ({ index }: { index: number }) => {
                   items: [...listItem.items.filter((_, i) => i !== index)]
                 })
               }
-              disabled={listItem.items.length <= 1 ? true : false}>
+              disabled={listItem.items.length <= 1 ? true : false}
+            >
               <DeleteForeverIcon />
             </IconButton>
           </InputAdornment>
@@ -121,7 +122,8 @@ export const CreateList = () => {
                 ...listItem,
                 items: [...listItem.items, emptyListItem]
               })
-            }>
+            }
+          >
             <AddIcon />
           </IconButton>
         </Grid>

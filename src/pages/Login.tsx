@@ -22,7 +22,8 @@ export const Login = ({ setInstanceAndLogin }: Props) => {
       display="flex"
       flexDirection="column"
       alignItems="center"
-      justifyContent="center">
+      justifyContent="center"
+    >
       <Typography variant="h1" fontSize={40} m={2}>
         Turplanleggeren
       </Typography>

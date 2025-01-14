@@ -23,7 +23,8 @@ export const DisplayErrors = () => {
       fullScreen={fullScreen}
       open={error !== undefined}
       onClose={() => setError(undefined)}
-      aria-labelledby="responsive-dialog-title">
+      aria-labelledby="responsive-dialog-title"
+    >
       <DialogTitle id="responsive-dialog-title">{t('error.title')}</DialogTitle>
       <DialogContent>
         <DialogContentText variant="h6">{`${error?.title}`}</DialogContentText>

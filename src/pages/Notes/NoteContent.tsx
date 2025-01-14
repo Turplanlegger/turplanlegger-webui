@@ -51,7 +51,8 @@ export const NoteButtons = ({ note }: Props) => {
         size="small"
         onClick={() => {
           setOpenEdit(modalSelector.EDIT);
-        }}>
+        }}
+      >
         {t('common.edit')}
       </Button>
       <Button size="small" onClick={() => deleteNote()}>

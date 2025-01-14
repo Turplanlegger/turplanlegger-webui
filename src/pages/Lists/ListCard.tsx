@@ -51,7 +51,8 @@ export const ItemListCard = ({ item_list }: Props) => {
             sx={{ borderRadius: 0 }}
             onClick={() => {
               setOpenView(modalSelector.EDIT);
-            }}>
+            }}
+          >
             <LaunchIcon />
           </IconButton>
         </Stack>
