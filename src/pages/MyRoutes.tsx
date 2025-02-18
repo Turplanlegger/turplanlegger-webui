@@ -8,10 +8,17 @@ export const MyRoutes = () => {
     if (!map.current) {
       map.current = L.map('map').setView([64.505, 10.09], 5);
       if (map) {
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map.current);
+        const id = 'topo';
+        const layer = L.tileLayer(`https://cache{s}.kartverket.no/v1/wmts/1.0.0/${id}/default/webmercator/{z}/{y}/{x}.png`,
+          {
+              // format: 'image/png',
+              minZoom: 5,
+              maxZoom: 18,
+              detectRetina: true,
+              attribution: '<a href="https://www.kartverket.no/">Kartverket</a>',
+              subdomains: ['', '2', '3', '4']
+          });
+      layer.addTo(map.current);
       }
     }
   }, [])
