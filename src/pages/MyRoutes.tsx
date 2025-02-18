@@ -18,7 +18,7 @@ export const MyRoutes = () => {
               attribution: '<a href="https://www.kartverket.no/">Kartverket</a>',
               subdomains: ['', '2', '3', '4']
           });
-      layer.addTo(map.current);
+        layer.addTo(map.current);
       }
     }
   }, [])
