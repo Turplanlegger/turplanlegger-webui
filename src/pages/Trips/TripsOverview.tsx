@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { Trip } from '../../models/Types';
 import { TripCard } from './TripCard';
 import { ModalContent } from 'components/Modal/content';
@@ -19,7 +19,7 @@ export const TripsOverview = ({ trips }: Props) => {
       <Grid container spacing={2} direction="row" sx={{ margin: 1 }}>
         {trips &&
           trips.map((trip) => (
-            <Grid item key={trip.id} xs={8} md={4}>
+            <Grid key={trip.id} size={{ xs: 8, md: 4 }}>
               <TripCard key={trip.id} trip={trip} />
             </Grid>
           ))}
