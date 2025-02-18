@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { ItemList } from '../../models/Types';
 import { ItemListCard } from './ListCard';
 import { ModalContent } from '../../components/Modal/content';
@@ -15,7 +15,7 @@ export const ListsOverview = ({ item_lists }: Props) => {
       <Grid container spacing={2} direction="row" sx={{ margin: 1 }}>
         {item_lists &&
           item_lists.map((item_list) => (
-            <Grid item key={item_list.name} xs={8} md={4}>
+            <Grid key={item_list.name} size={{ xs: 8, md: 4 }}>
               <ItemListCard key={item_list.name} item_list={item_list} />
             </Grid>
           ))}

@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { Note } from '../../models/Types';
 import { NoteCard } from './NoteCard';
 import { EditNote } from './EditNote';
@@ -15,7 +15,7 @@ export const NotesOverview = ({ notes }: Props) => {
       <Grid container spacing={2} direction="row" sx={{ margin: 1 }}>
         {notes &&
           notes.map((note) => (
-            <Grid item key={note.name} xs={8} md={4}>
+            <Grid key={note.name} size={{ xs: 8, md: 4 }}>
               <NoteCard key={note.name} note={note} />
             </Grid>
           ))}
