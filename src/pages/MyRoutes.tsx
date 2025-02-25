@@ -1,12 +1,10 @@
 import L from 'leaflet';
 import { useEffect, useRef, useState } from 'react';
-import iconSvg from "../Map/marker.svg";
-
-
 
 export const MyRoutes = () => {
   const [points, setPoints] = useState<L.LatLng[]>([]);
-  const [layer, _] = useState(L.layerGroup());
+  const [layer] = useState(L.layerGroup());
+  const [pathLayer] = useState(L.layerGroup());
   const map = useRef<L.Map | undefined>();
   
   useEffect(() => {
@@ -27,28 +25,41 @@ export const MyRoutes = () => {
       map.current.on('click', function(e) {        
         var popLocation= e.latlng;
         setPoints(points => [...points, popLocation])
-        
-    });
+      });
+
+      
     }
   }, [])
+
+  useEffect(() => {
+    map.current!.on('mousemove', function(e) {        
+      var popLocation= e.latlng;
+      if (points.length > 0) {
+        pathLayer.clearLayers()
+        const lastPoint = points[points.length - 1];
+        L.polyline([lastPoint, popLocation]).addTo(pathLayer);
+        pathLayer.addTo(map.current!)
+      }
+    });
+  }, [points])
 
   useEffect(() => {
     layer.clearLayers();
 
     // Markers
     points.map(point => {
-      L.marker(point, {
-        icon: L.icon({
-        className: "marker",
-        iconUrl: iconSvg,
-        iconSize: [50, 50],
-        iconAnchor: [25, 25]
-      })})
+      L.marker(point)
       .addTo(layer)})
       
       // Line
       const coordinates = points.map(p => L.latLng([p.lat, p.lng]));
-      L.polyline(coordinates).addTo(layer);
+      coordinates.forEach((_, index) => {
+        if (index > 0 && index < coordinates.length) {
+          const start = coordinates[index - 1];
+          const end = coordinates[index];
+          L.polyline([start, end]).bindTooltip((end.distanceTo(start) / 1000).toFixed(2) + "km", {permanent: true}).addTo(layer);
+        }
+      })
       
       layer.addTo(map.current!)
   }, [points])
