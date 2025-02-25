@@ -1,7 +1,11 @@
 import L from 'leaflet';
-import { useEffect, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
-export const MyRoutes = () => {
+interface Props {
+  setDistance: Dispatch<SetStateAction<number>>
+}
+
+export const TurplanleggerMap = ({setDistance}: Props) => {
   const [points, setPoints] = useState<L.LatLng[]>([]);
   const [layer] = useState(L.layerGroup());
   const [pathLayer] = useState(L.layerGroup());
@@ -13,7 +17,6 @@ export const MyRoutes = () => {
       const id = 'topo';
       const layer = L.tileLayer(`https://cache{s}.kartverket.no/v1/wmts/1.0.0/${id}/default/webmercator/{z}/{y}/{x}.png`,
         {
-            // format: 'image/png',
             minZoom: 5,
             maxZoom: 18,
             detectRetina: true,
@@ -53,17 +56,21 @@ export const MyRoutes = () => {
       
       // Line
       const coordinates = points.map(p => L.latLng([p.lat, p.lng]));
+      let distance = 0;
       coordinates.forEach((_, index) => {
         if (index > 0 && index < coordinates.length) {
           const start = coordinates[index - 1];
           const end = coordinates[index];
-          L.polyline([start, end]).bindTooltip((end.distanceTo(start) / 1000).toFixed(2) + "km", {permanent: true}).addTo(layer);
+          const distanceKm = (end.distanceTo(start) / 1000);
+          distance += distanceKm;
+          L.polyline([start, end]).bindTooltip(distanceKm.toFixed(2) + "km", {permanent: true}).addTo(layer);
         }
       })
       
+      setDistance(distance);
       layer.addTo(map.current!)
   }, [points])
   
 
-  return <div id="map" style={{ height: '100vh' }}></div>;
+  return <div id="map" style={{ height: '60vh' }}></div>;
 };

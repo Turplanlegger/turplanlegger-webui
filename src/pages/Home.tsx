@@ -21,7 +21,7 @@ import { useMsal } from '@azure/msal-react';
 import { Link, Route, Routes } from 'react-router-dom';
 import { Profile } from './Users/Profile';
 import { Trips } from './Trips/Trips';
-import { MyRoutes } from './MyRoutes';
+import { MyRoutes } from './Routes/MyRoutes';
 import { Notes } from './Notes/Notes';
 import { IPublicClientApplication } from '@azure/msal-browser';
 import { Lists } from './Lists/Lists';
