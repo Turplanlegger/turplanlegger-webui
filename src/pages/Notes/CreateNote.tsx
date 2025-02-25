@@ -1,4 +1,5 @@
-import { Box, Button, Grid, Stack, Switch, TextField, Typography } from '@mui/material';
+import { Box, Button, Stack, Switch, TextField, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { useState } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -31,12 +32,12 @@ export const CreateNote = () => {
   return (
     <Box height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'space-around'}>
       <Grid container direction="column" spacing={2}>
-        <Grid item>
+        <Grid>
           <Typography variant="h3" style={{ marginTop: 20 }}>
             {t('note.new_note')}
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid>
           <TextField
             id="outlined-basic"
             label={t('common.name')}
@@ -45,7 +46,7 @@ export const CreateNote = () => {
             onChange={(e) => setName(e?.target.value)}
           />
         </Grid>
-        <Grid item>
+        <Grid>
           <TextField
             multiline
             fullWidth
@@ -57,7 +58,7 @@ export const CreateNote = () => {
             onChange={(e) => setContent(e?.target.value)}
           />
         </Grid>
-        <Grid item>
+        <Grid>
           <Stack direction="row" spacing={1} alignItems="center">
             <Typography>{t('common.private')}</Typography>
             <Switch value={publicNote} onChange={() => setPublicNote(!publicNote)} />
