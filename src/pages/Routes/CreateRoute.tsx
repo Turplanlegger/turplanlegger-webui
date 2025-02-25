@@ -1,4 +1,5 @@
-import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { useState } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
 import { useSetRecoilState } from 'recoil';
@@ -19,12 +20,12 @@ export const CreateRoute = () => {
   return (
     <Box height={'100%'} display={'flex'} flexDirection={'column'} justifyContent={'space-around'}>
       <Grid container direction="column" spacing={2}>
-        <Grid item>
+        <Grid>
           <Typography variant="h3" style={{ marginTop: 20 }}>
             {t('route.new_route')}
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid>
           <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
             <TextField
               id="outlined-basic"
@@ -38,7 +39,7 @@ export const CreateRoute = () => {
             </Typography>
           </div>
         </Grid>
-        <Grid item>
+        <Grid>
           <TurplanleggerMap setDistance={setDistance} />
         </Grid>
       </Grid>
