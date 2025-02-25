@@ -1,8 +1,12 @@
 import L from 'leaflet';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import iconSvg from "../Map/marker.svg";
 
+
+
 export const MyRoutes = () => {
+  const [points, setPoints] = useState<L.LatLng[]>([]);
+  const [layer, _] = useState(L.layerGroup());
   const map = useRef<L.Map | undefined>();
   
   useEffect(() => {
@@ -22,21 +26,32 @@ export const MyRoutes = () => {
 
       map.current.on('click', function(e) {        
         var popLocation= e.latlng;
-        // L.popup()
-        //   .setLatLng(popLocation)
-        //   .setContent('<p>Hello world!<br />This is a nice popup.</p>')
-        //   .openOn(map.current!);
-          const icon = L.icon({
-            className: "marker",
-            iconUrl: iconSvg,
-            iconSize: [50, 50],
-            iconAnchor: [25, 25]
-        });
-        L.marker(popLocation, {icon: icon}).addTo(map.current!)
+        setPoints(points => [...points, popLocation])
+        
     });
     }
   }, [])
 
+  useEffect(() => {
+    layer.clearLayers();
+
+    // Markers
+    points.map(point => {
+      L.marker(point, {
+        icon: L.icon({
+        className: "marker",
+        iconUrl: iconSvg,
+        iconSize: [50, 50],
+        iconAnchor: [25, 25]
+      })})
+      .addTo(layer)})
+      
+      // Line
+      const coordinates = points.map(p => L.latLng([p.lat, p.lng]));
+      L.polyline(coordinates).addTo(layer);
+      
+      layer.addTo(map.current!)
+  }, [points])
   
 
   return <div id="map" style={{ height: '100vh' }}></div>;
