@@ -15,12 +15,3 @@ export const routeState = atom<Route[]>({
   key: 'routeState',
   default: initializeRoutesSelector
 });
-
-export const emptyRoute = {
-  id: 0
-};
-
-export const newRouteAtom = atom<Route>({
-  key: 'newRouteAtom',
-  default: emptyRoute
-});
