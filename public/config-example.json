@@ -1,0 +1,11 @@
+{
+  "i18nDebug": true,
+  "apiUrl": "https://api.turplanlegger.example",
+  "authAppClientId": "client-uuid",
+  "authAuthorityDomain": "B2C-domain.example",
+  "authLoginScope": "https://example.onmicrosoft.com/uuid/Default",
+  "authSignInName": "B2C_1_SignIn",
+  "authSignInAuthority": "https://example.b2clogin.com/example.onmicrosoft.com/B2C_1_SignIn",
+  "authSignUpName": "B2C_1_SignUp",
+  "authSignUpAuthority": "https://example.b2clogin.com/example.onmicrosoft.com/B2C_1_SignUp"
+}
