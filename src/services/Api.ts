@@ -1,12 +1,12 @@
 import { IPublicClientApplication } from '@azure/msal-browser';
-import config from '../config/config.json';
+import { Config } from 'config/config';
 
 export class Api {
   url: string;
   instance: IPublicClientApplication;
 
   constructor(instance: IPublicClientApplication) {
-    this.url = config.api_base_url;
+    this.url = Config.apiUrl;
     this.instance = instance;
   }
 
