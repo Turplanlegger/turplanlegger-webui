@@ -1,6 +1,9 @@
-# Getting Started with Create React App
+# Turplanlegger WebUI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Configuration
+To configure the application create the configuration file `public/config.json`.  
+There's see the example file for values: `public/config-example.json`.
 
 ## Available Scripts
 
