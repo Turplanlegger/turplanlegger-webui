@@ -11,7 +11,7 @@ export class Config {
 
   static async load() {
     try {
-      const response = await fetch('/public/config.json');
+      const response = await fetch('/config.json');
       if (!response.ok) {
         throw new Error(`Failed to load config.json: ${response.statusText}`);
       }
