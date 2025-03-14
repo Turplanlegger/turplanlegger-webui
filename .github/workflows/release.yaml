@@ -49,24 +49,12 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: 📥 Checkout Repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python 3.13
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-
-      - name: Install Python packages
-        run: pip install PyJWT cryptography requests
 
       - uses: actions/create-github-app-token@v1
         id: app-token
         with:
           app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.RELEASE_CLIENT_SECRET }}
+          private-key: ${{ secrets.TURPLANLEGGER_PRIVATE_KEY }}
 
       - name: 🔖 Create new tag and release
         env:
@@ -89,6 +77,7 @@ jobs:
       contents: read
     env:
       REGISTRY: ghcr.io
+      NEW_VERSION: ${{ needs.detect-version-change.outputs.version }}
     steps:
 
       - name: Checkout repository
@@ -112,7 +101,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.repository }}
           tags: |
             type=raw,value=latest
-            type=pep440,pattern={{version}}
+            type=pep440,pattern={{version}},value=${{ env.NEW_VERSION }}
             type=sha,format=long
 
       - name: Build and push Docker image
