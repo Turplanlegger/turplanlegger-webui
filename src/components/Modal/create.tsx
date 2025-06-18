@@ -17,7 +17,8 @@ export const CreateButton = () => {
         bottom: '2%',
         transform: 'translate(-50%,0)',
         left: `calc(calc(calc(100% - ${DrawerWidth}px) / 2) + ${DrawerWidth}px)`
-      }}>
+      }}
+    >
       <AddIcon />
     </Fab>
   );

@@ -1,5 +1,5 @@
 import { Button, Stack, Switch, TextField, Typography } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid2';
 import { useTranslationWrapper } from 'services/Translation';
 import { Note } from '../../models/Types';
 import { useRecoilValue, useSetRecoilState } from 'recoil';

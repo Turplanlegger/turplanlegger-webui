@@ -2,10 +2,10 @@ import { useRecoilValue } from 'recoil';
 import { tripState } from '../../state/tripState';
 import { CreateTrip } from './CreateTrip';
 import { TripsOverview } from './TripsOverview';
-import { useTranslationWrapper } from 'services/Translation';
-import { modalSelector } from 'state/modalState';
-import { ModalContent } from 'components/Modal/content';
-import { CreateButton } from 'components/Modal/create';
+import { useTranslationWrapper } from '../../services/Translation';
+import { modalSelector } from '../../state/modalState';
+import { ModalContent } from '../../components/Modal/content';
+import { CreateButton } from '../../components/Modal/create';
 
 export const Trips = () => {
   const trips = useRecoilValue(tripState);

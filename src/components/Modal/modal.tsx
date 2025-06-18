@@ -29,7 +29,8 @@ export const MartinModal = ({ children, modal }: Props) => {
       disablePortal
       open={open}
       style={{ position: 'absolute' }}
-      onClose={() => setOpen(modalSelector.NONE)}>
+      onClose={() => setOpen(modalSelector.NONE)}
+    >
       <Box sx={style}>{children}</Box>
     </Modal>
   );

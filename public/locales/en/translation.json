@@ -22,13 +22,14 @@
     "reset": "Reset",
     "date": "Date",
     "dates": "Dates",
-    "save": "Save",
     "start_date": "Start date",
     "end_date": "End date",
     "save": "Save",
     "member_since": "Member since",
-    "privacy": "Privacy"
-
+    "privacy": "Privacy",
+    "no_changed_fields": "No fields are changed",
+    "was_updated": "was updated",
+    "was_not_updated": "was not updated"
   },
   "create": {
     "description": "You can create a trip here!",
@@ -76,9 +77,11 @@
     "trip_name": "Trip name",
     "no_trips_found": "No trips found.\nPress the button below to create a trip",
     "no_selected_date": "No date has been selected for this trip.",
-    "dates_available": "dates are available for this trip."
+    "dates_available": "dates are available for this trip.",
+    "failed_to_load": "Failed to load trip"
   },
   "error": {
-    "title": "Woops, something went wrong"
+    "title": "Woops, something went wrong",
+    "unknown_error1": "Woops, something went wrong, but who knows what?"
   }
 }

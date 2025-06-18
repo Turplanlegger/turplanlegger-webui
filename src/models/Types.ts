@@ -9,6 +9,7 @@ export interface Note {
 
 export interface Trip {
   id: number;
+  create_time: Dayjs;
   name: string;
   dates: TripDate[];
   private: boolean;
@@ -18,7 +19,8 @@ export interface Trip {
 }
 
 export interface TripDate {
-  id: number;
+  id: number | undefined;
+  create_time: Dayjs;
   start_time: Dayjs;
   end_time: Dayjs;
   selected: boolean;

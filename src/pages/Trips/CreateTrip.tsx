@@ -3,15 +3,42 @@ import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import 'dayjs/locale/nb';
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import { apiState } from '../../state/apiState';
-import { newTripAtom, tripState } from '../../state/tripState';
+import { convertTripDatesFromString, newTripAtom, tripState } from '../../state/tripState';
 import { isErrorResponse } from '../../models/ErrorResponse';
 import { errorState } from '../../state/errorState';
 import { useEffect } from 'react';
-import { useTranslationWrapper } from 'services/Translation';
-import { modalSelector, openModalState } from 'state/modalState';
-import { useSetSelectedDate } from './useSetSelectedDate';
 import { PrivacyToggle } from './PrivacyToggle';
 import { DatesList } from './DatesList';
+import { useTranslationWrapper } from '../../services/Translation';
+import { Trip } from '../../models/Types';
+import { modalSelector, openModalState } from '../../state/modalState';
+
+const useSetSelectedDate = () => {
+  const [trip, setTrip] = useRecoilState(newTripAtom);
+  const setSelectedDate = () => {
+    if (trip.dates.length > 1 && trip.dates.some((date) => date.selected)) {
+      setTrip({
+        ...trip,
+        dates: trip.dates.map((date) => {
+          return { ...date, selected: false };
+        })
+      });
+    } else if (trip.dates.length == 1 && !trip.dates[0].selected) {
+      setTrip({
+        ...trip,
+        dates: [
+          {
+            ...trip.dates[0],
+            selected: true
+          },
+          ...trip.dates.slice(1)
+        ]
+      });
+    }
+    return true;
+  };
+  return setSelectedDate;
+};
 
 export const CreateTrip = () => {
   const t = useTranslationWrapper();
@@ -19,7 +46,7 @@ export const CreateTrip = () => {
   const setErrorState = useSetRecoilState(errorState);
 
   const api = useRecoilValue(apiState);
-  const [trips, setTrips] = useRecoilState(tripState);
+  const [trips, setTrips] = useRecoilState<Trip[]>(tripState);
   const [[trip, setTrip], resetTrip] = [
     useRecoilState(newTripAtom),
     useResetRecoilState(newTripAtom)
@@ -33,12 +60,14 @@ export const CreateTrip = () => {
 
   const createTrip = async () => {
     const result = await api?.post('/trips', trip);
+
     if (isErrorResponse(result)) {
       setErrorState(result);
       return;
     }
+    const newTrip = convertTripDatesFromString(result as Trip);
     setOpen(modalSelector.NONE);
-    setTrips([...trips, result]);
+    setTrips([...trips, newTrip]);
     resetTrip();
   };
 

@@ -14,7 +14,7 @@ import LandscapeIcon from '@mui/icons-material/Landscape';
 import HikingIcon from '@mui/icons-material/Hiking';
 import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import { useTranslationWrapper } from 'services/Translation';
+import { useTranslationWrapper } from '../services/Translation';
 import { TopBar } from '../components/TopBar';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useMsal } from '@azure/msal-react';
@@ -27,6 +27,7 @@ import { IPublicClientApplication } from '@azure/msal-browser';
 import { Lists } from './Lists/Lists';
 import { TripDetail } from './Trips/TripDetail/TripDetail';
 import { DisplayErrors } from '../components/DisplayErrors';
+import { EditTrip } from './Trips/EditTrip';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
@@ -153,6 +154,7 @@ export const Home = () => {
               <Route key={item.route} path={item.route} element={item.element} />
             ))}
             <Route path="/trips/:tripId" element={<TripDetail />} />
+            <Route path="/trips/:tripId/edit" element={<EditTrip />} />
           </Routes>
         </React.Suspense>
       </Box>

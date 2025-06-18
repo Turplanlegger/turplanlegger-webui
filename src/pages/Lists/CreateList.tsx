@@ -2,13 +2,13 @@ import {
   Box,
   Button,
   FormControlLabel,
-  Grid,
   IconButton,
   InputAdornment,
   Switch,
   TextField,
   Typography
 } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useTranslationWrapper } from 'services/Translation';
@@ -57,7 +57,8 @@ const ListItemField = ({ index }: { index: number }) => {
                   items: [...listItem.items.filter((_, i) => i !== index)]
                 })
               }
-              disabled={listItem.items.length <= 1 ? true : false}>
+              disabled={listItem.items.length <= 1 ? true : false}
+            >
               <DeleteForeverIcon />
             </IconButton>
           </InputAdornment>
@@ -88,10 +89,10 @@ export const CreateList = () => {
   return (
     <Box display={'flex'} flexDirection={'column'} justifyContent={'space-around'} sx={{ mt: 2 }}>
       <Grid container direction="column" spacing={2}>
-        <Grid item>
+        <Grid>
           <Typography component="h3">{t('list.new_list')}</Typography>
         </Grid>
-        <Grid item>
+        <Grid>
           <TextField
             id="outlined-basic"
             label={t('list.list_name')}
@@ -105,10 +106,10 @@ export const CreateList = () => {
             }
           />
         </Grid>
-        <Grid item id="items">
+        <Grid id="items">
           <Typography sx={{ mt: 2 }}>{t('list.items')}</Typography>
           {listItem.items.map((_, index) => (
-            <Grid item key={index} sx={{ mb: 1 }}>
+            <Grid key={index} sx={{ mb: 1 }}>
               <ListItemField index={index} />
             </Grid>
           ))}
@@ -121,11 +122,12 @@ export const CreateList = () => {
                 ...listItem,
                 items: [...listItem.items, emptyListItem]
               })
-            }>
+            }
+          >
             <AddIcon />
           </IconButton>
         </Grid>
-        <Grid item>
+        <Grid>
           <FormControlLabel
             control={
               <Switch

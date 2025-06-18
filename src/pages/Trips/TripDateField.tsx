@@ -7,9 +7,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import 'dayjs/locale/nb';
-import { useTranslationWrapper } from 'services/Translation';
+import { useTranslationWrapper } from '../../services/Translation';
 import { useSetSelectedDate } from './useSetSelectedDate';
-import { Trip } from 'models/Types';
+import { Trip } from '../../models/Types';
 
 export const TripDateField = ({
   index,
@@ -52,6 +52,7 @@ export const TripDateField = ({
         ...trip.dates.slice(0, index),
         {
           id: 0,
+          create_time: dayjs(),
           start_time: start_time,
           end_time: end_time,
           selected: selected
@@ -110,14 +111,14 @@ export const TripDateField = ({
           }
         />
       </LocalizationProvider>
-      {trip.dates[index].id > 0 ? (
+      {trip.dates[index].id && trip.dates[index].id > 0 ? (
         <>
-          <IconButton aria-label="Vote for date" onClick={() => voteDate(trip.dates[index].id)}>
+          <IconButton aria-label="Vote for date" onClick={() => voteDate(trip.dates[index].id!)}>
             <ThumbUpIcon />
           </IconButton>
           <IconButton
             aria-label="Select date"
-            onClick={() => selectDate(trip.dates[index].id, index)}
+            onClick={() => selectDate(trip.dates[index].id!, index)}
             style={
               trip.dates[index].selected
                 ? { background: 'green', borderRadius: '25%', padding: 5 }

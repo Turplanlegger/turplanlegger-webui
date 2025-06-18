@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { editTripAtom, tripByIdSelector } from 'state/tripState';
+import { editTripAtom, tripByIdSelector } from '../../../state/tripState';
 
 export const useEditTripState = () => {
   const { tripId } = useParams();

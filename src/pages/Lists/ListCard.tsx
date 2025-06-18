@@ -5,13 +5,13 @@ import {
   CardActions,
   CardContent,
   Chip,
-  Grid,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
   Typography
 } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
@@ -51,7 +51,8 @@ export const ItemListCard = ({ item_list }: Props) => {
             sx={{ borderRadius: 0 }}
             onClick={() => {
               setOpenView(modalSelector.EDIT);
-            }}>
+            }}
+          >
             <LaunchIcon />
           </IconButton>
         </Stack>
@@ -62,7 +63,7 @@ export const ItemListCard = ({ item_list }: Props) => {
           sx={{ mb: '15px' }}
         />
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Typography variant="h6" sx={{ mb: 2 }}>
               {t('list.unchecked_items')}
               <Chip label={item_list.items.length} size="small" sx={{ ml: 1, pt: 0.25 }} />
@@ -79,7 +80,7 @@ export const ItemListCard = ({ item_list }: Props) => {
                 ))}
             </List>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Typography variant="h6" sx={{ mb: 2 }}>
               {t('list.checked_items')}
               <Chip label={item_list.items_checked.length} size="small" sx={{ ml: 1, pt: 0.25 }} />

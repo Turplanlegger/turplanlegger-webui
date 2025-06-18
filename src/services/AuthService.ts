@@ -1,7 +1,7 @@
-import config from '../config/config.json';
+import { Config } from 'config/config';
 
 export async function Login(data: LoginBody) {
-  const response = await fetch(`${config.api_base_url}/login`, {
+  const response = await fetch(`${Config.apiUrl}/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)

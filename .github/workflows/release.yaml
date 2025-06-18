@@ -1,0 +1,119 @@
+name: 🚀 Release if Version Changed
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - package.json
+
+jobs:
+  detect-version-change:
+    name: Check for new version
+    runs-on: ubuntu-latest
+    outputs:
+      version_changed: ${{ steps.check.outputs.changed }}
+      version: ${{ steps.versions.outputs.current }}
+    steps:
+
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 2
+
+      - name: 🔎 Get Versions
+        id: versions
+        run: |
+          CURRENT_VERSION=$(jq -r '.version' package.json)
+          PREVIOUS_VERSION=$(git show HEAD~1:package.json | jq -r '.version' || echo "")
+          echo "current=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          echo "previous=$PREVIOUS_VERSION" >> $GITHUB_OUTPUT
+          echo "Current version: $CURRENT_VERSION"
+          echo "Previous version: $PREVIOUS_VERSION"
+
+      - name: 🕵️ Check if Version Changed
+        id: check
+        run: |
+          if [ "${{ steps.versions.outputs.current }}" != "${{ steps.versions.outputs.previous }}" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "🎯 Version changing to ${{ steps.versions.outputs.current }}!"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "🛑 No version change."
+          fi
+
+  create-release:
+    name: Create and publish new GitHub Release
+    needs: detect-version-change
+    if: needs.detect-version-change.outputs.version_changed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: 🔐 Generate GitHub App token
+        uses: actions/create-github-app-token@21cfef2b496dd8ef5b904c159339626a10ad380e # v1.11.6
+        id: app-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.TURPLANLEGGER_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: 🔖 Create new tag and release
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          NEW_VERSION: ${{ needs.detect-version-change.outputs.version }}
+        run: |
+          gh release create "$NEW_VERSION" \
+            --target "main" \
+            --latest \
+            --title "Release $NEW_VERSION" \
+            --generate-notes
+
+  build-and-push-docker-image:
+    name: 🐋 Build and publish Docker image to GitHub Packages
+    runs-on: ubuntu-latest
+    needs: create-release
+    permissions:
+      packages: write
+      id-token: write
+      contents: read
+    env:
+      REGISTRY: ghcr.io
+      NEW_VERSION: ${{ needs.detect-version-change.outputs.version }}
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Downcase repository name
+        run: echo "repository=${GITHUB_REPOSITORY@L}" >> ${GITHUB_ENV}
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5.7.0
+        with:
+          context: git
+          images: ${{ env.REGISTRY }}/${{ env.repository }}
+          tags: |
+            type=raw,value=latest
+            type=pep440,pattern={{version}},value=${{ env.NEW_VERSION }}
+            type=sha,format=long
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
