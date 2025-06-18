@@ -1,15 +1,17 @@
+import SaveIcon from '@mui/icons-material/Save';
 import { Box, Chip, IconButton, Typography } from '@mui/material';
-import { TripLists } from './TripLists';
-import { TripParticipants } from './TripParticipants';
-import { TripRoutes } from './TripRoutes';
-import { TripDates } from './TripDates';
-import { TripNotes } from './TripNotes';
+import dayjs from 'dayjs';
+import { TripDate } from 'models/Types';
 import { useTranslationWrapper } from 'services/Translation';
 import { PrivacyToggle } from '../PrivacyToggle';
-import { TripDate } from 'models/Types';
-import dayjs from 'dayjs';
+import { TripDates } from './TripDates';
+import { TripLists } from './TripLists';
+import { TripNotes } from './TripNotes';
+import { TripParticipants } from './TripParticipants';
+import { TripRoutes } from './TripRoutes';
 import { useEditTripState } from './useEditTripState';
-import SaveIcon from '@mui/icons-material/Save';
+import { apiState } from 'state/apiState';
+import { useRecoilValue } from 'recoil';
 
 const getSelectedDateString = (dates: TripDate[]) => {
   const selected = dates.find((d) => d.selected);
@@ -24,10 +26,10 @@ const getSelectedDateString = (dates: TripDate[]) => {
 export const TripDetail = () => {
   const { editTripState, setEditTripState } = useEditTripState();
   const t = useTranslationWrapper();
+  const api = useRecoilValue(apiState);
 
-  function saveTrip(): void {
-    TODO: Implement this
-    throw new Error('Function not implemented.');
+  async function saveTrip(): Promise<void> {
+    await api?.put(`/trips/${editTripState.id}`, editTripState);
   }
 
   return editTripState ? (
