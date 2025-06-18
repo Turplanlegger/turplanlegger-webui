@@ -20,6 +20,7 @@ export interface Trip {
 
 export interface TripDate {
   id: number | undefined;
+  trip_id: number | undefined;
   create_time: Dayjs;
   start_time: Dayjs;
   end_time: Dayjs;

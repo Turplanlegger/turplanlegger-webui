@@ -1,8 +1,8 @@
 import SaveIcon from '@mui/icons-material/Save';
-import { Box, Chip, IconButton, Typography } from '@mui/material';
+import { Box, Chip, CircularProgress, IconButton, Typography } from '@mui/material';
 import dayjs from 'dayjs';
-import { TripDate } from 'models/Types';
-import { useTranslationWrapper } from 'services/Translation';
+import { TripDate } from '../../../models/Types';
+import { useTranslationWrapper } from '../../../services/Translation';
 import { PrivacyToggle } from '../PrivacyToggle';
 import { TripDates } from './TripDates';
 import { TripLists } from './TripLists';
@@ -10,8 +10,9 @@ import { TripNotes } from './TripNotes';
 import { TripParticipants } from './TripParticipants';
 import { TripRoutes } from './TripRoutes';
 import { useEditTripState } from './useEditTripState';
-import { apiState } from 'state/apiState';
+import { apiState } from '../../../state/apiState';
 import { useRecoilValue } from 'recoil';
+import { useState } from 'react';
 
 const getSelectedDateString = (dates: TripDate[]) => {
   const selected = dates.find((d) => d.selected);
@@ -25,27 +26,37 @@ const getSelectedDateString = (dates: TripDate[]) => {
 
 export const TripDetail = () => {
   const { editTripState, setEditTripState } = useEditTripState();
+  const [loading, setLoading] = useState(false);
   const t = useTranslationWrapper();
   const api = useRecoilValue(apiState);
 
   async function saveTrip(): Promise<void> {
-    await api?.put(`/trips/${editTripState.id}`, editTripState);
+    setLoading(true);
+    const response = await api?.put(`/trips/${editTripState.id}`, editTripState);
+    console.log('Response: ', response);
+    console.log('Old: ', editTripState);
+    setEditTripState(response.trip);
+    setLoading(false);
   }
 
   return editTripState ? (
-    <Box marginTop={5} marginLeft={5} marginRight={5} width="fit-content">
+    <Box marginTop={5} marginLeft={5} marginRight={5} width="90%">
       <Box display="flex" alignItems={'center'} justifyContent={'space-between'}>
         <Typography component="h1" variant="h4">
           {editTripState.name}
         </Typography>
-        <IconButton
-          aria-label="save"
-          color="primary"
-          style={{ border: '1px solid', borderRadius: '10%' }}
-          onClick={() => saveTrip()}>
-          <>Save</>
-          <SaveIcon />
-        </IconButton>
+        {loading ? (
+          <CircularProgress color="success" />
+        ) : (
+          <IconButton
+            aria-label="save"
+            color="primary"
+            style={{ border: '1px solid', borderRadius: '10%' }}
+            onClick={() => saveTrip()}>
+            <>Save</>
+            <SaveIcon />
+          </IconButton>
+        )}
       </Box>
       <Typography component="h2" variant="h5">
         Date: {getSelectedDateString(editTripState.dates)}

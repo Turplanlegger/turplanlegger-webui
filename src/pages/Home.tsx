@@ -27,7 +27,6 @@ import { IPublicClientApplication } from '@azure/msal-browser';
 import { Lists } from './Lists/Lists';
 import { TripDetail } from './Trips/TripDetail/TripDetail';
 import { DisplayErrors } from '../components/DisplayErrors';
-import { EditTrip } from './Trips/EditTrip';
 
 const handleLogout = (instance: IPublicClientApplication) => {
   instance.logoutRedirect().catch();
@@ -154,7 +153,7 @@ export const Home = () => {
               <Route key={item.route} path={item.route} element={item.element} />
             ))}
             <Route path="/trips/:tripId" element={<TripDetail />} />
-            <Route path="/trips/:tripId/edit" element={<EditTrip />} />
+            <Route path="/trips/:tripId/edit" element={<TripDetail />} />
           </Routes>
         </React.Suspense>
       </Box>

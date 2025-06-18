@@ -1,8 +1,8 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Grid, IconButton, Typography } from '@mui/material';
 import { t } from 'i18next';
-import { Trip } from 'models/Types';
-import { emptyTripDate } from 'state/tripState';
+import { Trip } from '../../models/Types';
+import { emptyTripDate } from '../../state/tripState';
 import { TripDateField } from './TripDateField';
 
 interface Props {

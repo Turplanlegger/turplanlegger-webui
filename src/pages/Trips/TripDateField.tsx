@@ -51,11 +51,12 @@ export const TripDateField = ({
       dates: [
         ...trip.dates.slice(0, index),
         {
-          id: 0,
+          id: undefined,
           create_time: dayjs(),
           start_time: start_time,
           end_time: end_time,
-          selected: selected
+          selected: selected,
+          trip_id: undefined
         },
         ...trip.dates.slice(index + 1)
       ]
