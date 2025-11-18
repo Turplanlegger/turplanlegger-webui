@@ -15,6 +15,7 @@ export class Api {
       method: 'GET',
       headers: { Authorization: `Bearer ${await this.getToken()}` }
     });
+    await this.verifyStatus(response);
     return await response.json();
   }
 
@@ -23,6 +24,7 @@ export class Api {
       method: 'PATCH',
       headers: { Authorization: `Bearer ${await this.getToken()}` }
     });
+    await this.verifyStatus(response);
     return await response.json();
   }
 
@@ -35,6 +37,7 @@ export class Api {
       },
       body: JSON.stringify(data)
     });
+    await this.verifyStatus(response);
     return await response.json();
   }
 
@@ -47,6 +50,7 @@ export class Api {
       },
       body: JSON.stringify(data)
     });
+    await this.verifyStatus(response);
     return await response.json();
   }
 
@@ -59,6 +63,7 @@ export class Api {
       },
       body: JSON.stringify(data)
     });
+    await this.verifyStatus(response);
     return await response.json();
   }
 
@@ -67,6 +72,7 @@ export class Api {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${await this.getToken()}` }
     });
+    await this.verifyStatus(response);
     return await response.json();
   }
 
@@ -81,6 +87,12 @@ export class Api {
       items: items,
       items_checked: itemsChecked
     });
+  }
+
+  async verifyStatus(response: Response) {
+    if (!response.ok) {
+      throw new Error(await response.text());
+    }
   }
 
   noOp() {

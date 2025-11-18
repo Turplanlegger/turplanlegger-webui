@@ -18,10 +18,8 @@ export const RoutesOverview = ({ routes }: Props) => {
   const setRoutes = useSetRecoilState(routeState);
 
   const deleteRoute = async (routeId: number) => {
-    const res = await api?.delete(`/routes/${routeId}`);
-    if (res.status === 'ok') {
-      setRoutes(routes.filter((n) => n.id !== routeId));
-    }
+    await api?.delete(`/routes/${routeId}`);
+    setRoutes(routes.filter((n) => n.id !== routeId));
   };
 
   return (

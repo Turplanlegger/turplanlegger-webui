@@ -53,7 +53,7 @@ export const CreateRoute = () => {
               onChange={(e) => setName(e?.target.value)}
             />
             <Typography variant="h4">
-              {`${t('route.total_distance')} ${distance.toFixed(2)} km`}
+              {`${t('route.total_distance')}: ${distance.toFixed(2)} km`}
             </Typography>
           </div>
         </Grid>

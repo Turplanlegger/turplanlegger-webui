@@ -68,7 +68,7 @@
     "routes": "Routes",
     "my_routes": "My Routes",
     "new_route": "New route",
-    "total_distance": "Total distance:",
+    "total_distance": "Total distance",
     "no_routes_found": "No routes found.\nPress the button below to create a new route"
   },
   "trip": {
