@@ -6,6 +6,8 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { apiState } from 'state/apiState';
 import { routeState } from 'state/routeState';
 import { DisplayMap } from './Map/DisplayMap';
+import { length } from '@turf/turf';
+import { Feature, LineString } from 'geojson';
 
 interface Props {
   routes: Route[];
@@ -22,13 +24,16 @@ export const RoutesOverview = ({ routes }: Props) => {
     }
   };
 
+  console.log('Routes: ', routes);
   return (
     <Grid container spacing={2} direction="row" sx={{ margin: 1 }}>
       {routes.map((route) => (
         <Card key={route.id}>
           <CardContent>
             <div key={route.id}>
-              <h2>{route.name}</h2>
+              <h2>
+                {route.name} ({length(route.route as unknown as Feature<LineString>).toFixed(1)} km)
+              </h2>
               <div style={{ width: 400, height: 300 }}>
                 <DisplayMap route={route} />
               </div>
