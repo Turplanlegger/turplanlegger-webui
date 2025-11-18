@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalSelector, openModalState } from 'state/modalState';
-import { TurplanleggerMap } from './TurplanleggerMap';
+import { TurplanleggerMap } from './Map/TurplanleggerMap';
 import { Route } from 'models/Types';
 import { apiState } from 'state/apiState';
 
@@ -24,11 +24,8 @@ export const CreateRoute = () => {
       route: route,
       comment: 'Why u need comment pls'
     } as Route;
-    console.log('Create');
-    const result = await api?.post('/routes', newRoute);
-    console.log('result: ', result);
-    setOpen(modalSelector.NONE);
-    // setNotes([...notes, result]);
+
+    await api?.post('/routes', newRoute);
     setOpen(modalSelector.NONE);
   };
 

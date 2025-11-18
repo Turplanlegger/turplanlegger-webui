@@ -10,10 +10,11 @@ import { CreateRoute } from './CreateRoute';
 export const MyRoutes = () => {
   const routes = useRecoilValue(routeState);
   const t = useTranslationWrapper();
-  const message = routes.length === 0 ? t('route.no_routes_found') : undefined;
+  const message = routes?.length === 0 ? t('route.no_routes_found') : undefined;
+  console.log('Routes: ', routes);
   return (
     <>
-      {routes.length > 0 ? <RoutesOverview routes={routes} /> : null}
+      {routes?.length > 0 ? <RoutesOverview routes={routes} /> : null}
       <ModalContent modal={modalSelector.CREATE} message={message}>
         <CreateRoute />
       </ModalContent>
