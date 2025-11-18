@@ -2,18 +2,33 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid2';
 import { useState } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalSelector, openModalState } from 'state/modalState';
 import { TurplanleggerMap } from './TurplanleggerMap';
+import { Route } from 'models/Types';
+import { apiState } from 'state/apiState';
 
 export const CreateRoute = () => {
   const t = useTranslationWrapper();
   const [name, setName] = useState<string>('');
+  const [route, setRoute] = useState<GeoJSON.Geometry | undefined>(undefined);
   const [distance, setDistance] = useState<number>(0);
   const setOpen = useSetRecoilState(openModalState);
+  const api = useRecoilValue(apiState);
 
-  const createNote = async () => {
-    console.log("Create")
+  const createRoute = async () => {
+    console.log('create route: ', route);
+    if (route === undefined) return;
+    const newRoute = {
+      name: name,
+      route: route,
+      comment: 'Why u need comment pls'
+    } as Route;
+    console.log('Create');
+    const result = await api?.post('/routes', newRoute);
+    console.log('result: ', result);
+    setOpen(modalSelector.NONE);
+    // setNotes([...notes, result]);
     setOpen(modalSelector.NONE);
   };
 
@@ -26,7 +41,7 @@ export const CreateRoute = () => {
           </Typography>
         </Grid>
         <Grid>
-          <div style={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <TextField
               id="outlined-basic"
               label={t('common.name')}
@@ -35,19 +50,19 @@ export const CreateRoute = () => {
               onChange={(e) => setName(e?.target.value)}
             />
             <Typography variant="h4">
-              {t('route.total_distance') + " " + distance.toFixed(2) + " km"}
+              {t('route.total_distance') + ' ' + distance.toFixed(2) + ' km'}
             </Typography>
           </div>
         </Grid>
         <Grid>
-          <TurplanleggerMap setDistance={setDistance} />
+          <TurplanleggerMap setDistance={setDistance} setRoute={setRoute} />
         </Grid>
       </Grid>
       <Box display={'flex'}>
         <Button fullWidth={true} onClick={() => setOpen(modalSelector.NONE)}>
           {t('common.cancel')}
         </Button>
-        <Button fullWidth={true} onClick={createNote}>
+        <Button fullWidth={true} onClick={createRoute}>
           {t('common.create')}
         </Button>
       </Box>
