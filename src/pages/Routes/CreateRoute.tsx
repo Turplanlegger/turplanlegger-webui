@@ -19,13 +19,16 @@ export const CreateRoute = () => {
   const api = useRecoilValue(apiState);
 
   const createRoute = async () => {
-    console.log('create route: ', route);
-    if (route === undefined) return;
-    const newRoute = {
+    if (route === undefined) {
+      return;
+    }
+
+    const newRoute: Route = {
+      id: 0,
       name: name,
       route: route,
-      comment: 'Why u need comment pls'
-    } as Route;
+      comment: ''
+    };
 
     const createdRoute = await api?.post('/routes', newRoute);
     setRoutes((old) => [...old, createdRoute]);
@@ -50,7 +53,7 @@ export const CreateRoute = () => {
               onChange={(e) => setName(e?.target.value)}
             />
             <Typography variant="h4">
-              {t('route.total_distance') + ' ' + distance.toFixed(2) + ' km'}
+              {`${t('route.total_distance')} ${distance.toFixed(2)} km`}
             </Typography>
           </div>
         </Grid>

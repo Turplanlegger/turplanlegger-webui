@@ -24,7 +24,6 @@ export const RoutesOverview = ({ routes }: Props) => {
     }
   };
 
-  console.log('Routes: ', routes);
   return (
     <Grid container spacing={2} direction="row" sx={{ margin: 1 }}>
       {routes.map((route) => (
