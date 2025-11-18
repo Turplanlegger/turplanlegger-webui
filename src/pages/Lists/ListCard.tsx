@@ -33,10 +33,8 @@ export const ItemListCard = ({ item_list }: Props) => {
   const setOpenView = useSetRecoilState(openModalState);
 
   const deleteItemList = async () => {
-    const res = await api?.delete(`/item_lists/${item_list.id}`);
-    if (res.status === 'ok') {
-      setItemLists(item_lists.filter((il) => il.id !== item_list.id));
-    }
+    await api?.delete(`/item_lists/${item_list.id}`);
+    setItemLists(item_lists.filter((il) => il.id !== item_list.id));
   };
 
   return (

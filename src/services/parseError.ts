@@ -1,4 +1,4 @@
-interface ApiProblem {
+export interface ApiProblem {
   title?: string;
   detail?: string;
   status?: number;
@@ -23,7 +23,7 @@ export function parseError(error: string): ApiProblem {
   };
 }
 
-function isApiProblem(o: unknown): o is ApiProblem {
+export function isApiProblem(o: unknown): o is ApiProblem {
   const casted = o as ApiProblem;
   return casted.status !== undefined && casted.title !== undefined;
 }

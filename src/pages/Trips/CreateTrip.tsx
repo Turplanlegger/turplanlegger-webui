@@ -24,12 +24,12 @@ import {
   newTripAtom,
   tripState
 } from '../../state/tripState';
-import { isErrorResponse } from '../../models/ErrorResponse';
 import { errorState } from '../../state/errorState';
 import { useEffect } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
 import { modalSelector, openModalState } from 'state/modalState';
 import { Trip } from 'models/Types';
+import { isApiProblem } from 'services/parseError';
 
 const useSetSelectedDate = () => {
   const [trip, setTrip] = useRecoilState(newTripAtom);
@@ -166,16 +166,17 @@ export const CreateTrip = () => {
   };
 
   const createTrip = async () => {
-    const result = await api?.post('/trips', trip);
-
-    if (isErrorResponse(result)) {
-      setErrorState(result);
-      return;
+    try {
+      const result = await api?.post('/trips', trip);
+      const newTrip = convertTripDatesFromString(result as Trip);
+      setOpen(modalSelector.NONE);
+      setTrips([...trips, newTrip]);
+      resetTrip();
+    } catch (e) {
+      if (isApiProblem(e)) {
+        setErrorState(e);
+      }
     }
-    const newTrip = convertTripDatesFromString(result as Trip);
-    setOpen(modalSelector.NONE);
-    setTrips([...trips, newTrip]);
-    resetTrip();
   };
 
   return (

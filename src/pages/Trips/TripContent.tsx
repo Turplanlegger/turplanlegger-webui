@@ -6,8 +6,8 @@ import { Trip, TripDate } from '../../models/Types';
 import { apiState } from '../../state/apiState';
 import { tripState } from '../../state/tripState';
 import { Link } from 'react-router-dom';
-import { isErrorResponse } from 'models/ErrorResponse';
 import { errorState } from 'state/errorState';
+import { isApiProblem } from 'services/parseError';
 
 interface Props {
   trip: Trip;
@@ -40,14 +40,14 @@ export const TripButtons = ({ trip }: Props) => {
   const setErrorState = useSetRecoilState(errorState);
 
   const deleteTrip = async () => {
-    const result = await api?.delete(`/trips/${trip.id}`);
-
-    if (isErrorResponse(result)) {
-      setErrorState(result);
-      return;
+    try {
+      await api?.delete(`/trips/${trip.id}`);
+      setTrips(trips.filter((t) => t.id !== trip.id));
+    } catch (e) {
+      if (isApiProblem(e)) {
+        setErrorState(e);
+      }
     }
-
-    setTrips(trips.filter((t) => t.id !== trip.id));
   };
 
   return (

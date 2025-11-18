@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { apiState } from 'state/apiState';
 import { noteState } from 'state/noteState';
 import { modalSelector, openModalState } from 'state/modalState';
+import { parseError } from 'services/parseError';
 
 interface Props {
   note: Note;
@@ -39,8 +40,9 @@ export const EditNote = ({ note }: Props) => {
         setNotes((old) => [...old.filter((n) => n.id !== note.id), response.note]);
       })
       .catch((response) => {
+        const apiProblem = parseError(response);
         console.error('Not ok!');
-        console.debug(response.status, response.ok);
+        console.debug(apiProblem.title, apiProblem.detail, apiProblem.status);
       });
   };
 

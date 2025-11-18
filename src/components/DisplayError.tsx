@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material';
+import { ApiProblem } from 'services/parseError';
 import { useTranslationWrapper } from 'services/Translation';
-import { ErrorResponse } from '../models/ErrorResponse';
 
 interface Props {
-  error: ErrorResponse;
+  error: ApiProblem;
 }
 
 export const DisplayError = ({ error }: Props) => {

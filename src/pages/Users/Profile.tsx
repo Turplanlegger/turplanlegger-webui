@@ -9,8 +9,8 @@ import {
   Typography
 } from '@mui/material';
 import Grid from '@mui/material/Grid2';
-import { isErrorResponse } from 'models/ErrorResponse';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { isApiProblem } from 'services/parseError';
 import { useTranslationWrapper } from 'services/Translation';
 import { apiState } from 'state/apiState';
 import { errorState } from 'state/errorState';
@@ -35,15 +35,17 @@ export const Profile = () => {
     }
   };
   const togglePrivate = async () => {
-    const result = await api?.patch(`/users/${user.id}/private`);
-    if (isErrorResponse(result)) {
-      setErrorState(result);
-      return;
+    try {
+      await api?.patch(`/users/${user.id}/private`);
+      setUser({
+        ...user,
+        private: !user.private
+      });
+    } catch (e) {
+      if (isApiProblem(e)) {
+        setErrorState(e);
+      }
     }
-    setUser({
-      ...user,
-      private: !user.private
-    });
   };
   return Object.keys(user).length === 0 ? (
     <Box marginTop={5} marginLeft={5}>
