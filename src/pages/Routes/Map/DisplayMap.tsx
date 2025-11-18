@@ -31,5 +31,5 @@ export const DisplayMap = ({ route }: { route: Route }) => {
     }
   }, []);
 
-  return <div id={mapId} style={{ height: '100%' }}></div>;
+  return <div id={mapId} style={{ height: '100%', zIndex: 0 }}></div>;
 };

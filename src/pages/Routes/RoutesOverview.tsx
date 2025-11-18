@@ -23,29 +23,26 @@ export const RoutesOverview = ({ routes }: Props) => {
   };
 
   return (
-    <div>
-      <p>Routes: {routes.length}</p>
+    <Grid container spacing={2} direction="row" sx={{ margin: 1 }}>
       {routes.map((route) => (
-        <Grid key={route.id} container spacing={2} direction="row" sx={{ margin: 1 }}>
-          <Card>
-            <CardContent>
-              <div key={route.id}>
-                <h2>{route.name}</h2>
-                <div style={{ width: 400, height: 300 }}>
-                  <DisplayMap route={route} />
-                </div>
+        <Card key={route.id}>
+          <CardContent>
+            <div key={route.id}>
+              <h2>{route.name}</h2>
+              <div style={{ width: 400, height: 300 }}>
+                <DisplayMap route={route} />
               </div>
-            </CardContent>
-            <CardActions>
-              <>
-                <Button size="small" onClick={() => deleteRoute(route.id)}>
-                  {t('common.delete')}
-                </Button>
-              </>
-            </CardActions>
-          </Card>
-        </Grid>
+            </div>
+          </CardContent>
+          <CardActions>
+            <>
+              <Button size="small" onClick={() => deleteRoute(route.id)}>
+                {t('common.delete')}
+              </Button>
+            </>
+          </CardActions>
+        </Card>
       ))}
-    </div>
+    </Grid>
   );
 };

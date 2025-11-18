@@ -7,6 +7,7 @@ import { modalSelector, openModalState } from 'state/modalState';
 import { TurplanleggerMap } from './Map/TurplanleggerMap';
 import { Route } from 'models/Types';
 import { apiState } from 'state/apiState';
+import { routeState } from 'state/routeState';
 
 export const CreateRoute = () => {
   const t = useTranslationWrapper();
@@ -14,6 +15,7 @@ export const CreateRoute = () => {
   const [route, setRoute] = useState<GeoJSON.Geometry | undefined>(undefined);
   const [distance, setDistance] = useState<number>(0);
   const setOpen = useSetRecoilState(openModalState);
+  const setRoutes = useSetRecoilState(routeState);
   const api = useRecoilValue(apiState);
 
   const createRoute = async () => {
@@ -25,7 +27,8 @@ export const CreateRoute = () => {
       comment: 'Why u need comment pls'
     } as Route;
 
-    await api?.post('/routes', newRoute);
+    const createdRoute = await api?.post('/routes', newRoute);
+    setRoutes((old) => [...old, createdRoute]);
     setOpen(modalSelector.NONE);
   };
 
