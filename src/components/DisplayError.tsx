@@ -11,7 +11,9 @@ export const DisplayError = ({ error }: Props) => {
   return (
     <Box>
       <Typography>{t('common.something_went_wrong')}</Typography>
-      <Typography>{error.title}</Typography>
+      <Typography>
+        {error.status}: {error.title}
+      </Typography>
       <Typography>{error.detail}</Typography>
     </Box>
   );
