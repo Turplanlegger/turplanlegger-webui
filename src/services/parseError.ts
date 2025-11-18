@@ -19,7 +19,7 @@ export function parseError(error: string): ApiProblem {
   // Fallback if error is not ApiProblem
   return {
     title: 'Unknown error',
-    detail: error
+    detail: JSON.stringify(error)
   };
 }
 

@@ -152,15 +152,13 @@ export const EditTrip = () => {
         setSuccessUpdateFeedback(true);
         hideSuccessFeedback();
       })
-      .catch((response) => {
-        const err = parseError(response);
+      .catch((response: Error) => {
+        const err = parseError(response.message);
         console.error('Not ok!');
-        console.debug(err.title, err.detail, err.status);
+        console.debug(err);
+        const text = `${err.title}: ${err.detail}`;
         setUpdateError(
-          err.title ??
-            err.detail ??
-            t('error.unknown_error1') ??
-            'Woops, something went wrong, but who knows what?'
+          text ?? t('error.unknown_error1') ?? 'Woops, something went wrong, but who knows what?'
         );
         setFailedUpdateFeedback(true);
         hideFailedFeedback();
