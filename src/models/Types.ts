@@ -28,6 +28,9 @@ export interface TripDate {
 
 export interface Route {
   id: number;
+  route: GeoJSON.Geometry;
+  name: string;
+  comment: string;
 }
 
 export interface ItemList {

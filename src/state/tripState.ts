@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import { Trip, TripDate } from '../models/Types';
 import { apiState } from './apiState';
 import { emptyNote } from './noteState';
-import { emptyRoute } from './routeState';
 import { emptyList } from './listState';
 
 const initializeTripsSelector = selector<Trip[]>({
@@ -74,7 +73,7 @@ export const newTripAtom = atom<Trip>({
     name: '',
     dates: [emptyTripDate],
     notes: [emptyNote],
-    routes: [emptyRoute],
+    routes: [],
     item_lists: [emptyList],
     private: false
   }

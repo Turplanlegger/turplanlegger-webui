@@ -67,7 +67,10 @@
   "route": {
     "route": "Rute",
     "routes": "Ruter",
-    "my_routes": "Mine ruter"
+    "my_routes": "Mine ruter",
+    "new_route": "Ny rute",
+    "total_distance": "Total avstand",
+    "no_routes_found": "Ingen ruter funnet. Klikk på knappen nedenfor for å lage ny rute"
   },
   "trip": {
     "trip": "Tur",

@@ -15,7 +15,6 @@ export default defineConfig({
   plugins: [
     react(),
     viteTsconfigPaths(),
-    eslint(),
     checker({
       typescript: true
     })
