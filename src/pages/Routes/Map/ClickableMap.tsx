@@ -6,7 +6,7 @@ interface Props {
   setRoute: Dispatch<SetStateAction<GeoJSON.Geometry | undefined>>;
 }
 
-export const TurplanleggerMap = ({ setDistance, setRoute }: Props) => {
+export const ClickableMap = ({ setDistance, setRoute }: Props) => {
   const [points, setPoints] = useState<L.LatLng[]>([]);
   const [editing, setEditing] = useState(true);
   const [layer] = useState(L.layerGroup());

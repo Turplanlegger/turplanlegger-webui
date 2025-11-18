@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslationWrapper } from 'services/Translation';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { modalSelector, openModalState } from 'state/modalState';
-import { TurplanleggerMap } from './Map/TurplanleggerMap';
+import { ClickableMap } from './Map/ClickableMap';
 import { Route } from 'models/Types';
 import { apiState } from 'state/apiState';
 import { routeState } from 'state/routeState';
@@ -58,7 +58,7 @@ export const CreateRoute = () => {
           </div>
         </Grid>
         <Grid>
-          <TurplanleggerMap setDistance={setDistance} setRoute={setRoute} />
+          <ClickableMap setDistance={setDistance} setRoute={setRoute} />
         </Grid>
       </Grid>
       <Box display={'flex'}>
