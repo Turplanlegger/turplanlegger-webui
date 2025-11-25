@@ -26,6 +26,7 @@ import { Link, useParams } from 'react-router-dom';
 import { apiState } from 'state/apiState';
 import CheckIcon from '@mui/icons-material/Check';
 import WarningIcon from '@mui/icons-material/Warning';
+import { parseError } from 'services/parseError';
 
 interface TripDateProps {
   date: TripDate;
@@ -151,11 +152,10 @@ export const EditTrip = () => {
         setSuccessUpdateFeedback(true);
         hideSuccessFeedback();
       })
-      .catch((response) => {
-        const err = t('error.unknown_error1') || 'Woops, something went wrong, but who knows what?';
-        console.error('Not ok!');
-        console.debug(response.status, response.ok);
-        setUpdateError(err);
+      .catch((response: Error) => {
+        const err = parseError(response.message);
+        const text = `${err.title}: ${err.detail}`;
+        setUpdateError(text ?? t('error.unknown_error1'));
         setFailedUpdateFeedback(true);
         hideFailedFeedback();
       });

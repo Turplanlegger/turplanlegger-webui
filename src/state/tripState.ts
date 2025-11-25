@@ -9,15 +9,13 @@ const initializeTripsSelector = selector<Trip[]>({
   key: `initializeTripsSelector`,
   get: async ({ get }) => {
     const api = get(apiState);
-    const result = await api?.get('/trips/mine');
 
-    let trips: Trip[] = [];
-
-    if (result?.status === 'ok') {
-      trips = convertAllTripDatesFromString(result.trip);
+    try {
+      const result = await api?.get('/trips/mine');
+      return convertAllTripDatesFromString(result.trip);
+    } catch {
+      return [];
     }
-
-    return trips;
   }
 });
 

@@ -39,10 +39,8 @@ export const NoteButtons = ({ note }: Props) => {
   const setOpenEdit = useSetRecoilState(openModalState);
 
   const deleteNote = async () => {
-    const res = await api?.delete(`/notes/${note.id}`);
-    if (res.status === 'ok') {
-      setNotes(notes.filter((n) => n.id !== note.id));
-    }
+    await api?.delete(`/notes/${note.id}`);
+    setNotes(notes.filter((n) => n.id !== note.id));
   };
 
   return (
