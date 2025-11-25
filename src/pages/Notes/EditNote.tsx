@@ -42,7 +42,7 @@ export const EditNote = ({ note }: Props) => {
       .catch((response) => {
         const apiProblem = parseError(response);
         console.error('Not ok!');
-        console.debug(apiProblem.title, apiProblem.detail, apiProblem.status);
+        console.warn(apiProblem.title, apiProblem.detail, apiProblem.status);
       });
   };
 
