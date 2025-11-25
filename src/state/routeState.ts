@@ -6,8 +6,12 @@ const initializeRoutesSelector = selector<Route[]>({
   key: `initializeRoutesSelector`,
   get: async ({ get }) => {
     const api = get(apiState);
-    const result = await api?.get('/routes/mine');
-    return result?.status === 'ok' ? result.route : [];
+    try {
+      const result = await api?.get('/routes/mine');
+      return result.route;
+    } catch {
+      return [];
+    }
   }
 });
 
