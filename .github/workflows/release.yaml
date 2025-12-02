@@ -117,3 +117,19 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Set up Kubernetes kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
+          chmod 600 ~/.kube/config
+  
+      - name: Check Kubernetes permissions
+        run: |
+          kubectl -n tp auth can-i patch deployments
+          kubectl -n tp auth can-i list pods
+  
+      - name: Update Kubernetes Deployment
+        run: |
+          kubectl -n tp set image deployment/webui-turplanlegger-webui turplanlegger-webui=${{ env.REGISTRY }}/${{ env.repository }}:sha-${{ github.sha }}
+          kubectl -n tp rollout status deployment/webui-turplanlegger-webui
