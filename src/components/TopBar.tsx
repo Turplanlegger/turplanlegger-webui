@@ -45,7 +45,7 @@ export const TopBar = ({ handleDrawerToggle }: Props) => {
               lineHeight: '64px'
             }}
           >
-            {t('app.turplanlegger')}
+            {t('app.turplanlegger')} v{import.meta.env.APP_VERSION}
           </Link>
         </Typography>
         <IconButton
