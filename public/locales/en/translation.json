@@ -75,7 +75,7 @@
     "trip": "Trip",
     "trips": "Trips",
     "my_trips": "My Trips",
-    "new_trip": "New Trip",
+    "new_trip": "Create New Trip",
     "trip_name": "Trip name",
     "no_trips_found": "No trips found.\nPress the button below to create a trip",
     "no_selected_date": "No date has been selected for this trip.",

@@ -1,9 +1,7 @@
 import { atom, selectorFamily, selector } from 'recoil';
 import dayjs from 'dayjs';
-import { Trip, TripDate } from '../models/Types';
+import { Trip } from '../models/Types';
 import { apiState } from './apiState';
-import { emptyNote } from './noteState';
-import { emptyList } from './listState';
 
 const initializeTripsSelector = selector<Trip[]>({
   key: `initializeTripsSelector`,
@@ -58,21 +56,16 @@ export const emptyTripDate = {
   selected: false
 };
 
-export const newTripDateAtom = atom<TripDate>({
-  key: 'newTripDateAtom',
-  default: emptyTripDate
-});
-
 export const newTripAtom = atom<Trip>({
   key: 'newTripAtom',
   default: {
     id: 0,
     create_time: dayjs(),
     name: '',
-    dates: [emptyTripDate],
-    notes: [emptyNote],
+    dates: [],
+    notes: [],
     routes: [],
-    item_lists: [emptyList],
+    item_lists: [],
     private: false
   }
 });
